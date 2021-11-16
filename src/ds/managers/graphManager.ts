@@ -13,13 +13,16 @@ namespace ds {
       this.graphs.push(newGraph);
     };
 
-    displayCurrentGraph(target: HTMLDivElement): void {
-      target.insertAdjacentHTML('beforeend',
-      '<p>Hello World</p>');
-    };
+    getCurrentGraph(): Graph {
+      if (this.graphs.length < 0) {
+        throw new Error("No graphs");
+      } else {
+        return this.graphs[this.currIdx];
+      }  
+    }
 
     getCurrentGraphInfo(): GraphInfo {
-      return this.graphs[this.currIdx].getInfo();
+      return this.getCurrentGraph().getInfo();
     };
 
     moveNextGraph(): boolean {

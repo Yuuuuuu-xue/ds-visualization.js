@@ -12,9 +12,9 @@ document.getElementById("bluecircle").addEventListener('click', () => {
 });
 
 $(document).ready(function() {
-  const manager = new ds.GraphManager();
-  manager.createGraph("test", "Testing Graph");
-  console.log(manager.getCurrentGraphInfo());
-  manager.displayCurrentGraph(document.getElementById('test'));
+  const dsController = new ds.DataStructureController(500, 400, document.getElementById("test"));
+  dsController.createGraph("test", "Testing Graph!");
+  dsController.displayCurrentGraph();
+  console.log(dsController.getCurrentGraphInfo());
 });
 document.getElementById("svg").insertAdjacentHTML('beforeend', `<circle cx="220" cy="300" r="50" stroke="crimson" fill="none" />`);
