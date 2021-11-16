@@ -11,4 +11,8 @@ document.getElementById("bluecircle").addEventListener('click', () => {
   document.getElementById('line').style.stroke = 'red';
 });
 
+$(document).ready(function() {
+  libjs.sayHello();
+  console.log(count.getNum());
+});
 document.getElementById("svg").insertAdjacentHTML('beforeend', `<circle cx="220" cy="300" r="50" stroke="crimson" fill="none" />`);

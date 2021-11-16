@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "declaration": true,
+    "outFile": "./dist/ds.js",
+    "removeComments": true,
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
