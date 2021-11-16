@@ -13,13 +13,22 @@ namespace ds {
       this.graphs.push(newGraph);
     };
 
-    displayCurrentGraph(target: HTMLDivElement): void {
-      target.insertAdjacentHTML('beforeend',
-      '<p>Hello World</p>');
-    };
+    private raiseError(): void {
+      throw new Error("No graphs");
+    }
+
+    getCurrentGraph(): Graph {
+      if (this.graphs.length < 0) {
+        this.raiseError();
+      } else {
+        return this.graphs[this.currIdx];
+      }  
+    }
 
     getCurrentGraphInfo(): GraphInfo {
-      return this.graphs[this.currIdx].getInfo();
+      if (this.graphs.length < 0) {
+        return this.graphs[this.currIdx].getInfo();
+      }
     };
 
     moveNextGraph(): boolean {

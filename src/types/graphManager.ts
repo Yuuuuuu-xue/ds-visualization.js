@@ -1,7 +1,7 @@
 namespace ds {
   export interface GraphManagerInterface {
     createGraph: (type: string, name: string) => void,
-    displayCurrentGraph: (element: HTMLDivElement) => void,
+    getCurrentGraph: () => Graph,
     getCurrentGraphInfo: () => GraphInfo,
     moveNextGraph: () => boolean;
     movePrevGraph: () => boolean;
