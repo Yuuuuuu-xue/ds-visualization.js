@@ -12,7 +12,9 @@ document.getElementById("bluecircle").addEventListener('click', () => {
 });
 
 $(document).ready(function() {
-  const graph = new ds.MyGraph("test", "Testing Graph!");
-  console.log(graph.getInfo());
+  const manager = new ds.GraphManager();
+  manager.createGraph("test", "Testing Graph");
+  console.log(manager.getCurrentGraphInfo());
+  manager.displayCurrentGraph(document.getElementById('test'));
 });
 document.getElementById("svg").insertAdjacentHTML('beforeend', `<circle cx="220" cy="300" r="50" stroke="crimson" fill="none" />`);

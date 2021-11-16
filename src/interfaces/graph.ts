@@ -8,7 +8,7 @@ namespace ds {
     edges: Edge[]
   }
   
-  export interface Graph {
+  export interface GraphInterface {
     vertices: Vertex[],
     edges: Edge[],
     type: string,
