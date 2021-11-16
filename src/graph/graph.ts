@@ -1,5 +1,5 @@
-namespace graph {
-  class MyGraph implements Graph {
+namespace ds {
+  export class MyGraph implements Graph {
     vertices: Vertex[];
     edges: Edge[];
     type: string;

@@ -1,4 +1,4 @@
-namespace graph {
+namespace ds {
   export interface graphs {
     graphs: [Graph]
   }

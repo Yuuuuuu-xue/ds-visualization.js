@@ -1,3 +1,0 @@
-namespace libjs {
-  sayHello();
-}

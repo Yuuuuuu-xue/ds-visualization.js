@@ -12,7 +12,7 @@ document.getElementById("bluecircle").addEventListener('click', () => {
 });
 
 $(document).ready(function() {
-  libjs.sayHello();
-  console.log(count.getNum());
+  const graph = new ds.MyGraph("test", "Testing Graph!");
+  console.log(graph.getInfo());
 });
 document.getElementById("svg").insertAdjacentHTML('beforeend', `<circle cx="220" cy="300" r="50" stroke="crimson" fill="none" />`);
