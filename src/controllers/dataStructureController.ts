@@ -10,6 +10,14 @@ namespace ds {
       this.targetElement = targetElement;
     }
 
+    setWidth(width: number) {
+      this.drawingManager.setWidth(width);
+    }
+
+    setHeight(height: number) {
+      this.drawingManager.setHeight(height);
+    }
+
     createGraph(type: string, name: string): void {
       this.graphManager.createGraph(type, name);
     }

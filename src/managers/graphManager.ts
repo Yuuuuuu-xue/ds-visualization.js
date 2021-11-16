@@ -13,22 +13,16 @@ namespace ds {
       this.graphs.push(newGraph);
     };
 
-    private raiseError(): void {
-      throw new Error("No graphs");
-    }
-
     getCurrentGraph(): Graph {
       if (this.graphs.length < 0) {
-        this.raiseError();
+        throw new Error("No graphs");
       } else {
         return this.graphs[this.currIdx];
       }  
     }
 
     getCurrentGraphInfo(): GraphInfo {
-      if (this.graphs.length < 0) {
-        return this.graphs[this.currIdx].getInfo();
-      }
+      return this.getCurrentGraph().getInfo();
     };
 
     moveNextGraph(): boolean {
