@@ -41,8 +41,11 @@ namespace ds {
     }
     
     drawGraph(graph: Graph, target: HTMLDivElement): void {
-      target.insertAdjacentHTML('beforeend',
-      '<p>Hello World</p>');
+      const graphDiv = document.createElement('div');
+      graphDiv.setAttribute('style', canvasStyle(this.width, this.height));
+      graphDiv.classList.add("ds-canvas");
+      graphDiv.innerHTML = `<p style="${defaultStyle()}">Hello World</p>`;
+      target.appendChild(graphDiv);
     }
   }
 }
