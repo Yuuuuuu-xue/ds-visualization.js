@@ -4,7 +4,6 @@ export interface VertexCanvasInterface {
   y: number,
   defaultStyle: string,
   isActive: boolean,
-  // click on a vertex, return its string
-  handleClick: () => string,
-  draw: (canvasElement: HTMLDivElement) => void
+  vertexElement: HTMLDivElement,
+  handleClick: () => void
 }

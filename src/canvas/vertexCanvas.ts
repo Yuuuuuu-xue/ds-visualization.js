@@ -6,6 +6,7 @@ export class VertexCanvas implements VertexCanvasInterface {
   defaultStyle: string;
   vertexId: string;
   isActive: boolean;
+  vertexElement: HTMLDivElement
 
   constructor(x: number, y: number, defaultStyle: string, vertexId: string) {
     this.x = x;
@@ -13,6 +14,13 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.defaultStyle = defaultStyle;
     this.vertexId = vertexId;
     this.isActive = false;
+    this.vertexElement = document.createElement('div');
+    this.vertexElement.setAttribute('style', this.defaultStyle);
+    
+  }
+
+  handleClick(): void {
+
   }
 
   handleClick(): string {

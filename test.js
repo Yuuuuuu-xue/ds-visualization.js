@@ -18,3 +18,12 @@ $(document).ready(function() {
   console.log(dsController.getCurrentGraphInfo());
 });
 document.getElementById("svg").insertAdjacentHTML('beforeend', `<circle cx="220" cy="300" r="50" stroke="crimson" fill="none" />`);
+
+const clickMe = () => console.log('Click me');
+
+const testCircle = document.getElementById('circle');
+testCircle.innerHTML = `
+  <button style='width: 200px; height: 200px; border-radius: 50%; background: white; border: 1px solid crimson; position: absolute; left: 50px; top: 50px;' id='newButton'>Test</button>
+`
+
+document.getElementById('newButton').addEventListener('click', clickMe);
