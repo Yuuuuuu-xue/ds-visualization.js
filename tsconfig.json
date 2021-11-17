@@ -4,6 +4,7 @@
     "declaration": true,
     "outFile": "./dist/ds.js",
     "removeComments": true,
+    "plugins": [{"name": "typescript-plugin-css-modules"}]
   },
   "include": [
     "src/**/*"

@@ -1,5 +1,5 @@
-namespace ds {
-  export interface DrawingManagerInterface {
-    drawGraph: (graph: Graph, element: HTMLDivElement) => void,
-  }
+import { Graph } from "../graph/graph";
+
+export interface DrawingManagerInterface {
+  drawGraph: (graph: Graph, element: HTMLDivElement) => void,
 }

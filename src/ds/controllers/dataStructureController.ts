@@ -1,60 +1,64 @@
-namespace ds {
-  export class DataStructureController implements DataStructureControllerInterface {
-    private graphManager: GraphManager;
-    private drawingManager: DrawingManager;
-    private targetElement: HTMLDivElement;
+import { DrawingManager } from "../managers/drawingManager";
+import { GraphManager } from "../managers/graphManager";
+import { DataStructureControllerInterface } from "../types/dataStructureController";
+import { GraphInfo } from "../types/graph";
 
-    constructor(width: number, height: number, targetElement: HTMLDivElement) {
-      this.drawingManager = new DrawingManager(width, height);
-      this.graphManager = new GraphManager();
-      this.targetElement = targetElement;
-    }
 
-    setWidth(width: number) {
-      this.drawingManager.setWidth(width);
-    }
+export class DataStructureController implements DataStructureControllerInterface {
+  private graphManager: GraphManager;
+  private drawingManager: DrawingManager;
+  private targetElement: HTMLDivElement;
 
-    setHeight(height: number) {
-      this.drawingManager.setHeight(height);
-    }
+  constructor(width: number, height: number, targetElement: HTMLDivElement) {
+    this.drawingManager = new DrawingManager(width, height);
+    this.graphManager = new GraphManager();
+    this.targetElement = targetElement;
+  }
 
-    createGraph(type: string, name: string): void {
-      this.graphManager.createGraph(type, name);
-    }
+  setWidth(width: number) {
+    this.drawingManager.setWidth(width);
+  }
 
-    getCurrentGraphInfo(): GraphInfo {
-      return this.graphManager.getCurrentGraphInfo();
-    }
+  setHeight(height: number) {
+    this.drawingManager.setHeight(height);
+  }
 
-    setTargetElement(targetElement: HTMLDivElement): void {
-      this.targetElement = targetElement;
-    }
+  createGraph(type: string, name: string): void {
+    this.graphManager.createGraph(type, name);
+  }
 
-    private drawGraph(): void {
-      this.drawingManager.drawGraph(
-        this.graphManager.getCurrentGraph(),
-        this.targetElement
-      );
-    }
+  getCurrentGraphInfo(): GraphInfo {
+    return this.graphManager.getCurrentGraphInfo();
+  }
 
-    moveNextGraph(): boolean {
-      const result = this.graphManager.moveNextGraph();
-      if (result) {
-        this.drawGraph();
-      }
-      return result;
-    };
+  setTargetElement(targetElement: HTMLDivElement): void {
+    this.targetElement = targetElement;
+  }
 
-    movePrevGraph(): boolean {
-      const result = this.graphManager.movePrevGraph();
-      if (result) {
-        this.drawGraph();
-      }
-      return result;
-    };
+  private drawGraph(): void {
+    this.drawingManager.drawGraph(
+      this.graphManager.getCurrentGraph(),
+      this.targetElement
+    );
+  }
 
-    displayCurrentGraph(): void {
+  moveNextGraph(): boolean {
+    const result = this.graphManager.moveNextGraph();
+    if (result) {
       this.drawGraph();
     }
+    return result;
+  };
+
+  movePrevGraph(): boolean {
+    const result = this.graphManager.movePrevGraph();
+    if (result) {
+      this.drawGraph();
+    }
+    return result;
+  };
+
+  displayCurrentGraph(): void {
+    this.drawGraph();
   }
 }

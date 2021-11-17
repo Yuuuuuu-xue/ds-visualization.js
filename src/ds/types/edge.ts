@@ -1,8 +1,6 @@
-namespace ds {
-  export interface Edge {
-    vertexTo: string,
-    vertexFrom: string,
-    weight?: number
-  }
-};
+export interface Edge {
+  vertexTo: string,
+  vertexFrom: string,
+  weight?: number
+}
 
