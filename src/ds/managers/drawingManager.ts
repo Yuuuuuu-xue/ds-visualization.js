@@ -1,6 +1,5 @@
 import { DrawingManagerInterface } from "../types/drawingManager";
 import { Graph } from "../graph/graph";
-import * as styles from '../styles/Test.module.scss';
 
 export class DrawingManager implements DrawingManagerInterface {
   private width: number;
@@ -45,8 +44,6 @@ export class DrawingManager implements DrawingManagerInterface {
   
   drawGraph(graph: Graph, target: HTMLDivElement): void {
     const graphDiv = document.createElement('div');
-    console.log(styles);
-    graphDiv.classList.add(styles.test);
     // graphDiv.setAttribute('style', canvasStyle(this.width, this.height));
     // graphDiv.classList.add("ds-canvas");
     graphDiv.innerHTML = `<p style="">Hello World</p>`;
