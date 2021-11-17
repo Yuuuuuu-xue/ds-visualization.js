@@ -23,11 +23,6 @@ export class VertexCanvas implements VertexCanvasInterface {
 
   }
 
-  handleClick(): string {
-    this.isActive = !this.isActive;
-    return this.vertexId;
-  }
-
   draw(canvasElement: HTMLDivElement): void {
     const vertexElement = document.createElement('div');
     vertexElement.setAttribute('style', this.defaultStyle);

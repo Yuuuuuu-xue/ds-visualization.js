@@ -1,7 +1,7 @@
 import { DrawingManagerInterface } from "../types/drawingManager";
 import { Graph } from "../graph/graph";
 import { canvasStyle } from "../styles/canvas.style";
-import { defaultStyle } from "../styles/default.style";
+
 
 export class DrawingManager implements DrawingManagerInterface {
   private width: number;
@@ -46,9 +46,9 @@ export class DrawingManager implements DrawingManagerInterface {
   
   drawGraph(graph: Graph, target: HTMLDivElement): void {
     const graphDiv = document.createElement('div');
+    graphDiv.classList.add('ds-canvas');
     graphDiv.setAttribute('style', canvasStyle(this.width, this.height));
-    graphDiv.classList.add("ds-canvas");
-    graphDiv.innerHTML = `<p style="${defaultStyle()}">Hello World</p>`;
+    graphDiv.innerHTML += `<p>Hello World</p>`;
     target.appendChild(graphDiv);
   }
 }
