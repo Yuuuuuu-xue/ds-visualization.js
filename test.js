@@ -12,7 +12,7 @@ document.getElementById("bluecircle").addEventListener('click', () => {
 });
 
 $(document).ready(function() {
-  const dsController = new DataStructureController(500, 400, document.getElementById("test"));
+  const dsController = new ds.DataStructureController(500, 400, document.getElementById("test"));
   dsController.createGraph("test", "Testing Graph!");
   dsController.displayCurrentGraph();
   console.log(dsController.getCurrentGraphInfo());

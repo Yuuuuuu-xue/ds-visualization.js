@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "module": "es6",
+    "target": "es5",
+    "outDir": "./dist/",
+    "sourceMap": true,
     "declaration": true,
-    "outFile": "./dist/ds.js",
     "removeComments": true,
     "plugins": [{"name": "typescript-plugin-css-modules"}]
   },
