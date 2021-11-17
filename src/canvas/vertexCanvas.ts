@@ -1,29 +1,29 @@
-namespace canvas {
-  export class VertexCanvas implements VertexCanvasInterface {
-    x: number;
-    y: number;
-    defaultStyle: string;
-    vertexId: string;
-    isActive: boolean;
+import { VertexCanvasInterface } from "./types/vertexCanvasInterface";
 
-    constructor(x: number, y: number, defaultStyle: string, vertexId: string) {
-      this.x = x;
-      this.y = y;
-      this.defaultStyle = defaultStyle;
-      this.vertexId = vertexId;
-      this.isActive = false;
-    }
+export class VertexCanvas implements VertexCanvasInterface {
+  x: number;
+  y: number;
+  defaultStyle: string;
+  vertexId: string;
+  isActive: boolean;
 
-    handleClick(): string {
-      this.isActive = !this.isActive;
-      return this.vertexId;
-    }
+  constructor(x: number, y: number, defaultStyle: string, vertexId: string) {
+    this.x = x;
+    this.y = y;
+    this.defaultStyle = defaultStyle;
+    this.vertexId = vertexId;
+    this.isActive = false;
+  }
 
-    draw(canvasElement: HTMLDivElement): void {
-      const vertexElement = document.createElement('div');
-      vertexElement.setAttribute('style', this.defaultStyle);
-      vertexElement.addEventListener('click', this.handleClick);
-      
-    }
+  handleClick(): string {
+    this.isActive = !this.isActive;
+    return this.vertexId;
+  }
+
+  draw(canvasElement: HTMLDivElement): void {
+    const vertexElement = document.createElement('div');
+    vertexElement.setAttribute('style', this.defaultStyle);
+    vertexElement.addEventListener('click', this.handleClick);
+    
   }
 }
