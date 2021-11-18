@@ -23,7 +23,7 @@ const clickMe = () => console.log('Click me');
 
 const testCircle = document.getElementById('circle');
 testCircle.innerHTML = `
-  <button style='width: 200px; height: 200px; border-radius: 50%; background: white; border: 1px solid crimson; position: absolute; left: 50px; top: 50px;' id='newButton'>Test</button>
+  <button style='width: 100px; height: 100px; border-radius: 50%; background: transparent; border: 3px solid crimson; position: absolute; left: 50px; top: 50px;' id='newButton'>Test</button>
 `
 
 document.getElementById('newButton').addEventListener('click', clickMe);

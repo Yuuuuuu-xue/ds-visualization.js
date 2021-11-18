@@ -1,7 +1,4 @@
-export const vertexStyle = (x: number, y: number, radius: number) => `
-  position: absolute;
+export const vertexStyle = (x: number, y: number) => `
   left: ${x}px;
   top: ${y}px;
-  border-radius: ${radius}px;
-  
 `

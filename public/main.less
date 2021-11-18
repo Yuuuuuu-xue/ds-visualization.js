@@ -1,12 +1,34 @@
+// Constants
+@buttonRadius: 100px;
+@canvasBorder: crimson;
+@inactiveColor: black;
+@activeColor: #155724;
+@buttonRadius: 3px;
+
 .ds-canvas {
-    p, ul, li, h1, h2, h3, h4, h5 {
-        margin: 0;
-        padding: 0;
-        font-weight: normal;
+  p, ul, li, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+  }
+  position: relative;
+  padding: 5px;
+  overflow: auto;
+  border: 1px solid @canvasBorder;
+
+  .vertex {
+    position: absolute;
+    width: @buttonRadius;
+    height: @buttonRadius;
+    border-radius: 50%;
+    background: transparent;
+
+    &.active {
+      border: @buttonRadius solid @activeColor;
     }
 
-    display: relative;
-    padding: 5px;
-    overflow: auto;
-    border: 1px solid crimson;
+    &.inactive {
+      border: @buttonRadius solid @inactiveColor;
+    }
+  }
 };
