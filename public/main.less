@@ -6,6 +6,7 @@
 @buttonBorder: 5px;
 @white: white;
 @black: black;
+@arrowSize: 17px;
 
 .ds-canvas {
   p, ul, li, h1, h2, h3, h4, h5 {
@@ -21,13 +22,33 @@
 
   .edge {
     position: absolute;
-    z-index: -1;
+    z-index: 1;
+
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: -@arrowSize;
+      right: 0;
+      width: 0;
+      height: 0;
+      transform: translate(-48px, 0px);
+      border-top: @arrowSize solid transparent;
+      border-bottom: @arrowSize solid transparent;
+    }
     &.active {
-      border: 2px solid @activeColor;
+      border: 1px solid @activeColor;
+
+      &::after {
+        border-left: @arrowSize solid @activeColor;
+      }
     }
 
     &.inactive {
-      border: 2px solid @inactiveColor;
+      border: 1px solid @inactiveColor;
+
+      &::after {
+        border-left: @arrowSize solid @inactiveColor;
+      }
     }
   }
 
