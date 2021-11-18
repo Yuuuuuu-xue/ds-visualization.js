@@ -29,10 +29,12 @@ export class Graph implements GraphInterface {
       value: value
     };
     this.vertices.push(newVertex);
+    this.visitedVertices.add(_id);
+    return true;
   };
 
   pushEdge(vertexTo: string, vertexFrom: string, weight?: number): boolean {
-    if(!this.visitedVertices.has(vertexTo) || this.visitedVertices.has(vertexFrom)) {
+    if(!this.visitedVertices.has(vertexTo) || !this.visitedVertices.has(vertexFrom)) {
       return false;
     }
 

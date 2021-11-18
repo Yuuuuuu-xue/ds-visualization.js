@@ -57,4 +57,8 @@ export class DataStructureController implements DataStructureControllerInterface
     this.slideManager.pushVertex(_id, value);
     this.drawingManager.pushVertex(_id, x, y, value);
   }
+
+  pushEdge(vertexTo: string, vertexFrom: string, weight ?: number): void {
+    this.slideManager.pushEdge(vertexTo, vertexFrom, weight);
+  }
 }

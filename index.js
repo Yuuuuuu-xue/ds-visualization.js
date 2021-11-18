@@ -4,5 +4,6 @@ $(document).ready(function() {
   dsController.pushVertex('1', 'Second Vertex', 200, 300);
   dsController.pushVertex('2', 'Third Vertex', 300, 200);
   dsController.pushVertex('3', 'Fourth Vertex', 500, 200);
+  dsController.pushEdge('0', '3');
   console.log(dsController.getCurrentGraphInfo());
 });

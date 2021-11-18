@@ -49,7 +49,17 @@ export class SlideManager implements SlideManagerInterface {
   }
 
   pushVertex(_id: string, value: any): void {
-    this.graphs[this.currIdx].pushVertex(_id, value);
+    const result = this.graphs[this.currIdx].pushVertex(_id, value);
+    if (!result) {
+      throw new Error(`The id ${_id} must be unique`);
+    }
+  }
+
+  pushEdge(vertexTo: string, vertexFrom: string, weight ?: number) {
+    const result = this.graphs[this.currIdx].pushEdge(vertexTo, vertexFrom, weight);
+    if (!result) {
+      throw new Error(`The vertex id ${vertexTo} or ${vertexFrom} does not exist`);
+    }
   }
 
   getCurrentIdx(): number {
