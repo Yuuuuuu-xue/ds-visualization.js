@@ -23,13 +23,11 @@
     position: absolute;
     z-index: -1;
     &.active {
-      background-color: @activeColor;
+      border: 2px solid @activeColor;
     }
 
     &.inactive {
-      border: 2px solid black;
-      color: red;
-      background-color: @inactiveColor;
+      border: 2px solid @inactiveColor;
     }
   }
 
@@ -38,7 +36,7 @@
     width: @buttonRadius;
     height: @buttonRadius;
     border-radius: 50%;
-    z-index: 5;
+    z-index: 2;
 
     &.active {
       background-color: @activeColor;
