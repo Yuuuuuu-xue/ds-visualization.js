@@ -60,5 +60,6 @@ export class DataStructureController implements DataStructureControllerInterface
 
   pushEdge(vertexTo: string, vertexFrom: string, weight ?: number): void {
     this.slideManager.pushEdge(vertexTo, vertexFrom, weight);
+    this.drawingManager.pushEdge(vertexTo, vertexFrom, weight);
   }
 }

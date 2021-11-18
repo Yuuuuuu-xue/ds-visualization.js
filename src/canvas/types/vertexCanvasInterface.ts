@@ -1,9 +1,9 @@
-export interface VertexCanvasInterface {
+import { Clickable } from "./clickable";
+
+export interface VertexCanvasInterface extends Clickable {
   vertexId: string,
   x: number, 
   y: number,
-  isActive: boolean,
   vertexElement: HTMLButtonElement,
-  handleClick: () => void,
   getVertexElement: () => HTMLButtonElement
 }

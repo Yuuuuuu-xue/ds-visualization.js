@@ -1,14 +1,17 @@
 import { canvasStyle } from "../ds/styles/canvas.style";
+import { EdgeCanvas } from "./edgeCanvas";
 import { GraphCanvasInterface } from "./types/graphCanvasInterface";
 import { VertexCanvas } from "./vertexCanvas";
 
 export class GraphCanvas implements GraphCanvasInterface {
     vertices: VertexCanvas[];
+    edges: EdgeCanvas[];
     display: boolean;
     graphElement: HTMLDivElement;
 
     constructor() {
         this.vertices = [];
+        this.edges = [];
         this.display = false;
         this.graphElement = document.createElement('div');
         this.graphElement.classList.add('graph');
@@ -29,6 +32,15 @@ export class GraphCanvas implements GraphCanvasInterface {
         newVertex.getVertexElement().addEventListener('click', () => this.handleVertexClick(newVertex));
         this.vertices.push(newVertex);
         this.graphElement.insertAdjacentElement('beforeend', newVertex.getVertexElement());
+    }
+
+    pushEdge(vertexToId: string, vertexFromId: string, weight ?: number): void {
+        // Assume vertexFromId is valid 
+        const vertexFrom = this.vertices.filter(vertex => vertex.vertexId === vertexFromId)[0];
+        const vertexTo = this.vertices.filter(vertex => vertex.vertexId === vertexToId)[0];
+        const newEdge = new EdgeCanvas(vertexTo.x, vertexTo.y, vertexFrom.x, vertexFrom.y, vertexFromId, vertexToId, weight);
+        this.edges.push(newEdge);
+        this.graphElement.insertAdjacentElement('beforeend', newEdge.getEdgeElement());
     }
 
     getGraphElement(): HTMLDivElement {

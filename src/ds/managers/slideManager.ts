@@ -1,6 +1,7 @@
 import { SlideManagerInterface } from "../types/slideManager";
 import { Graph } from "../graph/graph";
 import { GraphInfo } from "../types/graph";
+import { Vertex } from "../types/vertex";
 
 export class SlideManager implements SlideManagerInterface {
   private graphs: Graph[];

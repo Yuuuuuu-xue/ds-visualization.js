@@ -4,7 +4,6 @@ import { vertexStyle } from "./styles/vertex.style";
 export class VertexCanvas implements VertexCanvasInterface {
   x: number;
   y: number;
-  defaultStyle: string;
   vertexId: string;
   isActive: boolean;
   vertexElement: HTMLButtonElement
@@ -29,9 +28,7 @@ export class VertexCanvas implements VertexCanvasInterface {
     if (this.isActive) {
       this.setInactive();
     } else {
-      this.vertexElement.classList.remove('inactive');
-      this.isActive = true;
-      this.vertexElement.classList.add('active');
+      this.setActive();
     }
   }
 
@@ -39,5 +36,11 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement.classList.remove('active');
     this.isActive = false;
     this.vertexElement.classList.add('inactive'); 
+  }
+
+  setActive(): void {
+    this.vertexElement.classList.remove('inactive');
+    this.isActive = true;
+    this.vertexElement.classList.add('active');
   }
 }
