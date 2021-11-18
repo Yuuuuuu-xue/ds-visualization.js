@@ -1,11 +1,13 @@
-import { DrawingManagerInterface } from "../types/drawingManager";
-import { Graph } from "../graph/graph";
 import { canvasStyle } from "../styles/canvas.style";
+import { GraphCanvas } from "../../canvas/graphCanvas";
 
 
-export class DrawingManager implements DrawingManagerInterface {
+export class DrawingManager {
   private width: number;
   private height: number;
+  private graphCanvas: GraphCanvas[];
+  private currIdx: number;
+  private canvasElement: HTMLDivElement;
 
   constructor(width: number, height: number) {
     if (width <= 0) {
@@ -14,13 +16,34 @@ export class DrawingManager implements DrawingManagerInterface {
     if (height <= 0) {
       this.raiseError("Height must be positive number");
     }
+
+    this.currIdx = 0;
     this.width = width;
     this.height = height;
+    
+    this.canvasElement = document.createElement('div');
+    this.canvasElement.classList.add('ds-canvas');
+    this.canvasElement.setAttribute('style', canvasStyle(this.width, this.height));
+    this.canvasElement.innerHTML += `<p>Hello World</p>`;
+
+    this.graphCanvas = [];
+    this.createGraphCanvas();
+    this.graphCanvas[0].displayGraph();
   };
   
+  getCanvasElement(): HTMLDivElement {
+    return this.canvasElement;
+  }
+
   private raiseError(message: string): void {
     throw new Error(message);
   };
+
+  createGraphCanvas(): void {
+    const newGraphCanvas = new GraphCanvas();
+    this.graphCanvas.push(newGraphCanvas);
+    this.canvasElement.insertAdjacentElement('beforeend', newGraphCanvas.graphElement);
+  }
 
   setWidth(width: number): void {
     if (width <= 0) {
@@ -44,11 +67,13 @@ export class DrawingManager implements DrawingManagerInterface {
     return this.height;
   }
   
-  drawGraph(graph: Graph, target: HTMLDivElement): void {
-    const graphDiv = document.createElement('div');
-    graphDiv.classList.add('ds-canvas');
-    graphDiv.setAttribute('style', canvasStyle(this.width, this.height));
-    graphDiv.innerHTML += `<p>Hello World</p>`;
-    target.appendChild(graphDiv);
+  displayGraph(newIdx: number): void {
+    this.graphCanvas[this.currIdx].hideGraph(); 
+    this.currIdx = newIdx;
+    this.graphCanvas[this.currIdx].displayGraph();
+  }
+
+  pushVertex(vertexId: string, x: number, y: number, value: any) {
+    this.graphCanvas[this.currIdx].pushVertex(vertexId, x, y, value);
   }
 }

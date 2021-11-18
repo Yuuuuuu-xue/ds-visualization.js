@@ -9,7 +9,7 @@ export class VertexCanvas implements VertexCanvasInterface {
   isActive: boolean;
   vertexElement: HTMLButtonElement
 
-  constructor(x: number, y: number, vertexId: string) {
+  constructor(x: number, y: number, vertexId: string, value: any) {
     this.x = x;
     this.y = y;
     this.vertexId = vertexId;
@@ -17,6 +17,7 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement = document.createElement('button');
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
+    this.vertexElement.innerText = value;
     this.vertexElement.setAttribute('style', vertexStyle(this.x, this.y));
   }
 

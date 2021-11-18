@@ -13,6 +13,7 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager = new DrawingManager(width, height);
     this.slideManager = new SlideManager();
     this.targetElement = targetElement;
+    this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
   }
 
   setWidth(width: number) {
@@ -35,17 +36,11 @@ export class DataStructureController implements DataStructureControllerInterface
     this.targetElement = targetElement;
   }
 
-  private drawGraph(): void {
-    this.drawingManager.drawGraph(
-      this.slideManager.getCurrentGraph(),
-      this.targetElement
-    );
-  }
 
   moveNextGraph(): boolean {
     const result = this.slideManager.moveNextGraph();
     if (result) {
-      this.drawGraph();
+      this.drawingManager.displayGraph(this.slideManager.getCurrentIdx());
     }
     return result;
   };
@@ -53,12 +48,13 @@ export class DataStructureController implements DataStructureControllerInterface
   movePrevGraph(): boolean {
     const result = this.slideManager.movePrevGraph();
     if (result) {
-      this.drawGraph();
+      this.drawingManager.displayGraph(this.slideManager.getCurrentIdx());
     }
     return result;
   };
 
-  displayCurrentGraph(): void {
-    this.drawGraph();
+  pushVertex(_id: string, value: any, x: number, y: number): void {
+    this.slideManager.pushVertex(_id, value);
+    this.drawingManager.pushVertex(_id, x, y, value);
   }
 }

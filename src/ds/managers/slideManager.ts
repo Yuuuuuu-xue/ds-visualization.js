@@ -10,8 +10,7 @@ export class SlideManager implements SlideManagerInterface {
     this.graphs = [];
     this.currIdx = 0;
     // default initial graph
-    const newGraph = new Graph('default', 'Initial Graph');
-    this.graphs.push(newGraph);
+    this.createGraph("default", "Initial Graph");
   }
 
   createGraph(type: string, name: string): void {
@@ -47,5 +46,13 @@ export class SlideManager implements SlideManagerInterface {
       this.currIdx --;
       return true;
     }
+  }
+
+  pushVertex(_id: string, value: any): void {
+    this.graphs[this.currIdx].pushVertex(_id, value);
+  }
+
+  getCurrentIdx(): number {
+    return this.currIdx
   }
 }

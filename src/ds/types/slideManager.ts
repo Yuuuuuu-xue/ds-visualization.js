@@ -8,4 +8,5 @@ export interface SlideManagerInterface {
   getCurrentGraphInfo: () => GraphInfo,
   moveNextGraph: () => boolean;
   movePrevGraph: () => boolean;
+  pushVertex: (_id: string, value: any) => void;
 }

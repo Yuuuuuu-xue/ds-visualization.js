@@ -1,9 +1,9 @@
 // Constants
 @buttonRadius: 100px;
 @canvasBorder: crimson;
-@inactiveColor: black;
-@activeColor: #155724;
-@buttonRadius: 3px;
+@inactiveColor: rgb(65, 65, 65);
+@activeColor: #24973f;
+@buttonBorder: 5px;
 
 .ds-canvas {
   p, ul, li, h1, h2, h3, h4, h5 {
@@ -24,11 +24,11 @@
     background: transparent;
 
     &.active {
-      border: @buttonRadius solid @activeColor;
+      border: @buttonBorder solid @activeColor;
     }
 
     &.inactive {
-      border: @buttonRadius solid @inactiveColor;
+      border: @buttonBorder solid @inactiveColor;
     }
   }
 };
