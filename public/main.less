@@ -4,6 +4,8 @@
 @inactiveColor: rgb(65, 65, 65);
 @activeColor: #24973f;
 @buttonBorder: 5px;
+@white: white;
+@black: black;
 
 .ds-canvas {
   p, ul, li, h1, h2, h3, h4, h5 {
@@ -24,10 +26,14 @@
     background: transparent;
 
     &.active {
+      background-color: @activeColor;
+      color: @white;
       border: @buttonBorder solid @activeColor;
     }
 
     &.inactive {
+      background-color: transparent;
+      color: @black;
       border: @buttonBorder solid @inactiveColor;
     }
   }

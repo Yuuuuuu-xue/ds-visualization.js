@@ -17,7 +17,9 @@ export class GraphCanvas implements GraphCanvasInterface {
 
     handleVertexClick(newVertex: VertexCanvas): void {
         this.vertices.forEach(v => {
-            v.setInactive();
+            if (v.vertexId !== newVertex.vertexId) {
+                v.setInactive();
+            }
         })
         newVertex.handleClick();
     }
