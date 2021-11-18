@@ -1,17 +1,17 @@
 import { DrawingManager } from "../managers/drawingManager";
-import { GraphManager } from "../managers/graphManager";
+import { SlideManager } from "../managers/slideManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
 import { GraphInfo } from "../types/graph";
 
 
 export class DataStructureController implements DataStructureControllerInterface {
-  private graphManager: GraphManager;
+  private slideManager: SlideManager;
   private drawingManager: DrawingManager;
   private targetElement: HTMLDivElement;
 
   constructor(width: number, height: number, targetElement: HTMLDivElement) {
     this.drawingManager = new DrawingManager(width, height);
-    this.graphManager = new GraphManager();
+    this.slideManager = new SlideManager();
     this.targetElement = targetElement;
   }
 
@@ -24,11 +24,11 @@ export class DataStructureController implements DataStructureControllerInterface
   }
 
   createGraph(type: string, name: string): void {
-    this.graphManager.createGraph(type, name);
+    this.slideManager.createGraph(type, name);
   }
 
   getCurrentGraphInfo(): GraphInfo {
-    return this.graphManager.getCurrentGraphInfo();
+    return this.slideManager.getCurrentGraphInfo();
   }
 
   setTargetElement(targetElement: HTMLDivElement): void {
@@ -37,13 +37,13 @@ export class DataStructureController implements DataStructureControllerInterface
 
   private drawGraph(): void {
     this.drawingManager.drawGraph(
-      this.graphManager.getCurrentGraph(),
+      this.slideManager.getCurrentGraph(),
       this.targetElement
     );
   }
 
   moveNextGraph(): boolean {
-    const result = this.graphManager.moveNextGraph();
+    const result = this.slideManager.moveNextGraph();
     if (result) {
       this.drawGraph();
     }
@@ -51,7 +51,7 @@ export class DataStructureController implements DataStructureControllerInterface
   };
 
   movePrevGraph(): boolean {
-    const result = this.graphManager.movePrevGraph();
+    const result = this.slideManager.movePrevGraph();
     if (result) {
       this.drawGraph();
     }

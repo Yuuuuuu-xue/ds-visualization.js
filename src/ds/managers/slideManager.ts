@@ -1,14 +1,17 @@
-import { GraphManagerInterface } from "../types/graphManager";
+import { SlideManagerInterface } from "../types/slideManager";
 import { Graph } from "../graph/graph";
 import { GraphInfo } from "../types/graph";
 
-export class GraphManager implements GraphManagerInterface {
+export class SlideManager implements SlideManagerInterface {
   private graphs: Graph[];
   private currIdx: number;
 
   constructor() {
     this.graphs = [];
     this.currIdx = 0;
+    // default initial graph
+    const newGraph = new Graph('default', 'Initial Graph');
+    this.graphs.push(newGraph);
   }
 
   createGraph(type: string, name: string): void {
