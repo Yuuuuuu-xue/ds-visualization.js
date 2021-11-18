@@ -24,7 +24,7 @@ export class DrawingManager {
     this.canvasElement = document.createElement('div');
     this.canvasElement.classList.add('ds-canvas');
     this.canvasElement.setAttribute('style', canvasStyle(this.width, this.height));
-    this.canvasElement.innerHTML += `<p>Hello World</p>`;
+    this.canvasElement.innerHTML += `<p>My Canvas</p>`;
 
     this.graphCanvas = [];
     this.createGraphCanvas();

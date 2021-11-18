@@ -15,9 +15,16 @@ export class GraphCanvas implements GraphCanvasInterface {
         this.graphElement.classList.add('hidden');
     }
 
+    handleVertexClick(newVertex: VertexCanvas): void {
+        this.vertices.forEach(v => {
+            v.setInactive();
+        })
+        newVertex.handleClick();
+    }
+
     pushVertex(vertexId: string, x: number, y: number, value: any): void {
         const newVertex = new VertexCanvas(x, y, vertexId, value);
-        newVertex.getVertexElement().addEventListener('click', () => newVertex.handleClick());
+        newVertex.getVertexElement().addEventListener('click', () => this.handleVertexClick(newVertex));
         this.vertices.push(newVertex);
         this.graphElement.insertAdjacentElement('beforeend', newVertex.getVertexElement());
     }

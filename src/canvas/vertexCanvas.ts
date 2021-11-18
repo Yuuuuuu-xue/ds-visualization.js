@@ -27,13 +27,17 @@ export class VertexCanvas implements VertexCanvasInterface {
 
   handleClick(): void {
     if (this.isActive) {
-      this.vertexElement.classList.remove('active');
-      this.isActive = false;
-      this.vertexElement.classList.add('inactive'); 
+      this.setInactive();
     } else {
       this.vertexElement.classList.remove('inactive');
       this.isActive = true;
       this.vertexElement.classList.add('active');
     }
+  }
+
+  setInactive(): void {
+    this.vertexElement.classList.remove('active');
+    this.isActive = false;
+    this.vertexElement.classList.add('inactive'); 
   }
 }
