@@ -54,9 +54,15 @@
   overflow: auto;
 }
 
-.title {
+.background-title {
   z-index: -1;
   opacity: 0.4;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 /************* END ********************/
@@ -71,8 +77,22 @@
   border: 2px solid @dialogBorder;
 
   .ds-dialog-background-title {
+    .background-title();
+  }
+
+  .ds-dialog-title {
+    text-align: center;
     .title();
-  } 
+  }
+
+  .one-line {
+    margin: 10px 0;
+
+    span {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 }
 
 
@@ -103,9 +123,7 @@
 
 
   .ds-canvas-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-decoration: underline;
+    .title();
     top: 1%;
     .absolute-horizontal-center();
   }
@@ -117,7 +135,7 @@
   }
 
   .ds-canvas-background-title {
-    .title();
+    .background-title();
   }
 
   .edge {
