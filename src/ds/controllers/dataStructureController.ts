@@ -16,6 +16,8 @@ export class DataStructureController implements DataStructureControllerInterface
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
     this.drawingManager.getNextButtonElement().disableButtonElement();
     this.drawingManager.getPrevButtonElement().disableButtonElement();
+    this.drawingManager.getNextButtonElement().getButtonElement().addEventListener('click', () => this.handleNextButtonClick());
+    this.drawingManager.getPrevButtonElement().getButtonElement().addEventListener('click', () => this.handlePrevButtonClick());
   }
 
   setWidth(width: number) {
@@ -27,7 +29,11 @@ export class DataStructureController implements DataStructureControllerInterface
   }
 
   createGraph(type: string, name: string): void {
+    if (this.graphManager.getCurrentIdx() === 0) {
+      this.drawingManager.getNextButtonElement().enableButtonElement();
+    }
     this.graphManager.createGraph(type, name);
+    this.drawingManager.createGraphCanvas();
   }
 
   getCurrentGraphInfo(): GraphInfo {
@@ -43,18 +49,42 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.setCanvasTitle(title);
   }
 
+  handleNextButtonClick(): void {
+    if (this.graphManager.getCurrentIdx() < this.graphManager.getGraphSize() - 1) {
+      // Then we can click to the next one
+      this.moveNextGraph();
+    }
+  }
+
+  handlePrevButtonClick(): void {
+    if (this.graphManager.getCurrentIdx() > 0) {
+      this.movePrevGraph();
+    }
+  }
 
   moveNextGraph(): void {
     this.graphManager.moveNextGraph();
     this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
     // Set the title
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
+
+    // Now if we react to the last one, we should disable to the next button
+    if(this.graphManager.getCurrentIdx() === this.graphManager.getGraphSize() - 1) {
+      this.drawingManager.getNextButtonElement().disableButtonElement();
+    }
+    this.drawingManager.getPrevButtonElement().enableButtonElement();
   };
 
   movePrevGraph(): void {
     this.graphManager.movePrevGraph();
     this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
+
+    // If we reach to the first one, we should disable the prev button
+    if (this.graphManager.getCurrentIdx() === 0) {
+      this.drawingManager.getPrevButtonElement().disableButtonElement();
+    }
+    this.drawingManager.getNextButtonElement().enableButtonElement();
   };
 
   pushVertex(_id: string, value: any, x: number, y: number): void {

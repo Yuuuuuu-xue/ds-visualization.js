@@ -65,4 +65,8 @@ export class GraphManager implements GraphManagerInterface {
   getCurrentIdx(): number {
     return this.currIdx
   }
+
+  getGraphSize(): number {
+    return this.graphs.length;
+  }
 }

@@ -14,5 +14,9 @@ $(document).ready(function() {
   dsController.pushEdge('4', '3');
   dsController.pushEdge('1', '2');
   dsController.pushEdge('3', '6');
+  dsController.createGraph('test', 'Next Graph');
+  dsController.moveNextGraph();
+  dsController.pushVertex('1', 'New First Vertex', 200, 200);
+  dsController.movePrevGraph();
   console.log(dsController.getCurrentGraphInfo());
 });

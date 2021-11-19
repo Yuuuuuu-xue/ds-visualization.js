@@ -115,6 +115,7 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].hideGraph(); 
     this.currIdx = newIdx;
     this.canvasCurrPageElement.innerText = `${this.currIdx + 1}`;
+    console.log(this.graphCanvas[this.currIdx], this.currIdx)
     this.graphCanvas[this.currIdx].displayGraph();
   }
 
