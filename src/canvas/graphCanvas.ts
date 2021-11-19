@@ -29,7 +29,11 @@ export class GraphCanvas implements GraphCanvasInterface {
             if (e.vertexFromId !== newVertex.vertexId && e.vertexToId !== newVertex.vertexId) {
                 e.setInactive();
             } else {
-                e.handleClick();
+                if (!newVertex.isActive) {
+                    e.setActive();
+                } else {
+                    e.setInactive();
+                }
             }
         })
         newVertex.handleClick();
