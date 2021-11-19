@@ -1,6 +1,7 @@
 import { GraphManagerInterface } from "../types/graphManager";
 import { Graph } from "../entity/graph/graph";
 import { GraphInfo } from "../types/graph";
+import { VertexDetailInterface } from "../types/vertexDetailInterface";
 
 export class GraphManager implements GraphManagerInterface {
   private graphs: Graph[];
@@ -68,5 +69,9 @@ export class GraphManager implements GraphManagerInterface {
 
   getGraphSize(): number {
     return this.graphs.length;
+  }
+
+  getVertexDetail(vertexId: string): VertexDetailInterface {
+    return this.graphs[this.currIdx].getVertexDetail(vertexId);
   }
 }

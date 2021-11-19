@@ -2,6 +2,7 @@ import { Vertex } from "../../types/vertex";
 import { Edge } from "../../types/edge";
 import { GraphInterface } from "../../types/graph";
 import { GraphInfo } from "../../types/graph";
+import { VertexDetailInterface, VertexInfo } from "../../types/vertexDetailInterface";
 
 export class Graph implements GraphInterface {
   vertices: Vertex[];
@@ -17,6 +18,37 @@ export class Graph implements GraphInterface {
     this.type = type;
     this.name = name;
   };
+
+  getVertexDetail(_id: string): VertexDetailInterface {
+    if (!this.visitedVertices.has(_id)) {
+      throw new Error(`No such vertex id ${_id}`);
+    }
+    
+    const vertexTo: VertexInfo[] = [];
+    const vertexFrom: VertexInfo[] = [];
+    this.edges.forEach(e => {
+      if (e.vertexFrom === _id) {
+        vertexTo.push({
+          vertexId: e.vertexTo,
+          weight: e.weight
+        });
+      } else if (e.vertexTo === _id) {
+        vertexFrom.push({
+          vertexId: e.vertexFrom,
+          weight: e.weight
+        });
+      }
+    })
+
+
+    const vertexDetail: VertexDetailInterface = {
+      vertexTo,
+      vertexFrom,
+      vertexId: _id
+    };
+
+    return vertexDetail;
+  }
 
   pushVertex(_id: string, value: any): boolean {
     // id is not unique

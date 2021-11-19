@@ -1,6 +1,5 @@
-interface VertexInfo {
+export interface VertexInfo {
   vertexId: string,
-  vertexValue: any,
   weight ?: number
 }
 
