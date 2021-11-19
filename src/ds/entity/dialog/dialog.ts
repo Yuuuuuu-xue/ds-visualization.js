@@ -68,9 +68,10 @@ export class Dialog {
     this.vertexDetail.innerHTML = '';
     
     this.vertexDetail.innerHTML += `
-      <p><span>Vertex id: </spam>${vertexDetail.vertexId}</p>
-      <p><span>In-degree: </span>${vertexDetail.vertexTo.length}</p>
-      <p><span>Out-degree: </span>${vertexDetail.vertexFrom.length}</p>
+      <p class='ds-dialog-title'>Vertex Info</p>
+      <p class='one-line'><span>Vertex id: </span>${vertexDetail.vertexId}</p>
+      <p class='one-line'><span>In-degree: </span>${vertexDetail.vertexTo.length}</p>
+      <p class='one-line'><span>Out-degree: </span>${vertexDetail.vertexFrom.length}</p>
     `
 
     // if (vertexDetail.vertexTo.length > 0) {
