@@ -1,7 +1,7 @@
-import { Vertex } from "../types/vertex";
-import { Edge } from "../types/edge";
-import { GraphInterface } from "../types/graph";
-import { GraphInfo } from "../types/graph";
+import { Vertex } from "../../types/vertex";
+import { Edge } from "../../types/edge";
+import { GraphInterface } from "../../types/graph";
+import { GraphInfo } from "../../types/graph";
 
 export class Graph implements GraphInterface {
   vertices: Vertex[];

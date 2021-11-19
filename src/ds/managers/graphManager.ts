@@ -1,5 +1,5 @@
 import { GraphManagerInterface } from "../types/graphManager";
-import { Graph } from "../graph/graph";
+import { Graph } from "../entity/graph/graph";
 import { GraphInfo } from "../types/graph";
 
 export class GraphManager implements GraphManagerInterface {

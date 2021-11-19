@@ -1,3 +1,4 @@
+import { DialogManager } from "../managers/dialogManager";
 import { DrawingManager } from "../managers/drawingManager";
 import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
@@ -7,6 +8,7 @@ export class DataStructureController implements DataStructureControllerInterface
   private graphManager: GraphManager;
   private drawingManager: DrawingManager;
   private targetElement: HTMLDivElement;
+  private dialogManager: DialogManager;
 
   constructor(width: number, height: number, targetElement: HTMLDivElement) {
     this.drawingManager = new DrawingManager(width, height);
@@ -18,6 +20,9 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.getPrevButtonElement().disableButtonElement();
     this.drawingManager.getNextButtonElement().getButtonElement().addEventListener('click', () => this.handleNextButtonClick());
     this.drawingManager.getPrevButtonElement().getButtonElement().addEventListener('click', () => this.handlePrevButtonClick());
+    this.dialogManager = new DialogManager(width, height);
+    this.targetElement.insertAdjacentElement('beforeend', this.dialogManager.getDialogElement());
+    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
   }
 
   setWidth(width: number) {

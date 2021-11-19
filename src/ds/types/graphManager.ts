@@ -1,4 +1,4 @@
-import { Graph } from "../graph/graph";
+import { Graph } from "../entity/graph/graph";
 import { GraphInfo } from "./graph";
 
 
