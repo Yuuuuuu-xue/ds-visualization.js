@@ -109,4 +109,13 @@ export class DataStructureController implements DataStructureControllerInterface
     this.graphManager.pushEdge(vertexTo, vertexFrom, weight);
     this.drawingManager.pushEdge(vertexTo, vertexFrom, weight);
   }
+
+  showDialog(): void {
+    this.dialogManager.enableDialog();
+    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
+  }
+
+  hideDialog(): void {
+    this.dialogManager.disableDialog();
+  }
 }

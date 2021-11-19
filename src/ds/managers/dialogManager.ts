@@ -43,6 +43,9 @@ export class DialogManager {
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementNumVertex());
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementNumEdge());
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementVertexDetail());
+
+    // Not showing the dialog at first
+    this.disableDialog();
   }
 
   setWidth(width: number): void {
@@ -72,5 +75,12 @@ export class DialogManager {
   setVertexDetail(vertexDetail: VertexDetailInterface) {
     this.dialog.setVertexDetail(vertexDetail);
   }
-  
+
+  disableDialog(): void {
+    this.dialogElement.classList.add('hidden');
+  }
+
+  enableDialog(): void {
+    this.dialogElement.classList.remove('hidden');
+  } 
 }

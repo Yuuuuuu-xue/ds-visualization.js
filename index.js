@@ -20,5 +20,6 @@ $(document).ready(function() {
   dsController.movePrevGraph();
   dsController.setDialogWidth(200);
   dsController.setDialogHeight(300);
+  dsController.showDialog();
   console.log(dsController.getCurrentGraphInfo());
 });
