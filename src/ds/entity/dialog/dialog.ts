@@ -76,6 +76,10 @@ export class Dialog {
     return output;
   }
 
+  clearVertexDetail(): void {
+    this.vertexDetail.innerHTML = '';
+  }
+
   setVertexDetail(vertexDetail: VertexDetailInterface) {
     this.vertexDetail.innerHTML = '';
     

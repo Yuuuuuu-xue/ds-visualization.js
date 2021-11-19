@@ -15,8 +15,9 @@ export class DrawingManager {
   private canvasNextButtonElement: ButtonInterface
   private canvasPrevButtonElement: ButtonInterface;
   private updateDialog: (vertexId: string) => void;
+  private clearVertexDialog: () => void;
 
-  constructor(width: number, height: number, updateDialog: (vertexId: string) => void) {
+  constructor(width: number, height: number, updateDialog: (vertexId: string) => void, clearVertexDialog: () => void) {
     if (width <= 0) {
       this.raiseError("Width must be positive number");
     }
@@ -64,7 +65,7 @@ export class DrawingManager {
     this.graphCanvas[0].displayGraph();
   
     this.updateDialog = updateDialog;
-    
+    this.clearVertexDialog = clearVertexDialog;
 
 
   };
@@ -82,7 +83,7 @@ export class DrawingManager {
   };
 
   createGraphCanvas(): void {
-    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId));
+    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog());
     this.graphCanvas.push(newGraphCanvas);
     this.canvasElement.insertAdjacentElement('beforeend', newGraphCanvas.graphElement);
   }
@@ -133,5 +134,9 @@ export class DrawingManager {
 
   pushEdge(vertexToId: string, vertexFromId: string, weight ?: number): void {
     this.graphCanvas[this.currIdx].pushEdge(vertexToId, vertexFromId, weight);
+  }
+
+  setCurrentGraphInactive(): void {
+    this.graphCanvas[this.currIdx].setInactiveAll();
   }
 }

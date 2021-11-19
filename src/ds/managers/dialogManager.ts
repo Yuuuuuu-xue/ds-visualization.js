@@ -70,6 +70,11 @@ export class DialogManager {
 
   setGraphDetail(graphInfo: GraphInfo) {
     this.dialog.setGraphDetail(graphInfo);
+    this.clearVertexDetail();
+  }
+
+  clearVertexDetail(): void {
+   this.dialog.clearVertexDetail(); 
   }
 
   setVertexDetail(vertexDetail: VertexDetailInterface) {

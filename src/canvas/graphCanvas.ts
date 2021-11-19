@@ -8,8 +8,9 @@ export class GraphCanvas implements GraphCanvasInterface {
     display: boolean;
     graphElement: HTMLDivElement;
     updateDialog: (vertexId: string) => void;
+    clearVertexDialog: () => void;
 
-    constructor(updateDialog: (vertexId: string) => void) {
+    constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void) {
         this.vertices = [];
         this.edges = [];
         this.display = false;
@@ -17,7 +18,16 @@ export class GraphCanvas implements GraphCanvasInterface {
         this.graphElement.classList.add('graph');
         this.graphElement.classList.add('hidden');
         this.updateDialog = updateDialog;
+        this.clearVertexDialog = clearVertexDialog;
+    }
 
+    setInactiveAll(): void {
+      this.vertices.forEach(v => {
+        v.setInactive();
+      });
+      this.edges.forEach(e => {
+        e.setInactive();
+      })
     }
 
     handleVertexClick(newVertex: VertexCanvas): void {
@@ -39,6 +49,10 @@ export class GraphCanvas implements GraphCanvasInterface {
         })
         newVertex.handleClick();
         this.updateDialog(newVertex.vertexId);
+        if(!newVertex.isActive) {
+          // Not active, clear the dialog
+          this.clearVertexDialog();
+        }
     }
 
     pushVertex(vertexId: string, x: number, y: number, value: any): void {

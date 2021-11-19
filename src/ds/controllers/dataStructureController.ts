@@ -19,8 +19,9 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
 
     const updateDialogBind = this.updateDialog.bind(this);
+    const clearVertexDialogBind = this.clearVertexDialog.bind(this);
 
-    this.drawingManager = new DrawingManager(width, height, updateDialogBind);
+    this.drawingManager = new DrawingManager(width, height, updateDialogBind, clearVertexDialogBind);
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
 
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
@@ -35,6 +36,10 @@ export class DataStructureController implements DataStructureControllerInterface
 
   updateDialog(vertexId: string): void {
     this.dialogManager.setVertexDetail(this.graphManager.getVertexDetail(vertexId));
+  }
+
+  clearVertexDialog(): void {
+    this.dialogManager.clearVertexDetail();
   }
 
   setCanvasWidth(width: number) {
@@ -89,6 +94,10 @@ export class DataStructureController implements DataStructureControllerInterface
 
   moveNextGraph(): void {
     this.graphManager.moveNextGraph();
+
+    // Inactive
+    this.drawingManager.setCurrentGraphInactive();
+
     this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
     // Set the title
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
@@ -98,10 +107,17 @@ export class DataStructureController implements DataStructureControllerInterface
       this.drawingManager.getNextButtonElement().disableButtonElement();
     }
     this.drawingManager.getPrevButtonElement().enableButtonElement();
+
+    // Update dialog
+    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
   };
 
   movePrevGraph(): void {
     this.graphManager.movePrevGraph();
+
+    // Inactive
+    this.drawingManager.setCurrentGraphInactive();
+
     this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
 
@@ -110,6 +126,9 @@ export class DataStructureController implements DataStructureControllerInterface
       this.drawingManager.getPrevButtonElement().disableButtonElement();
     }
     this.drawingManager.getNextButtonElement().enableButtonElement();
+    
+    // Update dialog
+    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
   };
 
   pushVertex(_id: string, value: any, x: number, y: number): void {
