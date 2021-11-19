@@ -1,9 +1,8 @@
-import { SlideManagerInterface } from "../types/slideManager";
+import { GraphManagerInterface } from "../types/graphManager";
 import { Graph } from "../graph/graph";
 import { GraphInfo } from "../types/graph";
-import { Vertex } from "../types/vertex";
 
-export class SlideManager implements SlideManagerInterface {
+export class GraphManager implements GraphManagerInterface {
   private graphs: Graph[];
   private currIdx: number;
 

@@ -1,17 +1,16 @@
 import { DrawingManager } from "../managers/drawingManager";
-import { SlideManager } from "../managers/slideManager";
+import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
 import { GraphInfo } from "../types/graph";
 
-
 export class DataStructureController implements DataStructureControllerInterface {
-  private slideManager: SlideManager;
+  private graphManager: GraphManager;
   private drawingManager: DrawingManager;
   private targetElement: HTMLDivElement;
 
   constructor(width: number, height: number, targetElement: HTMLDivElement) {
     this.drawingManager = new DrawingManager(width, height);
-    this.slideManager = new SlideManager();
+    this.graphManager = new GraphManager();
     this.targetElement = targetElement;
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
   }
@@ -25,11 +24,11 @@ export class DataStructureController implements DataStructureControllerInterface
   }
 
   createGraph(type: string, name: string): void {
-    this.slideManager.createGraph(type, name);
+    this.graphManager.createGraph(type, name);
   }
 
   getCurrentGraphInfo(): GraphInfo {
-    return this.slideManager.getCurrentGraphInfo();
+    return this.graphManager.getCurrentGraphInfo();
   }
 
   setTargetElement(targetElement: HTMLDivElement): void {
@@ -38,28 +37,28 @@ export class DataStructureController implements DataStructureControllerInterface
 
 
   moveNextGraph(): boolean {
-    const result = this.slideManager.moveNextGraph();
+    const result = this.graphManager.moveNextGraph();
     if (result) {
-      this.drawingManager.displayGraph(this.slideManager.getCurrentIdx());
+      this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
     }
     return result;
   };
 
   movePrevGraph(): boolean {
-    const result = this.slideManager.movePrevGraph();
+    const result = this.graphManager.movePrevGraph();
     if (result) {
-      this.drawingManager.displayGraph(this.slideManager.getCurrentIdx());
+      this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
     }
     return result;
   };
 
   pushVertex(_id: string, value: any, x: number, y: number): void {
-    this.slideManager.pushVertex(_id, value);
+    this.graphManager.pushVertex(_id, value);
     this.drawingManager.pushVertex(_id, x, y, value);
   }
 
   pushEdge(vertexTo: string, vertexFrom: string, weight ?: number): void {
-    this.slideManager.pushEdge(vertexTo, vertexFrom, weight);
+    this.graphManager.pushEdge(vertexTo, vertexFrom, weight);
     this.drawingManager.pushEdge(vertexTo, vertexFrom, weight);
   }
 }

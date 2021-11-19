@@ -2,7 +2,7 @@ import { Graph } from "../graph/graph";
 import { GraphInfo } from "./graph";
 
 
-export interface SlideManagerInterface {
+export interface GraphManagerInterface {
   createGraph: (type: string, name: string) => void,
   getCurrentGraph: () => Graph,
   getCurrentGraphInfo: () => GraphInfo,
