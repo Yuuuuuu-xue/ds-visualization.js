@@ -1,5 +1,5 @@
 import { GraphInfo } from "../../types/graph";
-import { VertexDetailInterface } from "../../types/vertexDetailInterface";
+import { VertexDetailInterface, VertexInfo } from "../../types/vertexDetailInterface";
 
 export class Dialog {
   name: HTMLDivElement;
@@ -64,6 +64,18 @@ export class Dialog {
     // this.vertexDetail.innerHTML = '';
   }
 
+  private getVertexNeighbourString(vertexDetail: VertexInfo[]): string {
+    let output = '';
+    vertexDetail.forEach(vertex => {
+      output += `
+        <li>
+          Vertex id: ${vertex.vertexId} ${vertex.weight ? `and weight ${vertex.weight}` : ''}
+        </li>
+      `
+    });
+    return output;
+  }
+
   setVertexDetail(vertexDetail: VertexDetailInterface) {
     this.vertexDetail.innerHTML = '';
     
@@ -74,19 +86,22 @@ export class Dialog {
       <p class='one-line'><span>Out-degree: </span>${vertexDetail.vertexFrom.length}</p>
     `
 
-    // if (vertexDetail.vertexTo.length > 0) {
-    //   this.vertexDetail.innerHTML += `
-    //     <span>In-neighbours: </span>
-    //     <ul>
-    //       ${vertexDetail.vertexTo.map(vertex => {
-    //         return `
-    //           <li>
-    //             Vertex id: ${vertex.vertexId} ${vertex.weight ? `and weight ${vertex.weight}` : ''}
-    //           </li>
-    //         `
-    //       })}
-    //     </ul>
-    //   `
-    // }
+    if (vertexDetail.vertexTo.length > 0) {
+      this.vertexDetail.innerHTML += `
+        <p class='one-line'><span>In-neighbours: </span></p>
+        <ul>
+          ${this.getVertexNeighbourString(vertexDetail.vertexTo)}
+        </ul>
+      `
+    }
+
+    if (vertexDetail.vertexFrom.length > 0) {
+      this.vertexDetail.innerHTML += `
+        <p class='one-line'><span>Out-neighbours: </span></p>
+        <ul>
+          ${this.getVertexNeighbourString(vertexDetail.vertexFrom)}
+        </ul>
+      `
+    }
   } 
 }
