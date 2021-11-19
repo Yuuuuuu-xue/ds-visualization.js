@@ -9,11 +9,34 @@
 @arrowSize: 17px;
 
 // mixins
-.absolute-center {
+.absolute-horizontal-center {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
+}
+
+.absolute-vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.button {
+  border-radius: 20px;
+  background: @white;
+  padding: 20px 10px;
+  font-size: 1.3em;
+  font-weight: bold;
+  border: 2px solid @canvasBorder;
+
+  &.enable {
+    &:hover {
+      background: @canvasBorder;
+      color: @white;  
+    }
+  }
 }
 
 .ds-canvas {
@@ -27,16 +50,35 @@
   overflow: auto;
   border: 2px solid @canvasBorder;
 
+  .ds-canvas-button {
+    .button();
+    .absolute-vertical-center();
+    
+    &.ds-canvas-next {
+      right: 10px;
+
+    }
+
+    &.ds-canvas-prev {
+      left: 10px;
+    }
+
+    &.disable {
+      opacity: 0.3;
+    }
+  }
+
+
   .ds-canvas-title {
     font-size: 1.5em;
     font-weight: bold;
     text-decoration: underline;
-    top: 10px;
-    .absolute-center();
+    top: 1%;
+    .absolute-horizontal-center();
   }
 
   .ds-canvas-curr-page {
-    .absolute-center();
+    .absolute-horizontal-center();
     bottom: 10px;
     font-size: 1.2em;
   }
@@ -62,7 +104,7 @@
       border-bottom: @arrowSize solid transparent;
     }
     &.active {
-      border: 1px solid @activeColor;
+      border: 2px solid @activeColor;
 
       &::after {
         border-left: @arrowSize solid @activeColor;
@@ -70,7 +112,7 @@
     }
 
     &.inactive {
-      border: 1px solid @inactiveColor;
+      border: 2px solid @inactiveColor;
 
       &::after {
         border-left: @arrowSize solid @inactiveColor;

@@ -14,6 +14,8 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
     this.targetElement = targetElement;
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
+    this.drawingManager.getNextButtonElement().disableButtonElement();
+    this.drawingManager.getPrevButtonElement().disableButtonElement();
   }
 
   setWidth(width: number) {
@@ -42,23 +44,17 @@ export class DataStructureController implements DataStructureControllerInterface
   }
 
 
-  moveNextGraph(): boolean {
-    const result = this.graphManager.moveNextGraph();
-    if (result) {
-      this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
-      // Set the title
-      this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
-    }
-    return result;
+  moveNextGraph(): void {
+    this.graphManager.moveNextGraph();
+    this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
+    // Set the title
+    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
   };
 
-  movePrevGraph(): boolean {
-    const result = this.graphManager.movePrevGraph();
-    if (result) {
-      this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
-      this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
-    }
-    return result;
+  movePrevGraph(): void {
+    this.graphManager.movePrevGraph();
+    this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
+    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
   };
 
   pushVertex(_id: string, value: any, x: number, y: number): void {

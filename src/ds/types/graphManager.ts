@@ -6,8 +6,8 @@ export interface GraphManagerInterface {
   createGraph: (type: string, name: string) => void,
   getCurrentGraph: () => Graph,
   getCurrentGraphInfo: () => GraphInfo,
-  moveNextGraph: () => boolean,
-  movePrevGraph: () => boolean,
+  moveNextGraph: () => void,
+  movePrevGraph: () => void,
   pushVertex: (_id: string, value: any) => void,
   pushEdge: (vertexTo: string, vertexFrom: string, weight ?: number) => void;
 }

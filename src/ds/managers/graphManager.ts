@@ -38,21 +38,19 @@ export class GraphManager implements GraphManagerInterface {
     this.getCurrentGraph().name = name;
   }
 
-  moveNextGraph(): boolean {
+  moveNextGraph(): void {
     if (this.currIdx >= this.graphs.length) {
-      return false;
+      throw new Error("Index of out boundary");
     } else {
       this.currIdx ++;
-      return true;
     }
   }
 
-  movePrevGraph(): boolean {
+  movePrevGraph(): void {
     if (this.currIdx === 0) {
-      return false;
+      throw new Error("Index of out boundary");
     } else {
       this.currIdx --;
-      return true;
     }
   }
 

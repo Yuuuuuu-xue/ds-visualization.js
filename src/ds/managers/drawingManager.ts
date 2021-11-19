@@ -1,5 +1,7 @@
 import { canvasStyle } from "../styles/canvas.style";
 import { GraphCanvas } from "../../canvas/graphCanvas";
+import { ButtonInterface } from "../../canvas/types/buttonInterface";
+import { Button } from "../../canvas/buttons/button";
 
 
 export class DrawingManager {
@@ -10,6 +12,8 @@ export class DrawingManager {
   private canvasElement: HTMLDivElement;
   private canvasTitleElement: HTMLParagraphElement;
   private canvasCurrPageElement: HTMLParagraphElement;
+  private canvasNextButtonElement: ButtonInterface
+  private canvasPrevButtonElement: ButtonInterface;
 
   constructor(width: number, height: number) {
     if (width <= 0) {
@@ -41,9 +45,18 @@ export class DrawingManager {
     this.canvasCurrPageElement.classList.add('ds-canvas-curr-page');
     this.canvasCurrPageElement.innerText = '1';
 
+    // Next page button
+    this.canvasNextButtonElement = new Button('next', '>');
+    
+    // Prev page button
+    this.canvasPrevButtonElement = new Button('prev', '<');
+
+    // Add to the canvas element
     this.canvasElement.insertAdjacentElement('beforeend', canvasBackgroundTitle);
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasTitleElement);
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasCurrPageElement);
+    this.canvasElement.insertAdjacentElement('beforeend', this.canvasNextButtonElement.getButtonElement());
+    this.canvasElement.insertAdjacentElement('beforeend', this.canvasPrevButtonElement.getButtonElement());
 
     this.graphCanvas = [];
     this.createGraphCanvas();
@@ -81,6 +94,14 @@ export class DrawingManager {
     }
     this.height = height;
   };
+  
+  getNextButtonElement(): ButtonInterface {
+    return this.canvasNextButtonElement;
+  }
+
+  getPrevButtonElement(): ButtonInterface {
+    return this.canvasPrevButtonElement;
+  }
 
   getWidth(): number {
     return this.width;

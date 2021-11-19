@@ -5,9 +5,14 @@ $(document).ready(function() {
   dsController.pushVertex('2', 'Second Vertex', 200, 300);
   dsController.pushVertex('3', 'Third Vertex', 300, 200);
   dsController.pushVertex('4', 'Fourth Vertex', 500, 200);
+  dsController.pushVertex('5', 'Fifth Vertex', 750, 50);
+  dsController.pushVertex('6', 'Sixth Vertex', 460, 350);
+  dsController.pushEdge('4', '5');
+  dsController.pushEdge('3', '5')
   dsController.pushEdge('1', '3');
   dsController.pushEdge('2', '1');
   dsController.pushEdge('4', '3');
   dsController.pushEdge('1', '2');
+  dsController.pushEdge('3', '6');
   console.log(dsController.getCurrentGraphInfo());
 });
