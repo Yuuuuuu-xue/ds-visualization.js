@@ -30,9 +30,14 @@ export class DialogManager {
     dialogBackgroundTitle.innerText = 'DS.js Dialog';
     dialogBackgroundTitle.classList.add('ds-dialog-background-title'); 
 
+    const dialogTitle = document.createElement('p');
+    dialogTitle.innerText = 'Graph Info';
+    dialogTitle.classList.add('ds-dialog-title');
+
     this.dialog = new Dialog();
 
     this.dialogElement.insertAdjacentElement('beforeend', dialogBackgroundTitle);
+    this.dialogElement.insertAdjacentElement('beforeend', dialogTitle);
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementName());
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementType());
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementNumVertex());
@@ -40,12 +45,20 @@ export class DialogManager {
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementVertexDetail());
   }
 
-  setWidth(width: number) {
+  setWidth(width: number): void {
+    if (width <= 0) {
+      throw new Error("Width must be positive number");
+    }
     this.width = width;
+    this.dialogElement.setAttribute('style', canvasStyle(this.width, this.height));
   }
 
-  setHeight(height: number) {
+  setHeight(height: number): void {
+    if (height <= 0) {
+      throw new Error("Height must be positive number");
+    }
     this.height = height;
+    this.dialogElement.setAttribute('style', canvasStyle(this.width, this.height));
   }
 
   getDialogElement(): HTMLDivElement {

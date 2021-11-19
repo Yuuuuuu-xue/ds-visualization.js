@@ -25,12 +25,20 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
   }
 
-  setWidth(width: number) {
+  setCanvasWidth(width: number) {
     this.drawingManager.setWidth(width);
   }
 
-  setHeight(height: number) {
+  setCanvasHeight(height: number) {
     this.drawingManager.setHeight(height);
+  }
+
+  setDialogWidth(width: number) {
+    this.dialogManager.setWidth(width);
+  }
+
+  setDialogHeight(height: number) {
+    this.dialogManager.setHeight(height);
   }
 
   createGraph(type: string, name: string): void {

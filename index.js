@@ -18,5 +18,7 @@ $(document).ready(function() {
   dsController.moveNextGraph();
   dsController.pushVertex('1', 'New First Vertex', 200, 200);
   dsController.movePrevGraph();
+  dsController.setDialogWidth(200);
+  dsController.setDialogHeight(300);
   console.log(dsController.getCurrentGraphInfo());
 });

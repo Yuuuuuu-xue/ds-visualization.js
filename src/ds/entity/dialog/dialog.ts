@@ -52,8 +52,7 @@ export class Dialog {
 
   private setInnerHTML(divElement: HTMLDivElement, spanBody: string, paraBody: string) {
     divElement.innerHTML = `
-      <span>${spanBody}</span>
-      <p>${paraBody}</p>
+      <p><span>${spanBody}</span>${paraBody}</p>
     `;
   }
 
@@ -67,12 +66,9 @@ export class Dialog {
 
   setVertexDetail(vertexDetail: VertexDetailInterface) {
     this.vertexDetail.innerHTML += `
-      <span>Vertex id: </spam>
-      <p>${vertexDetail.vertexId}</p>
-      <span>In-degree: </span>
-      <p>${vertexDetail.vertexTo.length}</p>
-      <span>Out-degree: </span>
-      <p>${vertexDetail.vertexFrom.length}</p>
+      <p><span>Vertex id: </spam>${vertexDetail.vertexId}</p>
+      <p><span>In-degree: </span>${vertexDetail.vertexTo.length}</p>
+      <p><span>Out-degree: </span>${vertexDetail.vertexFrom.length}</p>
     `
 
     if (vertexDetail.vertexTo.length > 0) {

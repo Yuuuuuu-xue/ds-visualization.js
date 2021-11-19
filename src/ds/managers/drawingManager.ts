@@ -86,6 +86,7 @@ export class DrawingManager {
       this.raiseError("Width must be positive number");
     }
     this.width = width;
+    this.canvasElement.setAttribute('style', canvasStyle(this.width, this.height));
   };
 
   setHeight(height: number): void {
@@ -93,6 +94,7 @@ export class DrawingManager {
       this.raiseError("Height must be positive number");
     }
     this.height = height;
+    this.canvasElement.setAttribute('style', canvasStyle(this.width, this.height));
   };
   
   getNextButtonElement(): ButtonInterface {

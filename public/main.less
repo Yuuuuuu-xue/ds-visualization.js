@@ -1,6 +1,7 @@
 // Constants
 @buttonRadius: 100px;
 @canvasBorder: crimson;
+@dialogBorder: salmon;
 @inactiveColor: rgb(65, 65, 65);
 @activeColor: #24973f;
 @buttonBorder: 5px;
@@ -8,7 +9,7 @@
 @black: black;
 @arrowSize: 17px;
 
-// mixins
+/****************** MIXINS ******************************/
 .absolute-horizontal-center {
   position: absolute;
   left: 50%;
@@ -39,15 +40,41 @@
   }
 }
 
-.ds-canvas {
+.reset {
   p, ul, li, h1, h2, h3, h4, h5 {
     margin: 0;
     padding: 0;
     font-weight: normal;
   }
+}
+
+.border {
   position: relative;
   padding: 5px;
   overflow: auto;
+}
+
+.title {
+  z-index: -1;
+  opacity: 0.4;
+}
+
+/************* END ********************/
+
+.ds-dialog {
+  .reset();
+  .border();
+  border: 2px solid @dialogBorder;
+
+  .ds-dialog-background-title {
+    .title();
+  } 
+}
+
+
+.ds-canvas {
+  .reset();
+  .border();
   border: 2px solid @canvasBorder;
 
   .hidden {
@@ -88,8 +115,7 @@
   }
 
   .ds-canvas-background-title {
-    z-index: -1;
-    opacity: 0.4;
+    .title();
   }
 
   .edge {
