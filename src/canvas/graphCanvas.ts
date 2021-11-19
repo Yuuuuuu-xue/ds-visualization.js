@@ -1,6 +1,4 @@
-import { canvasStyle } from "../ds/styles/canvas.style";
 import { EdgeCanvas } from "./edgeCanvas";
-import { vertexStyle } from "./styles/vertex.style";
 import { GraphCanvasInterface } from "./types/graphCanvasInterface";
 import { VertexCanvas } from "./vertexCanvas";
 

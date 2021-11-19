@@ -8,6 +8,14 @@
 @black: black;
 @arrowSize: 17px;
 
+// mixins
+.absolute-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
 .ds-canvas {
   p, ul, li, h1, h2, h3, h4, h5 {
     margin: 0;
@@ -17,8 +25,26 @@
   position: relative;
   padding: 5px;
   overflow: auto;
-  border: 1px solid @canvasBorder;
+  border: 2px solid @canvasBorder;
 
+  .ds-canvas-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: underline;
+    top: 10px;
+    .absolute-center();
+  }
+
+  .ds-canvas-curr-page {
+    .absolute-center();
+    bottom: 10px;
+    font-size: 1.2em;
+  }
+
+  .ds-canvas-background-title {
+    z-index: -1;
+    opacity: 0.4;
+  }
 
   .edge {
     position: absolute;

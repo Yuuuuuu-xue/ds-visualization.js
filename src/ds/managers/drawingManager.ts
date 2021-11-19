@@ -8,6 +8,8 @@ export class DrawingManager {
   private graphCanvas: GraphCanvas[];
   private currIdx: number;
   private canvasElement: HTMLDivElement;
+  private canvasTitleElement: HTMLParagraphElement;
+  private canvasCurrPageElement: HTMLParagraphElement;
 
   constructor(width: number, height: number) {
     if (width <= 0) {
@@ -24,12 +26,33 @@ export class DrawingManager {
     this.canvasElement = document.createElement('div');
     this.canvasElement.classList.add('ds-canvas');
     this.canvasElement.setAttribute('style', canvasStyle(this.width, this.height));
-    this.canvasElement.innerHTML += `<p>My Canvas</p>`;
+
+    const canvasBackgroundTitle = document.createElement('p');
+    canvasBackgroundTitle.innerText = 'DS.js Canvas';
+    canvasBackgroundTitle.classList.add('ds-canvas-background-title');
+
+    // canvas title
+    this.canvasTitleElement = document.createElement('p');
+    this.canvasTitleElement.classList.add('ds-canvas-title');
+    this.canvasTitleElement.innerText = '';
+
+    // canvas page
+    this.canvasCurrPageElement = document.createElement('p');
+    this.canvasCurrPageElement.classList.add('ds-canvas-curr-page');
+    this.canvasCurrPageElement.innerText = '1';
+
+    this.canvasElement.insertAdjacentElement('beforeend', canvasBackgroundTitle);
+    this.canvasElement.insertAdjacentElement('beforeend', this.canvasTitleElement);
+    this.canvasElement.insertAdjacentElement('beforeend', this.canvasCurrPageElement);
 
     this.graphCanvas = [];
     this.createGraphCanvas();
     this.graphCanvas[0].displayGraph();
   };
+
+  setCanvasTitle(title: string): void {
+    this.canvasTitleElement.innerText = title;
+  }
   
   getCanvasElement(): HTMLDivElement {
     return this.canvasElement;
@@ -70,6 +93,7 @@ export class DrawingManager {
   displayGraph(newIdx: number): void {
     this.graphCanvas[this.currIdx].hideGraph(); 
     this.currIdx = newIdx;
+    this.canvasCurrPageElement.innerText = `${this.currIdx + 1}`;
     this.graphCanvas[this.currIdx].displayGraph();
   }
 

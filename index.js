@@ -1,5 +1,6 @@
 $(document).ready(function() {
   const dsController = new ds.DataStructureController(800, 400, document.getElementById("root"));
+  dsController.setCurrentGraphTitle('Example of a graph')
   dsController.pushVertex('1', 'First Vertex', 50, 50);
   dsController.pushVertex('2', 'Second Vertex', 200, 300);
   dsController.pushVertex('3', 'Third Vertex', 300, 200);

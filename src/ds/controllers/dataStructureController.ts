@@ -11,6 +11,7 @@ export class DataStructureController implements DataStructureControllerInterface
   constructor(width: number, height: number, targetElement: HTMLDivElement) {
     this.drawingManager = new DrawingManager(width, height);
     this.graphManager = new GraphManager();
+    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
     this.targetElement = targetElement;
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
   }
@@ -35,11 +36,18 @@ export class DataStructureController implements DataStructureControllerInterface
     this.targetElement = targetElement;
   }
 
+  setCurrentGraphTitle(title: string): void {
+    this.graphManager.setCurrentGraphName(title);
+    this.drawingManager.setCanvasTitle(title);
+  }
+
 
   moveNextGraph(): boolean {
     const result = this.graphManager.moveNextGraph();
     if (result) {
       this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
+      // Set the title
+      this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
     }
     return result;
   };
@@ -48,6 +56,7 @@ export class DataStructureController implements DataStructureControllerInterface
     const result = this.graphManager.movePrevGraph();
     if (result) {
       this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
+      this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
     }
     return result;
   };

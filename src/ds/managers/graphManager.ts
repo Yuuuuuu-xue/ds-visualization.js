@@ -30,6 +30,14 @@ export class GraphManager implements GraphManagerInterface {
     return this.getCurrentGraph().getInfo();
   };
 
+  getCurrentGraphName(): string {
+    return this.getCurrentGraph().name;
+  };
+
+  setCurrentGraphName(name: string): void {
+    this.getCurrentGraph().name = name;
+  }
+
   moveNextGraph(): boolean {
     if (this.currIdx >= this.graphs.length) {
       return false;

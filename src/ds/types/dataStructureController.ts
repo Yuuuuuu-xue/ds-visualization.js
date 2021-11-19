@@ -1,5 +1,4 @@
 import { GraphInfo } from "./graph";
-import { Vertex } from "./vertex";
 
 export interface DataStructureControllerInterface {
   createGraph: (type: string, name: string) => void,
