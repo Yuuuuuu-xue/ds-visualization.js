@@ -49,17 +49,11 @@ export class GraphManager implements GraphManagerInterface {
   }
 
   pushVertex(_id: string, value: any): void {
-    const result = this.graphs[this.currIdx].pushVertex(_id, value);
-    if (!result) {
-      throw new Error(`The id ${_id} must be unique`);
-    }
+    this.graphs[this.currIdx].pushVertex(_id, value);
   }
 
   pushEdge(vertexTo: string, vertexFrom: string, weight ?: number) {
-    const result = this.graphs[this.currIdx].pushEdge(vertexTo, vertexFrom, weight);
-    if (!result) {
-      throw new Error(`The vertex id ${vertexTo} or ${vertexFrom} does not exist`);
-    }
+    this.graphs[this.currIdx].pushEdge(vertexTo, vertexFrom, weight);
   }
 
   getCurrentIdx(): number {

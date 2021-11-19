@@ -9,6 +9,7 @@ export class Graph implements GraphInterface {
   type: string;
   name: string;
   visitedVertices = new Set();
+  visitedEdges = new Set();
   
   constructor(type: string, name: string) {
     this.vertices = [];
@@ -20,7 +21,7 @@ export class Graph implements GraphInterface {
   pushVertex(_id: string, value: any): boolean {
     // id is not unique
     if(this.visitedVertices.has(_id)) {
-      return false;
+      throw new Error(`The id ${_id} must be unique`);
     }
     
     // create new Vertex
@@ -35,9 +36,15 @@ export class Graph implements GraphInterface {
 
   pushEdge(vertexTo: string, vertexFrom: string, weight?: number): boolean {
     if(!this.visitedVertices.has(vertexTo) || !this.visitedVertices.has(vertexFrom)) {
-      return false;
+      throw new Error(`The vertex id ${vertexTo} or ${vertexFrom} does not exist`);
     }
 
+    const seralizeEdge = JSON.stringify([vertexTo, vertexFrom]);
+    if (this.visitedEdges.has(seralizeEdge)) {
+      throw new Error(`The edge is already exist!`);
+    }
+
+    this.visitedEdges.add(seralizeEdge);
     // Create a new Edge
     const newEdge: Edge = {
       vertexTo: vertexTo,

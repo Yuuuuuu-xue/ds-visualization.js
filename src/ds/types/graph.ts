@@ -16,7 +16,7 @@ export interface GraphInterface {
   edges: Edge[],
   type: string,
   name: string,
-  pushVertex: (_id: string, value: any) => boolean;
-  pushEdge: (vertexTo: string, vertexFrom: string, weight?: number) => boolean;
+  pushVertex: (_id: string, value: any) => void;
+  pushEdge: (vertexTo: string, vertexFrom: string, weight?: number) => void;
   getInfo: () => GraphInfo;
 }
