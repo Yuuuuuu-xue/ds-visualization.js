@@ -7,14 +7,17 @@ export class GraphCanvas implements GraphCanvasInterface {
     edges: EdgeCanvas[];
     display: boolean;
     graphElement: HTMLDivElement;
+    updateDialog: (vertexId: string) => void;
 
-    constructor() {
+    constructor(updateDialog: (vertexId: string) => void) {
         this.vertices = [];
         this.edges = [];
         this.display = false;
         this.graphElement = document.createElement('div');
         this.graphElement.classList.add('graph');
         this.graphElement.classList.add('hidden');
+        this.updateDialog = updateDialog;
+
     }
 
     handleVertexClick(newVertex: VertexCanvas): void {
@@ -35,6 +38,7 @@ export class GraphCanvas implements GraphCanvasInterface {
             }
         })
         newVertex.handleClick();
+        this.updateDialog(newVertex.vertexId);
     }
 
     pushVertex(vertexId: string, x: number, y: number, value: any): void {

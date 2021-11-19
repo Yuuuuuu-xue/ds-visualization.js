@@ -10,19 +10,31 @@ export class DataStructureController implements DataStructureControllerInterface
   private targetElement: HTMLDivElement;
   private dialogManager: DialogManager;
 
-  constructor(width: number, height: number, targetElement: HTMLDivElement) {
-    this.drawingManager = new DrawingManager(width, height);
-    this.graphManager = new GraphManager();
-    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
+  constructor(width: number, height: number, targetElement: HTMLDivElement) {   
+    
     this.targetElement = targetElement;
+
+    this.graphManager = new GraphManager();        
+    this.dialogManager = new DialogManager(width, height);
+    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
+
+    const updateDialogBind = this.updateDialog.bind(this);
+
+    this.drawingManager = new DrawingManager(width, height, updateDialogBind);
+    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
+
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
     this.drawingManager.getNextButtonElement().disableButtonElement();
     this.drawingManager.getPrevButtonElement().disableButtonElement();
     this.drawingManager.getNextButtonElement().getButtonElement().addEventListener('click', () => this.handleNextButtonClick());
     this.drawingManager.getPrevButtonElement().getButtonElement().addEventListener('click', () => this.handlePrevButtonClick());
-    this.dialogManager = new DialogManager(width, height);
+
     this.targetElement.insertAdjacentElement('beforeend', this.dialogManager.getDialogElement());
-    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
+
+  }
+
+  updateDialog(vertexId: string): void {
+    this.dialogManager.setVertexDetail(this.graphManager.getVertexDetail(vertexId));
   }
 
   setCanvasWidth(width: number) {

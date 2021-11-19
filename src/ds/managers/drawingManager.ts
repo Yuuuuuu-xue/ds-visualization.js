@@ -14,8 +14,9 @@ export class DrawingManager {
   private canvasCurrPageElement: HTMLParagraphElement;
   private canvasNextButtonElement: ButtonInterface
   private canvasPrevButtonElement: ButtonInterface;
+  private updateDialog: (vertexId: string) => void;
 
-  constructor(width: number, height: number) {
+  constructor(width: number, height: number, updateDialog: (vertexId: string) => void) {
     if (width <= 0) {
       this.raiseError("Width must be positive number");
     }
@@ -61,6 +62,11 @@ export class DrawingManager {
     this.graphCanvas = [];
     this.createGraphCanvas();
     this.graphCanvas[0].displayGraph();
+  
+    this.updateDialog = updateDialog;
+    
+
+
   };
 
   setCanvasTitle(title: string): void {
@@ -76,7 +82,7 @@ export class DrawingManager {
   };
 
   createGraphCanvas(): void {
-    const newGraphCanvas = new GraphCanvas();
+    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId));
     this.graphCanvas.push(newGraphCanvas);
     this.canvasElement.insertAdjacentElement('beforeend', newGraphCanvas.graphElement);
   }

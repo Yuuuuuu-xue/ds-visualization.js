@@ -61,29 +61,31 @@ export class Dialog {
     this.setInnerHTML(this.type, 'Graph type: ', graphInfo.type);
     this.setInnerHTML(this.numVertex, 'Number of vertex: ', graphInfo.numVertex.toString());
     this.setInnerHTML(this.numEdge, 'Number of edge: ', graphInfo.numEdge.toString());
-    this.vertexDetail.innerHTML = '';
+    // this.vertexDetail.innerHTML = '';
   }
 
   setVertexDetail(vertexDetail: VertexDetailInterface) {
+    this.vertexDetail.innerHTML = '';
+    
     this.vertexDetail.innerHTML += `
       <p><span>Vertex id: </spam>${vertexDetail.vertexId}</p>
       <p><span>In-degree: </span>${vertexDetail.vertexTo.length}</p>
       <p><span>Out-degree: </span>${vertexDetail.vertexFrom.length}</p>
     `
 
-    if (vertexDetail.vertexTo.length > 0) {
-      this.vertexDetail.innerHTML += `
-        <span>In-neighbours: </span>
-        <ul>
-          ${vertexDetail.vertexTo.map(vertex => {
-            return `
-              <li>
-                Vertex id: ${vertex.vertexId} with value ${vertex.vertexValue} ${vertex.weight ? `and weight ${vertex.weight}` : ''}
-              </li>
-            `
-          })}
-        </ul>
-      `
-    }
+    // if (vertexDetail.vertexTo.length > 0) {
+    //   this.vertexDetail.innerHTML += `
+    //     <span>In-neighbours: </span>
+    //     <ul>
+    //       ${vertexDetail.vertexTo.map(vertex => {
+    //         return `
+    //           <li>
+    //             Vertex id: ${vertex.vertexId} ${vertex.weight ? `and weight ${vertex.weight}` : ''}
+    //           </li>
+    //         `
+    //       })}
+    //     </ul>
+    //   `
+    // }
   } 
 }
