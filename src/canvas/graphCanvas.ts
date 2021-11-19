@@ -1,5 +1,6 @@
 import { canvasStyle } from "../ds/styles/canvas.style";
 import { EdgeCanvas } from "./edgeCanvas";
+import { vertexStyle } from "./styles/vertex.style";
 import { GraphCanvasInterface } from "./types/graphCanvasInterface";
 import { VertexCanvas } from "./vertexCanvas";
 
@@ -22,6 +23,13 @@ export class GraphCanvas implements GraphCanvasInterface {
         this.vertices.forEach(v => {
             if (v.vertexId !== newVertex.vertexId) {
                 v.setInactive();
+            }
+        });
+        this.edges.forEach(e => {
+            if (e.vertexFromId !== newVertex.vertexId && e.vertexToId !== newVertex.vertexId) {
+                e.setInactive();
+            } else {
+                e.handleClick();
             }
         })
         newVertex.handleClick();
