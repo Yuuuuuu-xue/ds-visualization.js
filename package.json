@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "14.18.1"
+  },
   "scripts": {
     "build": "npx webpack",
     "start": "node server.js",
