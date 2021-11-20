@@ -64,5 +64,38 @@
     <div id="root">
     </div>
     
+    <p class='subtitle'>Demo:</p>
+    <div id='demo-forms'>
+      <form id='vertex-form'>
+        <p class='text-body'>Create Vertex to Current Graph</p>
+        <label for='vertex-id'>Vertex id:</label>
+        <input id='vertex-id' type='text' required placeholder="Id" />
+        <label for='vertex-value'>Vertex Value</label> 
+        <input id='vertex-value' type='text' required placeholder="Value" />
+        <label for='vertex-weight'>Vertex Weight</label>
+        <input id='vertex-weight' type="text" placeholder="Weight" />
+        <button type='submit'>Add Vertex</button>
+      </form>
+
+      <form id='edge-form'>
+        <p class='text-body'>Create Edge to Current Graph</p>
+        <label for='vertex-to-id'>Vertex To Id:</label>
+        <input id='vertex-to-id' type='text' required placeholder="Vertex To Id" />
+        <label for='vertex-from-id'>Vertex From Id:</label>
+        <input id='vertex-from-id' type='text' required placeholder="Vertex From Id" />
+        <button type='submit'>Add Edge</button>
+      </form>
+
+      <form id='graph-form'>
+        <p class='text-body'>Create Graph</p>
+        <label for='graph-type'>Graph Type:</label>
+        <input id='graph-type' type='text' required placeholder="Graph Type" />
+        <label for='graph-name'>Graph Name:</label>
+        <input id='graph-name' type='text' required placeholder="Graph Name" />
+        <button type='submit'>Create Graph</button>
+      </form>
+    </div>
+    <div id='demo'>
+    </div> 
   </body>
 </html>

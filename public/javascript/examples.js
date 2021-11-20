@@ -142,7 +142,7 @@ $(document).ready(function() {
           <br/>
           dsController.setDialogWidth(250);
           <br/>
-          dsController.setDialogHeight(300);
+          dsController.setDialogHeight(400);
           <br/>
           dsController.showDialog();
           <br/>
@@ -172,7 +172,7 @@ $(document).ready(function() {
   dsController.pushVertex('1', 'New First Vertex', 200, 200);
   dsController.movePrevGraph();
   dsController.setDialogWidth(250);
-  dsController.setDialogHeight(300);
+  dsController.setDialogHeight(400);
   // dsController.updateDialog('1');
   dsController.showDialog();
   console.log(dsController.getCurrentGraphInfo());
