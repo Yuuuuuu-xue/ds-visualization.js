@@ -99,6 +99,59 @@ $(document).ready(function() {
     'dsController.clearVertexDialog(): void {}'
   )
 
+  const exampleElement = document.getElementById('example');
+  exampleElement.innerHTML = `
+    <div class="instruction">
+      <div class='instruction-code-wrapper'>
+        <code class='instruction-code'>
+          dsController.setCurrentGraphTitle('Example of a graph')
+          <br/>
+          dsController.pushVertex('1', 'First Vertex', 50, 50);
+          <br/>
+          dsController.pushVertex('2', 'Second Vertex', 200, 300);
+          <br/>
+          dsController.pushVertex('3', 'Third Vertex', 300, 200);
+          <br/>
+          dsController.pushVertex('4', 'Fourth Vertex', 500, 200);
+          <br/>
+          dsController.pushVertex('5', 'Fifth Vertex', 750, 50);
+          <br/>
+          dsController.pushVertex('6', 'Sixth Vertex', 460, 350);
+          <br/>
+          dsController.pushEdge('4', '5');
+          <br/>
+          dsController.pushEdge('3', '5')
+          <br/>
+          dsController.pushEdge('1', '3');
+          <br/>
+          dsController.pushEdge('2', '1');
+          <br/>
+          dsController.pushEdge('4', '3');
+          <br/>
+          dsController.pushEdge('1', '2');
+          <br/>
+          dsController.pushEdge('3', '6');
+          <br/>
+          dsController.createGraph('test', 'Next Graph');
+          <br/>
+          dsController.moveNextGraph();
+          <br/>
+          dsController.pushVertex('1', 'New First Vertex', 200, 200);
+          <br/>
+          dsController.movePrevGraph();
+          <br/>
+          dsController.setDialogWidth(250);
+          <br/>
+          dsController.setDialogHeight(300);
+          <br/>
+          dsController.showDialog();
+          <br/>
+          console.log(dsController.getCurrentGraphInfo());
+        </code>
+      </div>
+    </div>
+  `
+
   const dsController = new ds.DataStructureController(800, 400, document.getElementById("root"));
   dsController.setCurrentGraphTitle('Example of a graph')
   dsController.pushVertex('1', 'First Vertex', 50, 50);
