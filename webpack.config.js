@@ -26,7 +26,8 @@ module.exports = {
     extensions: ['.ts', '.js', '.css']
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    // path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('./public/library'),
     filename: 'ds.js'
   }
 }
