@@ -205,11 +205,24 @@ $(document).ready(function() {
       demoController.pushEdge(
         document.getElementById('vertex-to-id').value,
         document.getElementById('vertex-from-id').value,
-
       );
       edgeForm.reset();
     } catch (err) {
       alert(err);
     }
-  })
+  });
+
+  const graphForm = document.getElementById('graph-form');
+  graphForm.addEventListener('submit', e => {
+    e.preventDefault();
+    try {
+      demoController.createGraph(
+        document.getElementById('graph-type').value,
+        document.getElementById('graph-name').value
+      );
+      graphForm.reset();
+    } catch (err) {
+      alert(err);
+    }
+  });
 });
