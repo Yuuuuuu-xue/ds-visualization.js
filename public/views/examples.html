@@ -68,33 +68,39 @@
     <div id='demo-forms'>
       <form id='vertex-form'>
         <p class='text-body'>Create Vertex to Current Graph</p>
-        <label for='vertex-id'>Vertex id:</label>
+        <label for='vertex-id'>Vertex id <span class='required'>*</span></label>
         <input id='vertex-id' type='text' required placeholder="Id" />
-        <label for='vertex-value'>Vertex Value</label> 
+        <label for='vertex-value'>Vertex Value <span class='required'>*</span></label> 
         <input id='vertex-value' type='text' required placeholder="Value" />
-        <label for='vertex-weight'>Vertex Weight</label>
-        <input id='vertex-weight' type="text" placeholder="Weight" />
+        <!-- <label for='vertex-weight'>Vertex Weight</label>
+        <input id='vertex-weight' type="text" placeholder="Weight" /> -->
+        <label for='vertex-x-coord'>Vertex x-coordinate <span class='required'>*</span></label>
+        <input id='vertex-x-coord' type='text' required placeholder="Vertex x-coordinate" />
+        <label for='vertex-y-coord'>Vertex y-coordinate <span class='required'>*</span></label>
+        <input id='vertex-y-coord' type='text' required placeholder="Vertex y-coordinate" />
         <button type='submit'>Add Vertex</button>
       </form>
-
+      <br />
       <form id='edge-form'>
         <p class='text-body'>Create Edge to Current Graph</p>
-        <label for='vertex-to-id'>Vertex To Id:</label>
+        <label for='vertex-to-id'>Vertex To Id <span class='required'>*</span></label>
         <input id='vertex-to-id' type='text' required placeholder="Vertex To Id" />
-        <label for='vertex-from-id'>Vertex From Id:</label>
+        <label for='vertex-from-id'>Vertex From Id <span class='required'>*</span></label>
         <input id='vertex-from-id' type='text' required placeholder="Vertex From Id" />
         <button type='submit'>Add Edge</button>
       </form>
-
+      <br />
       <form id='graph-form'>
         <p class='text-body'>Create Graph</p>
-        <label for='graph-type'>Graph Type:</label>
+        <label for='graph-type'>Graph Type <span class='required'>*</span></label>
         <input id='graph-type' type='text' required placeholder="Graph Type" />
-        <label for='graph-name'>Graph Name:</label>
+        <label for='graph-name'>Graph Name <span class='required'>*</span></label>
         <input id='graph-name' type='text' required placeholder="Graph Name" />
         <button type='submit'>Create Graph</button>
       </form>
     </div>
+
+    <p class='subtitle'>Demo Output</p>
     <div id='demo'>
     </div> 
   </body>

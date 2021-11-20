@@ -176,4 +176,24 @@ $(document).ready(function() {
   // dsController.updateDialog('1');
   dsController.showDialog();
   console.log(dsController.getCurrentGraphInfo());
+
+  const demoElement = document.getElementById('demo'); 
+  const demoController = new ds.DataStructureController(800, 400, demoElement);
+  demoController.setDialogWidth(250);
+  demoController.setDialogHeight(400);
+  demoController.showDialog();
+
+  const vertexForm = document.getElementById('vertex-form'); 
+  vertexForm.addEventListener('submit', e => {
+    e.preventDefault();
+    try {
+      demoController.pushVertex(
+      document.getElementById('vertex-id').value,
+      document.getElementById('vertex-value').value,
+      document.getElementById('vertex-x-coord').value,
+      document.getElementById('vertex-y-coord').value)
+    } catch (err) {
+      alert(err);
+    }
+  }) 
 });
