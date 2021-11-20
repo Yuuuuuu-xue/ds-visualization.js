@@ -20,88 +20,127 @@
     <h1 class='title'>DS.js Alpha Release Demo Version</h1>
     <p class='subtitle'>Author: Yu Xue <i class="fa fa-github" onClick="window.open('https://github.com/Yuuuuuu-xue');"></i></p>
     <p class='subtitle'>Date: 2021-11-20</p>
-
-    <p class="subtitle">Tech stack:</p>
-    <p class='text-body'>
-      This library is mostly written in <strong>TypeScript</strong> with <strong>Less</strong> as the stylesheet.
-      <br />
-      This library did not use Canvas API or SVG elements. Instead, it modifies the DOM directly for creating graphs.
-    </p>
-
-    <p class="subtitle">About this release:</p>
-    <p class='text-body'>
-      Most of the functionalities are already implemented. On the next release, it will mostly be focused on styles (i.e. different types of vertex and overall styles) and provide more user-friendly endpoints for the user creating graphs.
-    </p>
-
-    <p class="subtitle">Goal:</p>
-    <p class="text-body">
-      Its goal is to help developers to draw and visualize existing data structures, mainly graphs and trees (since a tree is also a type of a graph).
-    </p>
-
-    <p class="subtitle">Usecase:</p>
+    <p class='subtitle'>Table of Contents</p>
     <ul>
-      <li class="text-body">
-        For the website that is similar to LeetCode that provides data structures related coding problems.
-        The web app can use this library to draw graphs as a supplementary to explain a question or a solution.
+      <li class='text-body'>
+        <a href='#tech-stack'>Tech Stack</a>
+      </li>
+      <li class='text-body'>
+        <a href='#about-release'>About this release</a>
+      </li>
+      <li class='text-body'>
+        <a href='#goal'>Goal</a> 
+      </li>
+      <li class='text-body'>
+        <a href='#usecase'>Usecases</a> 
       </li>
       <li class="text-body">
-        lt can be used for web apps that want to visualize the map. The edge could be a street and the intersection will be a street intersection.
-      </li> 
+        <a href='#library-documentation'>Library documentation</a>
+      </li>
+      <li class='text-body'>
+        <a href='#example-using-library'>Example of using this library</a>
+      </li>
       <li class="text-body">
-        The library could also be used in social networks web apps such as Facebook or LinkedIn. It provides functionalities for end-users to visualize their networks where the vertex represents the user and an edge between two vertices represents two users are connected. Thus the user can view their connected users and their connected users’ network. And the different stages could be the network for each month so users can visualize how their network is changing and growing for a period of time.
+        <a href='#example-using-library-output'>Example output</a>
+      </li>
+      <li class='text-body'>
+        <a href='#example-demo'>Demo example</a>
+      </li>
+      <li class='text-body'>
+        <a href='#example-demo-output'>Demo example output</a>
       </li>
     </ul>
-
-    <p class="subtitle">Library documentation:</p> 
-    <div id="instructions">
-    </div>
-
-    <p class='subtitle'>Example of using the library</p>
-    <div id='example'>
-    </div>
-
-    <p class='subtitle'>Output</p>
-    <div id="root">
-    </div>
-    
-    <p class='subtitle'>Demo:</p>
-    <div id='demo-forms'>
-      <form id='vertex-form'>
-        <p class='text-body'>Create Vertex to Current Graph</p>
-        <label for='vertex-id'>Vertex id <span class='required'>*</span></label>
-        <input id='vertex-id' type='text' required placeholder="Id" />
-        <label for='vertex-value'>Vertex Value <span class='required'>*</span></label> 
-        <input id='vertex-value' type='text' required placeholder="Value" />
-        <label for='vertex-x-coord'>Vertex x-coordinate <span class='required'>*</span></label>
-        <input id='vertex-x-coord' type='text' required placeholder="Vertex x-coordinate" />
-        <label for='vertex-y-coord'>Vertex y-coordinate <span class='required'>*</span></label>
-        <input id='vertex-y-coord' type='text' required placeholder="Vertex y-coordinate" />
-        <button type='submit'>Add Vertex</button>
-      </form>
-      <br />
-      <form id='edge-form'>
-        <p class='text-body'>Create Edge to Current Graph</p>
-        <label for='vertex-to-id'>Vertex To Id <span class='required'>*</span></label>
-        <input id='vertex-to-id' type='text' required placeholder="Vertex To Id" />
-        <label for='vertex-from-id'>Vertex From Id <span class='required'>*</span></label>
-        <input id='vertex-from-id' type='text' required placeholder="Vertex From Id" />
-        <label for='vertex-weight'>Vertex Weight</label>
-        <input id='vertex-weight' type="text" placeholder="Weight" />
-        <button type='submit'>Add Edge</button>
-      </form>
-      <br />
-      <form id='graph-form'>
-        <p class='text-body'>Create Graph</p>
-        <label for='graph-type'>Graph Type <span class='required'>*</span></label>
-        <input id='graph-type' type='text' required placeholder="Graph Type" />
-        <label for='graph-name'>Graph Name <span class='required'>*</span></label>
-        <input id='graph-name' type='text' required placeholder="Graph Name" />
-        <button type='submit'>Create Graph</button>
-      </form>
-    </div>
-
-    <p class='subtitle'>Demo Output</p>
-    <div id='demo'>
-    </div> 
+    <section id='tech-stack'>
+      <p class="subtitle">Tech stack:</p>
+      <p class='text-body'>
+        This library is mostly written in <strong>TypeScript</strong> with <strong>Less</strong> as the stylesheet.
+        <br />
+        This library did not use Canvas API or SVG elements. Instead, it modifies the DOM directly for creating graphs.
+      </p>
+    </section>
+    <section id='about-release'>
+      <p class="subtitle">About this release:</p>
+      <p class='text-body'>
+        Most of the functionalities are already implemented. On the next release, it will mostly be focused on styles (i.e. different types of vertex and overall styles) and provide more user-friendly endpoints for the user creating graphs.
+      </p>
+    </section>
+    <section id='goal'>
+      <p class="subtitle">Goal:</p>
+      <p class="text-body">
+        Its goal is to help developers to draw and visualize existing data structures, mainly graphs and trees (since a tree is also a type of a graph).
+      </p>
+    </section>
+    <section id='usecase'>
+      <p class="subtitle">Usecase:</p>
+      <ul>
+        <li class="text-body">
+          For the website that is similar to LeetCode that provides data structures related coding problems.
+          The web app can use this library to draw graphs as a supplementary to explain a question or a solution.
+        </li>
+        <li class="text-body">
+          lt can be used for web apps that want to visualize the map. The edge could be a street and the intersection will be a street intersection.
+        </li> 
+        <li class="text-body">
+          The library could also be used in social networks web apps such as Facebook or LinkedIn. It provides functionalities for end-users to visualize their networks where the vertex represents the user and an edge between two vertices represents two users are connected. Thus the user can view their connected users and their connected users’ network. And the different stages could be the network for each month so users can visualize how their network is changing and growing for a period of time.
+        </li>
+      </ul>
+    </section>
+    <section id='library-documentation'>
+      <p class="subtitle">Library documentation:</p> 
+      <div id="instructions">
+      </div>
+    </section>
+    <section id='example-using-library'>
+      <p class='subtitle'>Example of using the library</p>
+      <div id='example'>
+      </div>
+    </section> 
+    <section id='example-using-library-output'>
+      <p class='subtitle'>Output</p>
+      <div id="root">
+      </div>
+    </section>
+    <section id='example-demo'>
+      <p class='subtitle'>Demo:</p>
+      <div id='demo-forms'>
+        <form id='vertex-form'>
+          <p class='text-body'>Create Vertex to Current Graph</p>
+          <label for='vertex-id'>Vertex id <span class='required'>*</span></label>
+          <input id='vertex-id' type='text' required placeholder="Id" />
+          <label for='vertex-value'>Vertex Value <span class='required'>*</span></label> 
+          <input id='vertex-value' type='text' required placeholder="Value" />
+          <label for='vertex-x-coord'>Vertex x-coordinate <span class='required'>*</span></label>
+          <input id='vertex-x-coord' type='text' required placeholder="Vertex x-coordinate" />
+          <label for='vertex-y-coord'>Vertex y-coordinate <span class='required'>*</span></label>
+          <input id='vertex-y-coord' type='text' required placeholder="Vertex y-coordinate" />
+          <button type='submit'>Add Vertex</button>
+        </form>
+        <br />
+        <form id='edge-form'>
+          <p class='text-body'>Create Edge to Current Graph</p>
+          <label for='vertex-to-id'>Vertex To Id <span class='required'>*</span></label>
+          <input id='vertex-to-id' type='text' required placeholder="Vertex To Id" />
+          <label for='vertex-from-id'>Vertex From Id <span class='required'>*</span></label>
+          <input id='vertex-from-id' type='text' required placeholder="Vertex From Id" />
+          <label for='vertex-weight'>Vertex Weight</label>
+          <input id='vertex-weight' type="text" placeholder="Weight" />
+          <button type='submit'>Add Edge</button>
+        </form>
+        <br />
+        <form id='graph-form'>
+          <p class='text-body'>Create Graph</p>
+          <label for='graph-type'>Graph Type <span class='required'>*</span></label>
+          <input id='graph-type' type='text' required placeholder="Graph Type" />
+          <label for='graph-name'>Graph Name <span class='required'>*</span></label>
+          <input id='graph-name' type='text' required placeholder="Graph Name" />
+          <button type='submit'>Create Graph</button>
+        </form>
+      </div>
+    </section>
+    <section id='example-demo-output'>
+      <p class='subtitle'>Demo Output</p>
+      <div id='demo'>
+      </div> 
+    </section>
   </body>
 </html>
