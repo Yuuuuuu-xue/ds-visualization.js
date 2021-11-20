@@ -190,10 +190,26 @@ $(document).ready(function() {
       demoController.pushVertex(
       document.getElementById('vertex-id').value,
       document.getElementById('vertex-value').value,
-      document.getElementById('vertex-x-coord').value,
-      document.getElementById('vertex-y-coord').value)
+      parseInt(document.getElementById('vertex-x-coord').value),
+      parseInt(document.getElementById('vertex-y-coord').value))
+      vertexForm.reset();
     } catch (err) {
       alert(err);
     }
-  }) 
+  });
+
+  const edgeForm = document.getElementById('edge-form');
+  edgeForm.addEventListener('submit', e => {
+    e.preventDefault();
+    try {
+      demoController.pushEdge(
+        document.getElementById('vertex-to-id').value,
+        document.getElementById('vertex-from-id').value,
+
+      );
+      edgeForm.reset();
+    } catch (err) {
+      alert(err);
+    }
+  })
 });
