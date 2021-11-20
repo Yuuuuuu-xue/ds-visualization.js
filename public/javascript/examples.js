@@ -1,4 +1,104 @@
+const addInstruction = (title, description, comments, code) => {
+  return `
+    <div class="instruction">
+      <p class="instruction-title">${title}</p>
+      <p>${description}</p>
+      <div class='instruction-code-wrapper'>
+        <code class='instruction-code'>
+          <span class="comments">// ${comments}</span>
+          ${code}
+        </code>
+      </div>
+    </div>
+  `
+}
+
+
 $(document).ready(function() {
+
+  const instructionElement = document.getElementById('instructions');
+  instructionElement.innerHTML += addInstruction(
+    'Define a controller:', '', 'Define a controller with canvas width, height, and a div element',
+    'const dsController = new ds.DataStructureController(width: number, height: number, targetElement: HTMLDivElement);'
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Push a vertex:', 
+    'We take in an unique identifier, vertex value, x-coordinate, y-coordinate',
+    'Push a vertex',
+    "dsController.pushVertex(_id: string, value: any, x: number, y: number): void {};"
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Push an edge',
+    'We take in the unique identifier of vertexTo and vertexFrom, also optional weight',
+    'Push an edge',
+    `pushEdge(vertexTo: string, vertexFrom: string, weight ?: number): void {}`
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Set the width and height of a canvas or a dialog',
+    'Take in a number',
+    'setCanvasWidth(), setCanvasHeight(), setDialogWidth(), setDialogHeight()',
+    'setCanvasWidth(width: number) {}'
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Create a new graph',
+    'Take in the graph type and graph name',
+    'Create the graph and by clicking the next of prev button, you can see a new empty graph',
+    'dsController.createGraph(type: string, name: string): void {};'
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Get current graph info',
+    '',
+    'Return an object representing the current graph info',
+    `dsController.getCurrentGraphInfo(): GraphInfo {}`
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Set the current graph title',
+    'Take in a string of a title',
+    'Update the title of current graph',
+    'dsController.setCurrentGraphTitle(title: string): void {}'
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Move to the next graph or prev graph',
+    '',
+    'Move to the next graph if we have one or more graph after current. Same for movePrevGraph()',
+    'dsController.moveNextGraph(): void {}'
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Show dialog',
+    '',
+    'Show the dialog',
+    'dsController.showDialog(): void {}'
+  );
+  
+  instructionElement.innerHTML += addInstruction(
+    'Hide dialog',
+    '',
+    'Hide the dialog',
+    'dsController.hideDialog(): void {}'
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Update the dialog to current graph',
+    '',
+    'Update the dialog',
+    'dsController.updateDialog(vertexId: string): void {}'
+  );
+
+  instructionElement.innerHTML += addInstruction(
+    'Clear the vertex info inside the dialog',
+    '',
+    'Clear the vertex info',
+    'dsController.clearVertexDialog(): void {}'
+  )
+
   const dsController = new ds.DataStructureController(800, 400, document.getElementById("root"));
   dsController.setCurrentGraphTitle('Example of a graph')
   dsController.pushVertex('1', 'First Vertex', 50, 50);

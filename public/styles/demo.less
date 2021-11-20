@@ -1,0 +1,43 @@
+body {
+  p, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .title {
+    font-size: 2.5em;
+  }
+
+  .subtitle {
+    font-size: 1.6em;
+    margin: 10px 0;
+
+    i {
+      &:hover {
+        color: crimson;
+      }
+    }
+  }
+
+  .instruction {
+    .instruction-title {
+      font-size: 1.3em;
+      text-decoration: underline;
+      color: crimson;
+    }
+
+    .instruction-code-wrapper {
+      margin: 5px 0 10px 0;
+      padding: 10px;
+      width: 80%;
+      border: 2px solid black;
+
+      .instruction-code {
+        .comments {
+          color: green;
+          display: block;
+        }
+      }
+    }
+  }
+}
