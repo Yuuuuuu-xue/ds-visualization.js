@@ -128,11 +128,11 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].displayGraph();
   }
 
-  pushVertex(vertexId: string, x: number, y: number, value: any): void {
+  pushVertexToCurrrentGraph(vertexId: string, x: number, y: number, value: any): void {
     this.graphCanvas[this.currIdx].pushVertex(vertexId, x, y, value);
   }
 
-  pushEdge(vertexToId: string, vertexFromId: string, weight ?: number): void {
+  pushEdgeToCurrentGraph(vertexToId: string, vertexFromId: string, weight ?: number): void {
     this.graphCanvas[this.currIdx].pushEdge(vertexToId, vertexFromId, weight);
   }
 

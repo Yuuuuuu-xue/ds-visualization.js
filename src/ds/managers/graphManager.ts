@@ -55,11 +55,11 @@ export class GraphManager implements GraphManagerInterface {
     }
   }
 
-  pushVertex(_id: string, value: any): void {
+  pushVertexToCurrentGraph(_id: string, value: any): void {
     this.graphs[this.currIdx].pushVertex(_id, value);
   }
 
-  pushEdge(vertexTo: string, vertexFrom: string, weight ?: number) {
+  pushEdgeToCurrentGraph(vertexTo: string, vertexFrom: string, weight ?: number) {
     this.graphs[this.currIdx].pushEdge(vertexTo, vertexFrom, weight);
   }
 
