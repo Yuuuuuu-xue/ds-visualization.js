@@ -141,6 +141,16 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.pushEdgeToCurrentGraph(vertexTo, vertexFrom, weight);
   }
 
+  pushVertexToGraph(i: number, _id: string, value: any, x: number, y: number): void {
+    this.graphManager.pushVertexToGraph(i, _id, value);
+    this.drawingManager.pushVertexToGraph(i, _id, x, y, value);
+  }
+
+  pushEdgeToGraph(i: number, vertexTo: string, vertexFrom: string, weight ?: number): void {
+    this.graphManager.pushEdgeToGraph(i, vertexTo, vertexFrom, weight);
+    this.drawingManager.pushEdgeToGraph(i, vertexTo, vertexFrom, weight);
+  }
+
   showDialog(): void {
     this.dialogManager.enableDialog();
     this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());

@@ -63,6 +63,20 @@ export class GraphManager implements GraphManagerInterface {
     this.graphs[this.currIdx].pushEdge(vertexTo, vertexFrom, weight);
   }
 
+  pushVertexToGraph(i: number, _id: string, value: any): void { 
+    if (this.graphs.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    this.graphs[i].pushVertex(_id, value);
+  }
+
+  pushEdgeToGraph(i: number, vertexTo: string, vertexFrom: string, weight ?: number) {
+    if (this.graphs.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    this.graphs[i].pushEdge(vertexTo, vertexFrom, weight);
+  }
+
   getCurrentIdx(): number {
     return this.currIdx
   }

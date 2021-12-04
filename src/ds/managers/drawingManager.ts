@@ -136,6 +136,20 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].pushEdge(vertexToId, vertexFromId, weight);
   }
 
+  pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any): void {
+    if (this.graphCanvas.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    this.graphCanvas[i].pushVertex(vertexId, x, y, value);
+  }
+
+  pushEdgeToGraph(i: number, vertexToId: string, vertexFromId: string, weight ?: number): void {
+    if (this.graphCanvas.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    this.graphCanvas[i].pushEdge(vertexToId, vertexFromId, weight);
+  }
+
   setCurrentGraphInactive(): void {
     this.graphCanvas[this.currIdx].setInactiveAll();
   }
