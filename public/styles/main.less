@@ -17,11 +17,26 @@
   z-index: 100;
 }
 
+.sticky-horizontal-center { 
+  position: sticky;
+  text-align: center;
+  left: 0;
+  top: 1%;
+  z-index: 1000; 
+}
+
 .absolute-vertical-center {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
+}
+
+.sticky-vertical-center {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
 }
 
 .button {
@@ -106,15 +121,14 @@
 
   .ds-canvas-button {
     .button();
-    .absolute-vertical-center();
+    .sticky-vertical-center();
     
     &.ds-canvas-next {
-      right: 10px;
-
+      left: 92%;
     }
 
     &.ds-canvas-prev {
-      left: 10px;
+      left: 3%;
     }
 
     &.disable {
@@ -125,8 +139,8 @@
 
   .ds-canvas-title {
     .title();
-    top: 1%;
-    .absolute-horizontal-center();
+    .sticky-horizontal-center();
+    // .absolute-horizontal-center();
   }
 
   .ds-canvas-curr-page {
