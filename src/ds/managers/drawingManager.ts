@@ -2,6 +2,7 @@ import { canvasStyle } from "../styles/canvas.style";
 import { GraphCanvas } from "../../canvas/graphCanvas";
 import { ButtonInterface } from "../../canvas/types/buttonInterface";
 import { Button } from "../../canvas/buttons/button";
+import { GraphType } from "../types/constantType";
 
 
 export class DrawingManager {
@@ -132,8 +133,8 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].pushVertex(vertexId, x, y, value);
   }
 
-  pushEdgeToCurrentGraph(vertexToId: string, vertexFromId: string, weight ?: number): void {
-    this.graphCanvas[this.currIdx].pushEdge(vertexToId, vertexFromId, weight);
+  pushEdgeToCurrentGraph(vertexToId: string, vertexFromId: string, type: GraphType, weight ?: number): void {
+    this.graphCanvas[this.currIdx].pushEdge(vertexToId, vertexFromId, type, weight);
   }
 
   pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any): void {
@@ -143,11 +144,11 @@ export class DrawingManager {
     this.graphCanvas[i].pushVertex(vertexId, x, y, value);
   }
 
-  pushEdgeToGraph(i: number, vertexToId: string, vertexFromId: string, weight ?: number): void {
+  pushEdgeToGraph(i: number, vertexToId: string, vertexFromId: string, type: GraphType, weight ?: number): void {
     if (this.graphCanvas.length <= i) {
       throw new Error("Index of out boundary");
     }
-    this.graphCanvas[i].pushEdge(vertexToId, vertexFromId, weight);
+    this.graphCanvas[i].pushEdge(vertexToId, vertexFromId, type, weight);
   }
 
   setCurrentGraphInactive(): void {

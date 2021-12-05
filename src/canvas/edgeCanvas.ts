@@ -1,3 +1,4 @@
+import { GraphType } from "../ds/types/constantType";
 import { edgeStyle } from "./styles/edge.style";
 import { EdgeCanvasInterface } from "./types/edgeCanvasInterface";
 
@@ -31,7 +32,7 @@ export class EdgeCanvas implements EdgeCanvasInterface {
     }
 
 
-    constructor(x1: number, y1: number, x2: number, y2: number, vertexFromId: string, vertexToId: string, weight?: number) {
+    constructor(x1: number, y1: number, x2: number, y2: number, vertexFromId: string, vertexToId: string, type: GraphType, weight?: number) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
@@ -41,6 +42,8 @@ export class EdgeCanvas implements EdgeCanvasInterface {
         this.edgeElement = document.createElement('div');
         this.edgeElement.classList.add('edge');
         this.edgeElement.classList.add('inactive');
+        this.edgeElement.classList.add(type);
+
         this.edgeElement.setAttribute('style', edgeStyle(this.getMidX(),
             this.getMidY(), this.getLength(), this.getAngle()));
         this.vertexFromId = vertexFromId;

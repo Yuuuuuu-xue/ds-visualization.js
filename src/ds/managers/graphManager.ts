@@ -2,6 +2,7 @@ import { GraphManagerInterface } from "../types/graphManager";
 import { Graph } from "../entity/graph/graph";
 import { GraphInfo } from "../types/graph";
 import { VertexDetailInterface } from "../types/vertexDetailInterface";
+import { GraphType } from "../types/constantType";
 
 export class GraphManager implements GraphManagerInterface {
   private graphs: Graph[];
@@ -11,7 +12,7 @@ export class GraphManager implements GraphManagerInterface {
     this.graphs = [];
     this.currIdx = 0;
     // default initial graph
-    this.createGraph("default", "Initial Graph");
+    this.createGraph("directed", "Initial Graph");
   }
 
   createGraph(type: string, name: string): void {
@@ -87,5 +88,16 @@ export class GraphManager implements GraphManagerInterface {
 
   getVertexDetail(vertexId: string): VertexDetailInterface {
     return this.graphs[this.currIdx].getVertexDetail(vertexId);
+  }
+
+  getCurrentGraphType(): GraphType {
+    return this.graphs[this.currIdx].type;
+  }
+
+  getGraphType(i: number): GraphType {
+    if (this.graphs.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    return this.graphs[i].type;
   }
 }

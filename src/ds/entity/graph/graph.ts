@@ -3,11 +3,12 @@ import { Edge } from "../../types/edge";
 import { GraphInterface } from "../../types/graph";
 import { GraphInfo } from "../../types/graph";
 import { VertexDetailInterface, VertexInfo } from "../../types/vertexDetailInterface";
+import { GraphType } from "../../types/constantType";
 
 export class Graph implements GraphInterface {
   vertices: Vertex[];
   edges: Edge[];
-  type: string;
+  type: GraphType;
   name: string;
   visitedVertices = new Set();
   visitedEdges = new Set();
@@ -15,6 +16,9 @@ export class Graph implements GraphInterface {
   constructor(type: string, name: string) {
     this.vertices = [];
     this.edges = [];
+    if (type !== 'directed' && type !== 'undirected') {
+      throw new Error("Graph type must be either 'directed' or 'undirected'");
+    }
     this.type = type;
     this.name = name;
   };
@@ -66,17 +70,27 @@ export class Graph implements GraphInterface {
     return true;
   };
 
+
+  private saveSeralizedEdge(vertexTo: string, vertexFrom: string): void {
+    const seralizeEdge = JSON.stringify([vertexTo, vertexFrom]);
+    if (this.visitedEdges.has(seralizeEdge)) {
+      throw new Error(`The edge is already exist!`);
+    }
+    this.visitedEdges.add(seralizeEdge);
+  }
+
   pushEdge(vertexTo: string, vertexFrom: string, weight?: number): boolean {
     if(!this.visitedVertices.has(vertexTo) || !this.visitedVertices.has(vertexFrom)) {
       throw new Error(`The vertex id ${vertexTo} or ${vertexFrom} does not exist`);
     }
 
-    const seralizeEdge = JSON.stringify([vertexTo, vertexFrom]);
-    if (this.visitedEdges.has(seralizeEdge)) {
-      throw new Error(`The edge is already exist!`);
+    this.saveSeralizedEdge(vertexTo, vertexFrom);
+
+    // Undirected graph
+    if (this.type === 'undirected') {
+      this.saveSeralizedEdge(vertexFrom, vertexTo);
     }
 
-    this.visitedEdges.add(seralizeEdge);
     // Create a new Edge
     const newEdge: Edge = {
       vertexTo: vertexTo,

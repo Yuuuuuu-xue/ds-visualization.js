@@ -138,7 +138,7 @@ export class DataStructureController implements DataStructureControllerInterface
 
   pushEdgeToCurrentGraph(vertexTo: string, vertexFrom: string, weight ?: number): void {
     this.graphManager.pushEdgeToCurrentGraph(vertexTo, vertexFrom, weight);
-    this.drawingManager.pushEdgeToCurrentGraph(vertexTo, vertexFrom, weight);
+    this.drawingManager.pushEdgeToCurrentGraph(vertexTo, vertexFrom, this.graphManager.getCurrentGraphType(), weight);
   }
 
   pushVertexToGraph(i: number, _id: string, value: any, x: number, y: number): void {
@@ -148,7 +148,7 @@ export class DataStructureController implements DataStructureControllerInterface
 
   pushEdgeToGraph(i: number, vertexTo: string, vertexFrom: string, weight ?: number): void {
     this.graphManager.pushEdgeToGraph(i, vertexTo, vertexFrom, weight);
-    this.drawingManager.pushEdgeToGraph(i, vertexTo, vertexFrom, weight);
+    this.drawingManager.pushEdgeToGraph(i, vertexTo, vertexFrom, this.graphManager.getGraphType(i), weight);
   }
 
   showDialog(): void {

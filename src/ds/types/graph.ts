@@ -1,10 +1,11 @@
+import { GraphType } from "./constantType";
 import { Edge } from "./edge";
 import { Vertex } from "./vertex";
 
 
 export interface GraphInfo {
   name: string,
-  type: string,
+  type: GraphType
   numVertex: number,
   vertices: string[],
   numEdge: number,
