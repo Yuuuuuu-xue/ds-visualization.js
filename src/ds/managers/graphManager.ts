@@ -100,4 +100,15 @@ export class GraphManager implements GraphManagerInterface {
     }
     return this.graphs[i].type;
   }
+
+  removeVertexFromCurrentGraph(_id: string): void {
+    this.graphs[this.currIdx].removeVertex(_id);
+  }
+
+  removeVertexFromGraph(i: number, _id: string): void {
+    if (this.graphs.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    this.graphs[i].removeVertex(_id);
+  }
 }

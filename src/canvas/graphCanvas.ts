@@ -85,4 +85,13 @@ export class GraphCanvas implements GraphCanvasInterface {
         this.display = false;
         this.graphElement.classList.add('hidden');
     }
+
+    removeVertex(_id: string): void {
+      const targetVertices = this.vertices.filter(v => v.vertexId === _id);
+      if (targetVertices.length > 0) {
+        const targetVertex = targetVertices[0];
+        // Remove the element from DOM
+        targetVertex.vertexElement.parentElement.removeChild(targetVertex.vertexElement);
+      }
+    }
 };

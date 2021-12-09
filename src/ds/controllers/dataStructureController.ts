@@ -159,4 +159,14 @@ export class DataStructureController implements DataStructureControllerInterface
   hideDialog(): void {
     this.dialogManager.disableDialog();
   }
+
+  removeVertexFromCurrentGraph(_id: string): void {
+    this.graphManager.removeVertexFromCurrentGraph(_id);
+    this.drawingManager.removeVertexFromCurrentGraph(_id);
+  }
+
+  removeVertexFromGraph(i: number, _id: string): void {
+    this.graphManager.removeVertexFromGraph(i, _id);
+    this.drawingManager.removeVertexFromGraph(i, _id);
+  }
 }

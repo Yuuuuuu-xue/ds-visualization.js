@@ -154,4 +154,15 @@ export class DrawingManager {
   setCurrentGraphInactive(): void {
     this.graphCanvas[this.currIdx].setInactiveAll();
   }
+
+  removeVertexFromCurrentGraph(_id: string): void {
+    this.graphCanvas[this.currIdx].removeVertex(_id);
+  }
+
+  removeVertexFromGraph(i: number, _id: string): void {
+    if (this.graphCanvas.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    this.graphCanvas[i].removeVertex(_id);
+  }
 }
