@@ -31,6 +31,28 @@ export class Graph implements GraphInterface {
     this.vertices = this.vertices.filter(v => v._id !== _id);
   }
 
+  removeEdge(vertexTo: string, vertexFrom: string) {
+    if (this.type === 'directed') {
+      const edge = JSON.stringify([vertexTo, vertexFrom]);
+      if (!this.visitedEdges.has(edge)) {
+        throw new Error(`No edge with vertex id ${vertexTo} to vertex id ${vertexFrom}`);
+      }
+      this.visitedEdges.delete(edge);
+      this.edges = this.edges.filter(e => e.vertexTo !== vertexTo || e.vertexFrom !== vertexFrom);
+    } else {
+      // Undirected graph, we need to remove two edges
+      const edge1 = JSON.stringify([vertexTo, vertexFrom]);
+      const edge2 = JSON.stringify([vertexFrom, vertexTo]);
+      if (!this.visitedEdges.has(edge1)) {
+        throw new Error(`No edge with vertex id ${vertexTo} to vertex id ${vertexFrom}`);
+      };
+      this.visitedEdges.delete(edge1);
+      this.visitedEdges.delete(edge2);
+      this.edges = this.edges.filter(e => e.vertexTo !== vertexTo || e.vertexFrom !== vertexFrom);
+      this.edges = this.edges.filter(e => e.vertexTo !== vertexFrom || e.vertexFrom !== vertexTo);
+    }
+  }
+
   getVertexDetail(_id: string): VertexDetailInterface {
     if (!this.visitedVertices.has(_id)) {
       throw new Error(`No such vertex id ${_id}`);

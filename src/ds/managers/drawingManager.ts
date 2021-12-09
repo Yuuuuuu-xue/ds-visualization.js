@@ -165,4 +165,15 @@ export class DrawingManager {
     }
     this.graphCanvas[i].removeVertex(_id);
   }
+
+  removeEdgeFromCurrentGraph(vertexTo: string, vertexFrom: string) {
+    this.graphCanvas[this.currIdx].removeEdge(vertexTo, vertexFrom);
+  }
+
+  removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string) {
+    if (this.graphCanvas.length <= i) {
+      throw new Error("Index of out boundary");
+    };
+    this.graphCanvas[i].removeEdge(vertexTo, vertexFrom);
+  }
 }

@@ -88,10 +88,16 @@ export class GraphCanvas implements GraphCanvasInterface {
 
     removeVertex(_id: string): void {
       const targetVertices = this.vertices.filter(v => v.vertexId === _id);
-      if (targetVertices.length > 0) {
-        const targetVertex = targetVertices[0];
+      targetVertices.forEach(targetVertex => {
         // Remove the element from DOM
         targetVertex.vertexElement.parentElement.removeChild(targetVertex.vertexElement);
-      }
+      });
+    }
+
+    removeEdge(vertexTo: string, vertexFrom: string): void {
+      const targetEdges = this.edges.filter(e => e.vertexToId === vertexTo && e.vertexFromId === vertexFrom);
+      targetEdges.forEach(targetEdge => {
+        targetEdge.edgeElement.parentElement.removeChild(targetEdge.edgeElement);
+      });
     }
 };

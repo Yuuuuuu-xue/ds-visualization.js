@@ -111,4 +111,15 @@ export class GraphManager implements GraphManagerInterface {
     }
     this.graphs[i].removeVertex(_id);
   }
+
+  removeEdgeFromCurrentGraph(vertexTo: string, vertexFrom: string): void {
+    this.graphs[this.currIdx].removeEdge(vertexTo, vertexFrom);
+  }
+
+  removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string) {
+    if (this.graphs.length <= i) {
+      throw new Error("Index of out boundary");
+    }
+    this.graphs[i].removeEdge(vertexTo, vertexFrom);
+  }
 }
