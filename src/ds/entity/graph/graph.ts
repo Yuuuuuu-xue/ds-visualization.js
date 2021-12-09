@@ -29,6 +29,34 @@ export class Graph implements GraphInterface {
     }
     this.visitedVertices.delete(_id);
     this.vertices = this.vertices.filter(v => v._id !== _id);
+    // Remove Edge
+    this.getInNeighbourIds(_id).forEach(vertexTo => {
+      this.removeEdge(vertexTo, _id);
+    })
+
+    this.getOutNeighbourIds(_id).forEach(vertexFrom => {
+      this.removeEdge(_id, vertexFrom);
+    });
+  }
+
+  getInNeighbourIds(vertexId: string): string[] {
+    const targetIds = [];
+    this.edges.forEach(e => {
+      if (e.vertexFrom === vertexId) {
+        targetIds.push(e.vertexTo);
+      }
+    });
+    return targetIds;
+  }
+
+  getOutNeighbourIds(vertexId: string): string[] {
+    const targetIds = [];
+    this.edges.forEach(e => {
+      if (e.vertexTo === vertexId){
+        targetIds.push(e.vertexFrom);
+      }
+    });
+    return targetIds;
   }
 
   removeEdge(vertexTo: string, vertexFrom: string) {
