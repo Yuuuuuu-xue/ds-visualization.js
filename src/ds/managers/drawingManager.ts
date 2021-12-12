@@ -62,14 +62,17 @@ export class DrawingManager {
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasPrevButtonElement.getButtonElement());
 
     this.graphCanvas = [];
-    this.createGraphCanvas();
-    this.graphCanvas[0].displayGraph();
-  
+    this.createDefaultGraph();
     this.updateDialog = updateDialog;
     this.clearVertexDialog = clearVertexDialog;
 
 
   };
+
+  createDefaultGraph(): void {
+    this.createGraphCanvas();
+    this.graphCanvas[0].displayGraph();
+  }
 
   setCanvasTitle(title: string): void {
     this.canvasTitleElement.innerText = title;
@@ -137,17 +140,19 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].pushEdge(vertexToId, vertexFromId, type, weight);
   }
 
-  pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any): void {
+  private checkValidLength(i: number) {
     if (this.graphCanvas.length <= i) {
       throw new Error("Index of out boundary");
     }
+  }
+
+  pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any): void {
+    this.checkValidLength(i);
     this.graphCanvas[i].pushVertex(vertexId, x, y, value);
   }
 
   pushEdgeToGraph(i: number, vertexToId: string, vertexFromId: string, type: GraphType, weight ?: number): void {
-    if (this.graphCanvas.length <= i) {
-      throw new Error("Index of out boundary");
-    }
+    this.checkValidLength(i);
     this.graphCanvas[i].pushEdge(vertexToId, vertexFromId, type, weight);
   }
 
@@ -160,9 +165,7 @@ export class DrawingManager {
   }
 
   removeVertexFromGraph(i: number, _id: string): void {
-    if (this.graphCanvas.length <= i) {
-      throw new Error("Index of out boundary");
-    }
+    this.checkValidLength(i);
     this.graphCanvas[i].removeVertex(_id);
   }
 
@@ -171,9 +174,34 @@ export class DrawingManager {
   }
 
   removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string) {
-    if (this.graphCanvas.length <= i) {
-      throw new Error("Index of out boundary");
-    };
+    this.checkValidLength(i);
     this.graphCanvas[i].removeEdge(vertexTo, vertexFrom);
+  }
+
+  removeCurrentGraph(): void {
+    this.graphCanvas[this.currIdx].removeGraph();
+    this.graphCanvas.splice(this.currIdx, 1);
+    if (this.graphCanvas.length === 0) {
+      this.createDefaultGraph();
+      this.canvasPrevButtonElement.disableButtonElement();
+      this.canvasNextButtonElement.disableButtonElement();
+    } else if (this.graphCanvas.length === 1) {
+      // Disable the two buttons
+
+    }
+  }
+
+  removeGraph(i: number): void {
+    this.checkValidLength(i);
+    this.graphCanvas[i].removeGraph();
+    this.graphCanvas.splice(i, 1);
+    if (this.graphCanvas.length === 0) {
+      this.createDefaultGraph();
+      this.canvasPrevButtonElement.disableButtonElement();
+      this.canvasNextButtonElement.disableButtonElement();
+    } else if (this.graphCanvas.length === 1) {
+      this.canvasPrevButtonElement.disableButtonElement();
+      this.canvasNextButtonElement.disableButtonElement();
+    }
   }
 }

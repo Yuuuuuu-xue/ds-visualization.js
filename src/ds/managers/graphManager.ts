@@ -12,6 +12,10 @@ export class GraphManager implements GraphManagerInterface {
     this.graphs = [];
     this.currIdx = 0;
     // default initial graph
+    this.createDefaultGraph();
+  }
+
+  createDefaultGraph(): void {
     this.createGraph("directed", "Initial Graph");
   }
 
@@ -64,17 +68,19 @@ export class GraphManager implements GraphManagerInterface {
     this.graphs[this.currIdx].pushEdge(vertexTo, vertexFrom, weight);
   }
 
-  pushVertexToGraph(i: number, _id: string, value: any): void { 
+  private checkValidLength(i: number) {
     if (this.graphs.length <= i) {
       throw new Error("Index of out boundary");
     }
+  }
+
+  pushVertexToGraph(i: number, _id: string, value: any): void { 
+    this.checkValidLength(i);
     this.graphs[i].pushVertex(_id, value);
   }
 
   pushEdgeToGraph(i: number, vertexTo: string, vertexFrom: string, weight ?: number) {
-    if (this.graphs.length <= i) {
-      throw new Error("Index of out boundary");
-    }
+    this.checkValidLength(i);
     this.graphs[i].pushEdge(vertexTo, vertexFrom, weight);
   }
 
@@ -95,9 +101,7 @@ export class GraphManager implements GraphManagerInterface {
   }
 
   getGraphType(i: number): GraphType {
-    if (this.graphs.length <= i) {
-      throw new Error("Index of out boundary");
-    }
+    this.checkValidLength(i);
     return this.graphs[i].type;
   }
 
@@ -106,9 +110,7 @@ export class GraphManager implements GraphManagerInterface {
   }
 
   removeVertexFromGraph(i: number, _id: string): void {
-    if (this.graphs.length <= i) {
-      throw new Error("Index of out boundary");
-    }
+    this.checkValidLength(i);
     this.graphs[i].removeVertex(_id);
   }
 
@@ -117,9 +119,25 @@ export class GraphManager implements GraphManagerInterface {
   }
 
   removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string) {
-    if (this.graphs.length <= i) {
-      throw new Error("Index of out boundary");
-    }
+    this.checkValidLength(i);
     this.graphs[i].removeEdge(vertexTo, vertexFrom);
+  }
+
+  removeCurrentGraph(): void {
+    // this.graphs[this.currIdx].removeGraph();
+    this.graphs.splice(this.currIdx, 1);
+    // Remove the last graph
+    if (this.graphs.length === 0) {
+      this.createDefaultGraph();
+    }
+  }
+
+  removeGraph(i: number): void {
+    this.checkValidLength(i);
+    // this.graphs[i].removeGraph();
+    this.graphs.splice(i, 1);
+    if (this.graphs.length === 0) {
+      this.createDefaultGraph();
+    }
   }
 }

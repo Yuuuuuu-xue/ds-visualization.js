@@ -118,4 +118,11 @@ export class GraphCanvas implements GraphCanvasInterface {
         targetEdge.edgeElement.parentElement.removeChild(targetEdge.edgeElement);
       });
     }
+
+    removeGraph(): void {
+      // this.vertices.forEach(v => {
+      //   this.removeVertex(v.vertexId);
+      // });
+      this.graphElement.parentElement.removeChild(this.graphElement);
+    }
 };

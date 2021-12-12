@@ -170,13 +170,24 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.removeVertexFromGraph(i, _id);
   }
 
-  removeEdgeFromCurrentGraph(vertexTo: string, vertexFrom: string) {
+  removeEdgeFromCurrentGraph(vertexTo: string, vertexFrom: string): void {
     this.graphManager.removeEdgeFromCurrentGraph(vertexTo, vertexFrom);
     this.drawingManager.removeEdgeFromCurrentGraph(vertexTo, vertexFrom);
   }
 
-  removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string) {
+  removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string): void {
     this.graphManager.removeEdgeFromGraph(i, vertexTo, vertexFrom);
     this.drawingManager.removeEdgeFromGraph(i, vertexTo, vertexFrom);
   }
+
+  removeCurrentGraph(): void {
+    this.graphManager.removeCurrentGraph();
+    this.drawingManager.removeCurrentGraph();
+  }
+
+  removeGraph(i: number): void {
+    this.graphManager.removeGraph(i);
+    this.drawingManager.removeGraph(i);
+  }
+
 }

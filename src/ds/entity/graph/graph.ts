@@ -23,6 +23,12 @@ export class Graph implements GraphInterface {
     this.name = name;
   };
 
+  removeGraph(): void {
+    this.vertices.forEach(v => {
+      this.removeVertex(v._id);
+    });
+  }
+
   removeVertex(_id: string): void {
     if (!this.visitedVertices.has(_id)) {
       throw new Error(`No such vertex id ${_id}`);
