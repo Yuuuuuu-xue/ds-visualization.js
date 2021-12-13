@@ -138,4 +138,13 @@ export class GraphManager implements GraphManagerInterface {
       this.currIdx -= 1;
     }
   }
+
+  updateCurrentGraphVertexValue(_id: string, value: any): void {
+    this.graphs[this.currIdx].updateVertexValue(_id, value);
+  }
+
+  updateGraphVertexValue(i: number, _id: string, value: any): void {
+    this.checkValidLength(i);
+    this.graphs[i].updateVertexValue(_id, value);
+  }
 }

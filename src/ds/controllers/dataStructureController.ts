@@ -214,4 +214,15 @@ export class DataStructureController implements DataStructureControllerInterface
     this.updateCurrentGraph();
   }
 
+  updateCurrentGraphVertexValue(_id: string, value: any): void {
+    this.graphManager.updateCurrentGraphVertexValue(_id, value);
+    this.drawingManager.updateCurrentGraphVertexValue(_id, value);
+  }
+
+  updateGraphVertexValue(i: number, _id: string, value: any): void {
+    this.graphManager.updateGraphVertexValue(i, _id, value);
+    this.drawingManager.updateGraphVertexValue(i, _id, value);
+  }
+
+
 }

@@ -125,4 +125,12 @@ export class GraphCanvas implements GraphCanvasInterface {
       // });
       this.graphElement.parentElement.removeChild(this.graphElement);
     }
+
+    updateVertexValue(vertexId: string, value: any): void { 
+      this.vertices.forEach(v => {
+        if (v.vertexId === vertexId) {
+          v.vertexElement.innerText = value;
+        }
+      });
+    }
 };

@@ -87,9 +87,21 @@ export class Graph implements GraphInterface {
     }
   }
 
+  updateVertexValue(_id: string, value: any): void {
+    if (!this.visitedVertices.has(_id)) {
+      throw new Error(`No such vertex with id ${_id}`);
+    }
+
+    this.vertices.forEach(v => {
+      if (v._id === _id) {
+        v.value = value;
+      }
+    })
+  }
+
   getVertexDetail(_id: string): VertexDetailInterface {
     if (!this.visitedVertices.has(_id)) {
-      throw new Error(`No such vertex id ${_id}`);
+      throw new Error(`No such vertex with id ${_id}`);
     }
     
     const vertexTo: VertexInfo[] = [];

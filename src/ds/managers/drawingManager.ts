@@ -128,7 +128,7 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].hideGraph(); 
     this.currIdx = newIdx;
     this.canvasCurrPageElement.innerText = `${this.currIdx + 1}`;
-    console.log(this.graphCanvas[this.currIdx], this.currIdx)
+    // console.log(this.graphCanvas[this.currIdx], this.currIdx)
     this.graphCanvas[this.currIdx].displayGraph();
   }
 
@@ -192,5 +192,14 @@ export class DrawingManager {
     if (this.currIdx >= this.graphCanvas.length) {
       this.currIdx -= 1
     }
+  }
+
+  updateCurrentGraphVertexValue(vertexId: string, value: any): void {
+    this.graphCanvas[this.currIdx].updateVertexValue(vertexId, value);
+  }
+
+  updateGraphVertexValue(i: number, vertexId: string, value: any): void {
+    this.checkValidLength(i);
+    this.graphCanvas [i].updateVertexValue(vertexId, value);
   }
 }
