@@ -92,6 +92,28 @@ export class DataStructureController implements DataStructureControllerInterface
     }
   }
 
+  updateCurrentGraph(): void {
+    this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
+    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
+    // Now if we react to the last one, we should disable to the next button
+    if(this.graphManager.getCurrentIdx() === this.graphManager.getGraphSize() - 1) {
+      this.drawingManager.getNextButtonElement().disableButtonElement();
+    }
+    this.drawingManager.getPrevButtonElement().enableButtonElement();
+
+    // Update dialog
+    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
+
+    // Now if we react to the last one, we should disable to the next button
+    if(this.graphManager.getCurrentIdx() === this.graphManager.getGraphSize() - 1) {
+      this.drawingManager.getNextButtonElement().disableButtonElement();
+    }    
+    // If we reach to the first one, we should disable the prev button
+    if (this.graphManager.getCurrentIdx() === 0) {
+      this.drawingManager.getPrevButtonElement().disableButtonElement();
+    }
+  }
+
   moveNextGraph(): void {
     this.graphManager.moveNextGraph();
 
@@ -170,13 +192,26 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.removeVertexFromGraph(i, _id);
   }
 
-  removeEdgeFromCurrentGraph(vertexTo: string, vertexFrom: string) {
+  removeEdgeFromCurrentGraph(vertexTo: string, vertexFrom: string): void {
     this.graphManager.removeEdgeFromCurrentGraph(vertexTo, vertexFrom);
     this.drawingManager.removeEdgeFromCurrentGraph(vertexTo, vertexFrom);
   }
 
-  removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string) {
+  removeEdgeFromGraph(i: number, vertexTo: string, vertexFrom: string): void {
     this.graphManager.removeEdgeFromGraph(i, vertexTo, vertexFrom);
     this.drawingManager.removeEdgeFromGraph(i, vertexTo, vertexFrom);
   }
+
+  removeCurrentGraph(): void {
+    this.graphManager.removeCurrentGraph();
+    this.drawingManager.removeCurrentGraph();
+    this.updateCurrentGraph();
+  }
+
+  removeGraph(i: number): void {
+    this.graphManager.removeGraph(i);
+    this.drawingManager.removeGraph(i);
+    this.updateCurrentGraph();
+  }
+
 }
