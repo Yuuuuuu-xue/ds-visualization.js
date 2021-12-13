@@ -2,7 +2,9 @@ import { DialogManager } from "../managers/dialogManager";
 import { DrawingManager } from "../managers/drawingManager";
 import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
+import EdgeInput from "../types/edgeInput";
 import { GraphInfo } from "../types/graph";
+import VertexInput from "../types/vertexInput";
 
 export class DataStructureController implements DataStructureControllerInterface {
   private graphManager: GraphManager;
@@ -58,16 +60,23 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setHeight(height);
   }
 
-  createGraph(type: string, name: string): void {
+  createGraph(type: string, name: string, vertices: VertexInput[] = [], edges: EdgeInput[] = []): void {
     if (this.graphManager.getCurrentIdx() === 0) {
       this.drawingManager.getNextButtonElement().enableButtonElement();
     }
     this.graphManager.createGraph(type, name);
     this.drawingManager.createGraphCanvas();
+    const graphSize = this.graphManager.getGraphSize() - 1;
+    this.pushVerticesToGraph(graphSize, vertices);
+    this.pushEdgesToGraph(graphSize, edges);
   }
 
   getCurrentGraphInfo(): GraphInfo {
     return this.graphManager.getCurrentGraphInfo();
+  }
+
+  getNumberOfGraphs(): number {
+    return this.graphManager.getGraphSize();
   }
 
   setTargetElement(targetElement: HTMLDivElement): void {
@@ -171,6 +180,22 @@ export class DataStructureController implements DataStructureControllerInterface
   pushEdgeToGraph(i: number, vertexTo: string, vertexFrom: string, weight ?: number): void {
     this.graphManager.pushEdgeToGraph(i, vertexTo, vertexFrom, weight);
     this.drawingManager.pushEdgeToGraph(i, vertexTo, vertexFrom, this.graphManager.getGraphType(i), weight);
+  }
+
+  pushVerticesToCurrentGraph(vertices: VertexInput[]): void {
+    vertices.forEach(v => this.pushVertexToCurrentGraph(v._id, v.value, v.x, v.y));
+  }
+
+  pushVerticesToGraph(i: number, vertices: VertexInput[]): void {
+    vertices.forEach(v => this.pushVertexToGraph(i, v._id, v.value, v.x, v.y));
+  }
+
+  pushEdgesToCurrentGraph(edges: EdgeInput[]): void {
+    edges.forEach(e => this.pushEdgeToCurrentGraph(e.vertexTo, e.vertexFrom, e.weight));
+  }
+
+  pushEdgesToGraph(i: number, edges: EdgeInput[]): void {
+    edges.forEach(e => this.pushEdgeToGraph(i, e.vertexTo, e.vertexFrom, e.weight));
   }
 
   showDialog(): void {
