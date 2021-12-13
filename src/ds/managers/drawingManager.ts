@@ -200,6 +200,15 @@ export class DrawingManager {
 
   updateGraphVertexValue(i: number, vertexId: string, value: any): void {
     this.checkValidLength(i);
-    this.graphCanvas [i].updateVertexValue(vertexId, value);
+    this.graphCanvas[i].updateVertexValue(vertexId, value);
+  }
+
+  updateCurrentGraphVertexPosition(vertexId: string, x: number, y: number): void {
+    this.graphCanvas[this.currIdx].updateVertexPosition(vertexId, x, y);
+  }
+
+  updateGraphVertexPosition(i: number, vertexId: string, x: number, y: number): void {
+    this.checkValidLength(i);
+    this.graphCanvas[i].updateVertexPosition(vertexId, x, y);
   }
 }

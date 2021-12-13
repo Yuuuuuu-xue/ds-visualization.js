@@ -9,15 +9,13 @@ export class VertexCanvas implements VertexCanvasInterface {
   vertexElement: HTMLButtonElement
 
   constructor(x: number, y: number, vertexId: string, value: any) {
-    this.x = x;
-    this.y = y;
     this.vertexId = vertexId;
     this.isActive = false;
     this.vertexElement = document.createElement('button');
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
     this.vertexElement.innerText = value;
-    this.vertexElement.setAttribute('style', vertexStyle(this.x, this.y));
+    this.updatePosition(x, y);
   }
 
   getVertexElement(): HTMLButtonElement {
@@ -30,6 +28,15 @@ export class VertexCanvas implements VertexCanvasInterface {
     } else {
       this.setActive();
     }
+  }
+
+  updatePosition(x: number, y: number) {
+    if (x < 0 || y < 0) {
+      throw new Error('The value of x and y must be non-negative');
+    }
+    this.x = x; 
+    this.y = y;
+    this.vertexElement.setAttribute('style', vertexStyle(this.x, this.y));
   }
 
   setInactive(): void {

@@ -33,25 +33,42 @@ export class EdgeCanvas implements EdgeCanvasInterface {
 
 
     constructor(x1: number, y1: number, x2: number, y2: number, vertexFromId: string, vertexToId: string, type: GraphType, weight?: number) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
         this.weight = weight;
         this.isActive = false;
         this.edgeElement = document.createElement('div');
         this.edgeElement.classList.add('edge');
         this.edgeElement.classList.add('inactive');
         this.edgeElement.classList.add(type);
-
-        this.edgeElement.setAttribute('style', edgeStyle(this.getMidX(),
-            this.getMidY(), this.getLength(), this.getAngle()));
+        this.updatePosition(x1, y1, x2, y2);
         this.vertexFromId = vertexFromId;
         this.vertexToId = vertexToId;
     }
 
     getEdgeElement(): HTMLDivElement {
         return this.edgeElement;
+    }
+
+    updatePosition(x1: number, y1: number, x2: number, y2: number): void {
+      this.x1 = x1;
+      this.y1 = y1;
+      this.x2 = x2; 
+      this.y2 = y2;
+      this.edgeElement.setAttribute('style', edgeStyle(this.getMidX(),
+        this.getMidY(), this.getLength(), this.getAngle()));
+    }
+
+    updateVertexToPosition(x1: number, y1: number): void {
+      this.x1 = x1; 
+      this.y1 = y1;
+      this.edgeElement.setAttribute('style', edgeStyle(this.getMidX(),
+        this.getMidY(), this.getLength(), this.getAngle()));
+    }
+
+    updateVertexFromPosition(x2: number, y2: number) {
+      this.x2 = x2;
+      this.y2 = y2;
+      this.edgeElement.setAttribute('style', edgeStyle(this.getMidX(),
+      this.getMidY(), this.getLength(), this.getAngle()));
     }
 
     setActive(): void {

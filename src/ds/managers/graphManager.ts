@@ -147,4 +147,9 @@ export class GraphManager implements GraphManagerInterface {
     this.checkValidLength(i);
     this.graphs[i].updateVertexValue(_id, value);
   }
+
+  validateValidVertexId(i: number, _id: string) {
+    this.checkValidLength(i);
+    this.graphs[i].validateValidVertexId(_id);
+  }
 }

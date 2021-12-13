@@ -133,4 +133,20 @@ export class GraphCanvas implements GraphCanvasInterface {
         }
       });
     }
+
+    updateVertexPosition(vertexId: string, x: number, y: number): void {
+      this.vertices.forEach(v => {
+        if (v.vertexId === vertexId) {
+          v.updatePosition(x, y);
+          this.edges.forEach(e => {
+            if (e.vertexToId === vertexId) {
+              e.updateVertexToPosition(x, y);
+            }
+            if (e.vertexFromId === vertexId) {
+              e.updateVertexFromPosition(x, y);
+            }
+          });
+        }
+      })
+    }
 };

@@ -29,10 +29,15 @@ export class Graph implements GraphInterface {
     });
   }
 
-  removeVertex(_id: string): void {
-    if (!this.visitedVertices.has(_id)) {
-      throw new Error(`No such vertex id ${_id}`);
+  validateValidVertexId(_id: string): void {
+    if(!this.visitedVertices.has(_id)) {
+      throw new Error(`No such vertex with id ${_id}`);
     }
+  }
+
+
+  removeVertex(_id: string): void {
+    this.validateValidVertexId(_id);
     this.visitedVertices.delete(_id);
     this.vertices = this.vertices.filter(v => v._id !== _id);
     // Remove Edge
@@ -100,9 +105,7 @@ export class Graph implements GraphInterface {
   }
 
   getVertexDetail(_id: string): VertexDetailInterface {
-    if (!this.visitedVertices.has(_id)) {
-      throw new Error(`No such vertex with id ${_id}`);
-    }
+    this.validateValidVertexId(_id);
     
     const vertexTo: VertexInfo[] = [];
     const vertexFrom: VertexInfo[] = [];
