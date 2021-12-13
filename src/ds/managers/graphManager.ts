@@ -152,4 +152,22 @@ export class GraphManager implements GraphManagerInterface {
     this.checkValidLength(i);
     this.graphs[i].validateValidVertexId(_id);
   }
+
+  updateCurrentGraphName(name: string): void {
+    this.graphs[this.currIdx].updateGraphName(name);
+  }
+
+  updateGraphName(i: number, name: string): void {
+    this.checkValidLength(i);
+    this.graphs[i].updateGraphName(name);
+  }
+
+  updateCurrentGraphType(type: GraphType): void {
+    this.graphs[this.currIdx].updateGraphType(type);
+  }
+
+  updateGraphType(i: number, type: GraphType): void {
+    this.checkValidLength(i);
+    this.graphs[i].updateGraphType(type); 
+  }
 }

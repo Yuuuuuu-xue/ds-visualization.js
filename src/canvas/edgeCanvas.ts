@@ -90,4 +90,14 @@ export class EdgeCanvas implements EdgeCanvasInterface {
             this.setActive();
         }
     }
+
+    updateType(type: GraphType): void {
+      if (type === 'directed') {
+        this.edgeElement.classList.remove('undirected');
+        this.edgeElement.classList.add('directed');
+      } else {
+        this.edgeElement.classList.remove('directed');
+        this.edgeElement.classList.add('undirected');
+      }
+    }
 }

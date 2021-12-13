@@ -211,4 +211,13 @@ export class DrawingManager {
     this.checkValidLength(i);
     this.graphCanvas[i].updateVertexPosition(vertexId, x, y);
   }
+
+  updateCurrentGraphType(type: GraphType) {
+    this.graphCanvas[this.currIdx].updateGraphType(type);
+  }
+
+  updateGraphType(i: number, type: GraphType) {
+    this.checkValidLength(i);
+    this.graphCanvas[i].updateGraphType(type);
+  }
 }

@@ -104,6 +104,14 @@ export class Graph implements GraphInterface {
     })
   }
 
+  updateGraphName(name: string): void {
+    this.name = name;
+  }
+
+  updateGraphType(type: GraphType): void {
+    this.type = type; 
+  }
+
   getVertexDetail(_id: string): VertexDetailInterface {
     this.validateValidVertexId(_id);
     

@@ -74,10 +74,10 @@ export class DataStructureController implements DataStructureControllerInterface
     this.targetElement = targetElement;
   }
 
-  setCurrentGraphTitle(title: string): void {
-    this.graphManager.setCurrentGraphName(title);
-    this.drawingManager.setCanvasTitle(title);
-  }
+  // setCurrentGraphTitle(title: string): void {
+  //   this.graphManager.setCurrentGraphName(title);
+  //   this.drawingManager.setCanvasTitle(title);
+  // }
 
   handleNextButtonClick(): void {
     if (this.graphManager.getCurrentIdx() < this.graphManager.getGraphSize() - 1) {
@@ -224,13 +224,48 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.updateGraphVertexValue(i, _id, value);
   }
 
-  updateCurrentGraphVertexPosition(_id: string, x: number, y: number) {
+  updateCurrentGraphVertexPosition(_id: string, x: number, y: number): void {
     this.graphManager.validateValidVertexId(this.graphManager.getCurrentIdx(), _id);
     this.drawingManager.updateCurrentGraphVertexPosition(_id, x, y);
   }
 
-  updateGraphVertexPosition(i: number, _id: string, x: number, y: number) {
+  updateGraphVertexPosition(i: number, _id: string, x: number, y: number): void {
     this.graphManager.validateValidVertexId(i, _id);
     this.drawingManager.updateGraphVertexPosition(i, _id, x, y);
+  }
+
+  updateCurrentGraphName(name: string): void {
+    this.graphManager.updateCurrentGraphName(name);
+    this.drawingManager.setCanvasTitle(name);
+    this.dialogManager.updateName(name);
+  }
+
+  updateGraphName(i: number, name: string): void {
+    this.graphManager.updateGraphName(i, name);
+    this.drawingManager.setCanvasTitle(name);
+
+    if (i === this.graphManager.getCurrentIdx()) {
+      this.dialogManager.updateName(name);
+    }
+  }
+
+  updateCurrentGraphType(type: string): void {
+    if (type !== 'directed' && type !== 'undirected') {
+      throw new Error("Graph type must be either 'directed' or 'undirected'");
+    }
+    this.graphManager.updateCurrentGraphType(type);
+    this.drawingManager.updateCurrentGraphType(type);
+    this.dialogManager.updateType(type);
+  }
+
+  updateGraphType(i: number, type: string): void {
+    if (type !== 'directed' && type !== 'undirected') {
+      throw new Error("Graph type must be either 'directed' or 'undirected'");
+    }
+    this.graphManager.updateGraphType(i, type);
+    this.drawingManager.updateGraphType(i, type);
+    if (i === this.graphManager.getCurrentIdx()) {
+      this.dialogManager.updateType(type);
+    }
   }
 }
