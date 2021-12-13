@@ -124,12 +124,7 @@ export class GraphManager implements GraphManagerInterface {
   }
 
   removeCurrentGraph(): void {
-    // this.graphs[this.currIdx].removeGraph();
-    this.graphs.splice(this.currIdx, 1);
-    // Remove the last graph
-    if (this.graphs.length === 0) {
-      this.createDefaultGraph();
-    }
+    this.removeGraph(this.currIdx);
   }
 
   removeGraph(i: number): void {
@@ -138,6 +133,9 @@ export class GraphManager implements GraphManagerInterface {
     this.graphs.splice(i, 1);
     if (this.graphs.length === 0) {
       this.createDefaultGraph();
+    }
+    if (this.currIdx >= this.graphs.length) {
+      this.currIdx -= 1;
     }
   }
 }

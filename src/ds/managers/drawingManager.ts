@@ -179,16 +179,7 @@ export class DrawingManager {
   }
 
   removeCurrentGraph(): void {
-    this.graphCanvas[this.currIdx].removeGraph();
-    this.graphCanvas.splice(this.currIdx, 1);
-    if (this.graphCanvas.length === 0) {
-      this.createDefaultGraph();
-      this.canvasPrevButtonElement.disableButtonElement();
-      this.canvasNextButtonElement.disableButtonElement();
-    } else if (this.graphCanvas.length === 1) {
-      // Disable the two buttons
-
-    }
+    this.removeGraph(this.currIdx);
   }
 
   removeGraph(i: number): void {
@@ -197,11 +188,9 @@ export class DrawingManager {
     this.graphCanvas.splice(i, 1);
     if (this.graphCanvas.length === 0) {
       this.createDefaultGraph();
-      this.canvasPrevButtonElement.disableButtonElement();
-      this.canvasNextButtonElement.disableButtonElement();
-    } else if (this.graphCanvas.length === 1) {
-      this.canvasPrevButtonElement.disableButtonElement();
-      this.canvasNextButtonElement.disableButtonElement();
+    }
+    if (this.currIdx >= this.graphCanvas.length) {
+      this.currIdx -= 1
     }
   }
 }
