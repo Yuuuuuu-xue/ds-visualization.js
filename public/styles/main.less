@@ -192,6 +192,9 @@
     z-index: 2;
     overflow: hidden;
     text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+
     
     &.draggable {
       cursor: move;
@@ -201,12 +204,14 @@
       background-color: @activeColor;
       color: @white;
       border: @buttonBorder solid @activeColor;
+      text-shadow: 1px 1px @black;
     }
 
     &.inactive {
       background-color: @white;
       color: @black;
       border: @buttonBorder solid @inactiveColor;
+      text-shadow: 1px 1px @white;
     }
 
     &.dragging {

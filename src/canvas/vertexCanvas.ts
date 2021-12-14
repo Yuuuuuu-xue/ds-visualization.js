@@ -16,9 +16,15 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement = document.createElement('button');
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
-    this.vertexElement.innerText = value;
+
+    const { draggable, backgroundImageSrc, hideText } = config;
+
+    if (!hideText) {
+      this.vertexElement.innerText = value;
+    }
+
     this.updatePosition(x, y);
-    const { draggable, backgroundImageSrc } = config;
+
     this.updateVertexWithEdgePosition = updateVertexWithEdgePosition;
     if (draggable === true) {
       this.vertexElement.classList.add('draggable')
@@ -30,7 +36,11 @@ export class VertexCanvas implements VertexCanvasInterface {
       // backgroundImage.classList.add('background-img');
       // backgroundImage.setAttribute('src', backgroundImageSrc);
       // this.vertexElement.insertAdjacentElement('beforeend', backgroundImage); 
-      this.vertexElement.style.background = `url('${backgroundImageSrc}') no-repeat center center / cover`
+      if (!hideText) {
+        this.vertexElement.style.background = `linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('${backgroundImageSrc}') no-repeat center center / cover`;
+      } else {
+        this.vertexElement.style.background = `url('${backgroundImageSrc}') no-repeat center center / cover`;
+      } 
     }
 
   }
