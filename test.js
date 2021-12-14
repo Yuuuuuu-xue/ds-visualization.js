@@ -23,6 +23,8 @@ dsController.createGraph('undirected', 'Next Graph', [
 ], [
   {vertexTo: '1', vertexFrom: '2'}
 ]);
+
+dsController.updateCurrentGraphVertexValue('3', 'New Value')
 dsController.setDialogWidth(250);
 dsController.setDialogHeight(400);
 dsController.showDialog();

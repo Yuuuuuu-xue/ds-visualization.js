@@ -94,6 +94,7 @@ export class Dialog {
     this.vertexDetail.innerHTML += `
       <p class='ds-dialog-title'>Vertex Info</p>
       <p class='one-line'><span>Vertex id: </span>${vertexDetail.vertexId}</p>
+      <p class='one-line'><span>Vertex value: </span>${vertexDetail.value}</p>
       <p class='one-line'><span>In-degree: </span>${vertexDetail.vertexTo.length}</p>
       <p class='one-line'><span>Out-degree: </span>${vertexDetail.vertexFrom.length}</p>
     `

@@ -7,4 +7,5 @@ export interface VertexDetailInterface {
   vertexTo: VertexInfo[],
   vertexFrom: VertexInfo[],
   vertexId: string
+  value: any
 }

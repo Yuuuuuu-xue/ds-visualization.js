@@ -130,12 +130,18 @@ export class Graph implements GraphInterface {
         });
       }
     })
-
+    let vertexValue: any;
+    this.vertices.forEach(v => {
+      if (v._id === _id) {
+        vertexValue = v.value;
+      }
+    })
 
     const vertexDetail: VertexDetailInterface = {
       vertexTo,
       vertexFrom,
-      vertexId: _id
+      vertexId: _id,
+      value: vertexValue
     };
 
     return vertexDetail;
