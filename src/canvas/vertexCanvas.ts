@@ -19,11 +19,18 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement.classList.add('inactive');
     this.vertexElement.innerText = value;
     this.updatePosition(x, y);
-    const { draggable } = config;
+    const { draggable, backgroundImageSrc } = config;
     this.updateVertexWithEdgePosition = updateVertexWithEdgePosition;
     if (draggable === true) {
       this.vertexElement.classList.add('draggable')
       dragElement(this.vertexElement, (x, y) => this.updateVertexWithEdgePosition(this.vertexId, x, y));
+    }
+
+    if (backgroundImageSrc) {
+      const backgroundImage = document.createElement('img');
+      backgroundImage.classList.add('background-img');
+      backgroundImage.setAttribute('src', backgroundImageSrc);
+      this.vertexElement.insertAdjacentElement('beforeend', backgroundImage); 
     }
 
   }

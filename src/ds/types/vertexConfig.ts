@@ -1,3 +1,4 @@
 export interface VertexConfig { 
-  draggable?: boolean
+  draggable?: boolean,
+  backgroundImageSrc?: string
 }
