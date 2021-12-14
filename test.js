@@ -1,6 +1,6 @@
 const dsController = new ds.DataStructureController(800, 400, document.getElementById("test"));
 dsController.pushVerticesToCurrentGraph([
-  {_id: '1', value: 'First Vertex', x: 50, y: 50},
+  {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {draggable: true}},
   {_id: '2', value: 'Second Vertex', x: 200, y: 300},
   {_id: '3', value: 'Third Vertex', x: 300, y: 200},
   {_id: '4', value: 'Fourth Vertex', x: 500, y: 200},

@@ -4,6 +4,7 @@ import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
 import EdgeInput from "../types/edgeInput";
 import { GraphInfo } from "../types/graph";
+import { VertexConfig } from "../types/vertexConfig";
 import VertexInput from "../types/vertexInput";
 
 export class DataStructureController implements DataStructureControllerInterface {
@@ -162,9 +163,9 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
   };
 
-  pushVertexToCurrentGraph(_id: string, value: any, x: number, y: number): void {
+  pushVertexToCurrentGraph(_id: string, value: any, x: number, y: number, config: VertexConfig = {}): void {
     this.graphManager.pushVertexToCurrentGraph(_id, value);
-    this.drawingManager.pushVertexToCurrrentGraph(_id, x, y, value);
+    this.drawingManager.pushVertexToCurrrentGraph(_id, x, y, value, config);
   }
 
   pushEdgeToCurrentGraph(vertexTo: string, vertexFrom: string, weight ?: number): void {
@@ -172,9 +173,9 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.pushEdgeToCurrentGraph(vertexTo, vertexFrom, this.graphManager.getCurrentGraphType(), weight);
   }
 
-  pushVertexToGraph(i: number, _id: string, value: any, x: number, y: number): void {
+  pushVertexToGraph(i: number, _id: string, value: any, x: number, y: number, config: VertexConfig = {}): void {
     this.graphManager.pushVertexToGraph(i, _id, value);
-    this.drawingManager.pushVertexToGraph(i, _id, x, y, value);
+    this.drawingManager.pushVertexToGraph(i, _id, x, y, value, config);
   }
 
   pushEdgeToGraph(i: number, vertexTo: string, vertexFrom: string, weight ?: number): void {
@@ -183,11 +184,11 @@ export class DataStructureController implements DataStructureControllerInterface
   }
 
   pushVerticesToCurrentGraph(vertices: VertexInput[]): void {
-    vertices.forEach(v => this.pushVertexToCurrentGraph(v._id, v.value, v.x, v.y));
+    vertices.forEach(v => this.pushVertexToCurrentGraph(v._id, v.value, v.x, v.y, v.config || {}));
   }
 
   pushVerticesToGraph(i: number, vertices: VertexInput[]): void {
-    vertices.forEach(v => this.pushVertexToGraph(i, v._id, v.value, v.x, v.y));
+    vertices.forEach(v => this.pushVertexToGraph(i, v._id, v.value, v.x, v.y, v.config || {}));
   }
 
   pushEdgesToCurrentGraph(edges: EdgeInput[]): void {

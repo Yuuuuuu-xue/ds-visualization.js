@@ -1,4 +1,5 @@
 import { GraphType } from "../ds/types/constantType";
+import { VertexConfig } from "../ds/types/vertexConfig";
 import { EdgeCanvas } from "./edgeCanvas";
 import { GraphCanvasInterface } from "./types/graphCanvasInterface";
 import { VertexCanvas } from "./vertexCanvas";
@@ -56,8 +57,8 @@ export class GraphCanvas implements GraphCanvasInterface {
         }
     }
 
-    pushVertex(vertexId: string, x: number, y: number, value: any): void {
-        const newVertex = new VertexCanvas(x, y, vertexId, value);
+    pushVertex(vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
+        const newVertex = new VertexCanvas(x, y, vertexId, value, config);
         newVertex.getVertexElement().addEventListener('click', () => this.handleVertexClick(newVertex));
         this.vertices.push(newVertex);
         this.graphElement.insertAdjacentElement('beforeend', newVertex.getVertexElement());

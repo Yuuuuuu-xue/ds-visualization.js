@@ -3,6 +3,7 @@ import { GraphCanvas } from "../../canvas/graphCanvas";
 import { ButtonInterface } from "../../canvas/types/buttonInterface";
 import { Button } from "../../canvas/buttons/button";
 import { GraphType } from "../types/constantType";
+import { VertexConfig } from "../types/vertexConfig";
 
 
 export class DrawingManager {
@@ -132,8 +133,8 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].displayGraph();
   }
 
-  pushVertexToCurrrentGraph(vertexId: string, x: number, y: number, value: any): void {
-    this.graphCanvas[this.currIdx].pushVertex(vertexId, x, y, value);
+  pushVertexToCurrrentGraph(vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
+    this.graphCanvas[this.currIdx].pushVertex(vertexId, x, y, value, config);
   }
 
   pushEdgeToCurrentGraph(vertexToId: string, vertexFromId: string, type: GraphType, weight ?: number): void {
@@ -146,9 +147,9 @@ export class DrawingManager {
     }
   }
 
-  pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any): void {
+  pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
     this.checkValidLength(i);
-    this.graphCanvas[i].pushVertex(vertexId, x, y, value);
+    this.graphCanvas[i].pushVertex(vertexId, x, y, value, config);
   }
 
   pushEdgeToGraph(i: number, vertexToId: string, vertexFromId: string, type: GraphType, weight ?: number): void {

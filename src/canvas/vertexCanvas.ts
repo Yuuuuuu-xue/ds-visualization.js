@@ -1,5 +1,6 @@
 import { VertexCanvasInterface } from "./types/vertexCanvasInterface";
 import { vertexStyle } from "./styles/vertex.style";
+import { VertexConfig } from "../ds/types/vertexConfig";
 
 export class VertexCanvas implements VertexCanvasInterface {
   x: number;
@@ -8,13 +9,20 @@ export class VertexCanvas implements VertexCanvasInterface {
   isActive: boolean;
   vertexElement: HTMLButtonElement
 
-  constructor(x: number, y: number, vertexId: string, value: any) {
+  constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig) {
     this.vertexId = vertexId;
     this.isActive = false;
     this.vertexElement = document.createElement('button');
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
     this.vertexElement.innerText = value;
+    
+    const { draggable } = config;
+    if (draggable === true) {
+      console.log(this.vertexId, 'is draggable')
+    } else {
+      console.log(this.vertexId, 'is not draggable')
+    }
     this.updatePosition(x, y);
   }
 
