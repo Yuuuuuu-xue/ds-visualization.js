@@ -117,7 +117,6 @@
   border: 2px solid @canvasBorder;
 
 
-
   .ds-canvas-button {
     .button();
     .sticky-vertical-center();
@@ -192,6 +191,9 @@
     border-radius: 50%;
     z-index: 2;
 
+    
+    cursor: move;
+
     &.active {
       background-color: @activeColor;
       color: @white;
@@ -202,6 +204,10 @@
       background-color: @white;
       color: @black;
       border: @buttonBorder solid @inactiveColor;
+    }
+
+    &.dragging {
+      z-index: 3;
     }
   }
 };

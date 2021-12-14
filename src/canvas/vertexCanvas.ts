@@ -1,6 +1,7 @@
 import { VertexCanvasInterface } from "./types/vertexCanvasInterface";
 import { vertexStyle } from "./styles/vertex.style";
 import { VertexConfig } from "../ds/types/vertexConfig";
+import dragElement from "./utils/drag";
 
 export class VertexCanvas implements VertexCanvasInterface {
   x: number;
@@ -8,22 +9,22 @@ export class VertexCanvas implements VertexCanvasInterface {
   vertexId: string;
   isActive: boolean;
   vertexElement: HTMLButtonElement
+  updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void
 
-  constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig) {
+  constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig, updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void) {
     this.vertexId = vertexId;
     this.isActive = false;
     this.vertexElement = document.createElement('button');
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
     this.vertexElement.innerText = value;
-    
-    const { draggable } = config;
-    if (draggable === true) {
-      console.log(this.vertexId, 'is draggable')
-    } else {
-      console.log(this.vertexId, 'is not draggable')
-    }
     this.updatePosition(x, y);
+    const { draggable } = config;
+    this.updateVertexWithEdgePosition = updateVertexWithEdgePosition;
+    if (draggable === true) {
+      dragElement(this.vertexElement, (x, y) => this.updateVertexWithEdgePosition(this.vertexId, x, y));
+    }
+
   }
 
   getVertexElement(): HTMLButtonElement {
