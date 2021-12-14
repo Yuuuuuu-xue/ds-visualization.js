@@ -30,6 +30,14 @@ export class Dialog {
     this.vertexDetail.classList.add('multiple-line');
   }
 
+  updateName(name: string) {
+    this.setInnerHTML(this.name, 'Graph name: ', name);
+  }
+
+  updateType(type: string) {
+    this.setInnerHTML(this.type, 'Graph type: ', type);
+  }
+
   getElementName(): HTMLDivElement {
     return this.name;
   }

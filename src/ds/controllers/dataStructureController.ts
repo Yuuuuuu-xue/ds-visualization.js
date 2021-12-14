@@ -2,7 +2,10 @@ import { DialogManager } from "../managers/dialogManager";
 import { DrawingManager } from "../managers/drawingManager";
 import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
+import EdgeInput from "../types/edgeInput";
 import { GraphInfo } from "../types/graph";
+import { VertexConfig } from "../types/vertexConfig";
+import VertexInput from "../types/vertexInput";
 
 export class DataStructureController implements DataStructureControllerInterface {
   private graphManager: GraphManager;
@@ -58,26 +61,33 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setHeight(height);
   }
 
-  createGraph(type: string, name: string): void {
+  createGraph(type: string, name: string, vertices: VertexInput[] = [], edges: EdgeInput[] = []): void {
     if (this.graphManager.getCurrentIdx() === 0) {
       this.drawingManager.getNextButtonElement().enableButtonElement();
     }
     this.graphManager.createGraph(type, name);
     this.drawingManager.createGraphCanvas();
+    const graphSize = this.graphManager.getGraphSize() - 1;
+    this.pushVerticesToGraph(graphSize, vertices);
+    this.pushEdgesToGraph(graphSize, edges);
   }
 
   getCurrentGraphInfo(): GraphInfo {
     return this.graphManager.getCurrentGraphInfo();
   }
 
+  getNumberOfGraphs(): number {
+    return this.graphManager.getGraphSize();
+  }
+
   setTargetElement(targetElement: HTMLDivElement): void {
     this.targetElement = targetElement;
   }
 
-  setCurrentGraphTitle(title: string): void {
-    this.graphManager.setCurrentGraphName(title);
-    this.drawingManager.setCanvasTitle(title);
-  }
+  // setCurrentGraphTitle(title: string): void {
+  //   this.graphManager.setCurrentGraphName(title);
+  //   this.drawingManager.setCanvasTitle(title);
+  // }
 
   handleNextButtonClick(): void {
     if (this.graphManager.getCurrentIdx() < this.graphManager.getGraphSize() - 1) {
@@ -153,9 +163,9 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
   };
 
-  pushVertexToCurrentGraph(_id: string, value: any, x: number, y: number): void {
+  pushVertexToCurrentGraph(_id: string, value: any, x: number, y: number, config: VertexConfig = {}): void {
     this.graphManager.pushVertexToCurrentGraph(_id, value);
-    this.drawingManager.pushVertexToCurrrentGraph(_id, x, y, value);
+    this.drawingManager.pushVertexToCurrrentGraph(_id, x, y, value, config);
   }
 
   pushEdgeToCurrentGraph(vertexTo: string, vertexFrom: string, weight ?: number): void {
@@ -163,14 +173,30 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.pushEdgeToCurrentGraph(vertexTo, vertexFrom, this.graphManager.getCurrentGraphType(), weight);
   }
 
-  pushVertexToGraph(i: number, _id: string, value: any, x: number, y: number): void {
+  pushVertexToGraph(i: number, _id: string, value: any, x: number, y: number, config: VertexConfig = {}): void {
     this.graphManager.pushVertexToGraph(i, _id, value);
-    this.drawingManager.pushVertexToGraph(i, _id, x, y, value);
+    this.drawingManager.pushVertexToGraph(i, _id, x, y, value, config);
   }
 
   pushEdgeToGraph(i: number, vertexTo: string, vertexFrom: string, weight ?: number): void {
     this.graphManager.pushEdgeToGraph(i, vertexTo, vertexFrom, weight);
     this.drawingManager.pushEdgeToGraph(i, vertexTo, vertexFrom, this.graphManager.getGraphType(i), weight);
+  }
+
+  pushVerticesToCurrentGraph(vertices: VertexInput[]): void {
+    vertices.forEach(v => this.pushVertexToCurrentGraph(v._id, v.value, v.x, v.y, v.config || {}));
+  }
+
+  pushVerticesToGraph(i: number, vertices: VertexInput[]): void {
+    vertices.forEach(v => this.pushVertexToGraph(i, v._id, v.value, v.x, v.y, v.config || {}));
+  }
+
+  pushEdgesToCurrentGraph(edges: EdgeInput[]): void {
+    edges.forEach(e => this.pushEdgeToCurrentGraph(e.vertexTo, e.vertexFrom, e.weight));
+  }
+
+  pushEdgesToGraph(i: number, edges: EdgeInput[]): void {
+    edges.forEach(e => this.pushEdgeToGraph(i, e.vertexTo, e.vertexFrom, e.weight));
   }
 
   showDialog(): void {
@@ -214,4 +240,58 @@ export class DataStructureController implements DataStructureControllerInterface
     this.updateCurrentGraph();
   }
 
+  updateCurrentGraphVertexValue(_id: string, value: any): void {
+    this.graphManager.updateCurrentGraphVertexValue(_id, value);
+    this.drawingManager.updateCurrentGraphVertexValue(_id, value);
+  }
+
+  updateGraphVertexValue(i: number, _id: string, value: any): void {
+    this.graphManager.updateGraphVertexValue(i, _id, value);
+    this.drawingManager.updateGraphVertexValue(i, _id, value);
+  }
+
+  updateCurrentGraphVertexPosition(_id: string, x: number, y: number): void {
+    this.graphManager.validateValidVertexId(this.graphManager.getCurrentIdx(), _id);
+    this.drawingManager.updateCurrentGraphVertexPosition(_id, x, y);
+  }
+
+  updateGraphVertexPosition(i: number, _id: string, x: number, y: number): void {
+    this.graphManager.validateValidVertexId(i, _id);
+    this.drawingManager.updateGraphVertexPosition(i, _id, x, y);
+  }
+
+  updateCurrentGraphName(name: string): void {
+    this.graphManager.updateCurrentGraphName(name);
+    this.drawingManager.setCanvasTitle(name);
+    this.dialogManager.updateName(name);
+  }
+
+  updateGraphName(i: number, name: string): void {
+    this.graphManager.updateGraphName(i, name);
+    this.drawingManager.setCanvasTitle(name);
+
+    if (i === this.graphManager.getCurrentIdx()) {
+      this.dialogManager.updateName(name);
+    }
+  }
+
+  updateCurrentGraphType(type: string): void {
+    if (type !== 'directed' && type !== 'undirected') {
+      throw new Error("Graph type must be either 'directed' or 'undirected'");
+    }
+    this.graphManager.updateCurrentGraphType(type);
+    this.drawingManager.updateCurrentGraphType(type);
+    this.dialogManager.updateType(type);
+  }
+
+  updateGraphType(i: number, type: string): void {
+    if (type !== 'directed' && type !== 'undirected') {
+      throw new Error("Graph type must be either 'directed' or 'undirected'");
+    }
+    this.graphManager.updateGraphType(i, type);
+    this.drawingManager.updateGraphType(i, type);
+    if (i === this.graphManager.getCurrentIdx()) {
+      this.dialogManager.updateType(type);
+    }
+  }
 }

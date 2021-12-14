@@ -1,4 +1,5 @@
 import { GraphType } from "../ds/types/constantType";
+import { VertexConfig } from "../ds/types/vertexConfig";
 import { EdgeCanvas } from "./edgeCanvas";
 import { GraphCanvasInterface } from "./types/graphCanvasInterface";
 import { VertexCanvas } from "./vertexCanvas";
@@ -56,8 +57,8 @@ export class GraphCanvas implements GraphCanvasInterface {
         }
     }
 
-    pushVertex(vertexId: string, x: number, y: number, value: any): void {
-        const newVertex = new VertexCanvas(x, y, vertexId, value);
+    pushVertex(vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
+        const newVertex = new VertexCanvas(x, y, vertexId, value, config, (_id: string, x: number, y: number) => this.updateVertexPosition(_id, x, y));
         newVertex.getVertexElement().addEventListener('click', () => this.handleVertexClick(newVertex));
         this.vertices.push(newVertex);
         this.graphElement.insertAdjacentElement('beforeend', newVertex.getVertexElement());
@@ -124,5 +125,35 @@ export class GraphCanvas implements GraphCanvasInterface {
       //   this.removeVertex(v.vertexId);
       // });
       this.graphElement.parentElement.removeChild(this.graphElement);
+    }
+
+    updateVertexValue(vertexId: string, value: any): void { 
+      this.vertices.forEach(v => {
+        if (v.vertexId === vertexId) {
+          v.vertexElement.innerText = value;
+        }
+      });
+    }
+
+    updateVertexPosition(vertexId: string, x: number, y: number): void {
+      this.vertices.forEach(v => {
+        if (v.vertexId === vertexId) {
+          v.updatePosition(x, y);
+          this.edges.forEach(e => {
+            if (e.vertexToId === vertexId) {
+              e.updateVertexToPosition(x, y);
+            }
+            if (e.vertexFromId === vertexId) {
+              e.updateVertexFromPosition(x, y);
+            }
+          });
+        }
+      })
+    }
+
+    updateGraphType(type: GraphType): void {
+      this.edges.forEach(e => {
+        e.updateType(type);
+      });
     }
 };

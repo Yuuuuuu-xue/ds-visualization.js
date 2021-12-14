@@ -3,6 +3,7 @@ import { GraphCanvas } from "../../canvas/graphCanvas";
 import { ButtonInterface } from "../../canvas/types/buttonInterface";
 import { Button } from "../../canvas/buttons/button";
 import { GraphType } from "../types/constantType";
+import { VertexConfig } from "../types/vertexConfig";
 
 
 export class DrawingManager {
@@ -128,12 +129,12 @@ export class DrawingManager {
     this.graphCanvas[this.currIdx].hideGraph(); 
     this.currIdx = newIdx;
     this.canvasCurrPageElement.innerText = `${this.currIdx + 1}`;
-    console.log(this.graphCanvas[this.currIdx], this.currIdx)
+    // console.log(this.graphCanvas[this.currIdx], this.currIdx)
     this.graphCanvas[this.currIdx].displayGraph();
   }
 
-  pushVertexToCurrrentGraph(vertexId: string, x: number, y: number, value: any): void {
-    this.graphCanvas[this.currIdx].pushVertex(vertexId, x, y, value);
+  pushVertexToCurrrentGraph(vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
+    this.graphCanvas[this.currIdx].pushVertex(vertexId, x, y, value, config);
   }
 
   pushEdgeToCurrentGraph(vertexToId: string, vertexFromId: string, type: GraphType, weight ?: number): void {
@@ -146,9 +147,9 @@ export class DrawingManager {
     }
   }
 
-  pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any): void {
+  pushVertexToGraph(i: number, vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
     this.checkValidLength(i);
-    this.graphCanvas[i].pushVertex(vertexId, x, y, value);
+    this.graphCanvas[i].pushVertex(vertexId, x, y, value, config);
   }
 
   pushEdgeToGraph(i: number, vertexToId: string, vertexFromId: string, type: GraphType, weight ?: number): void {
@@ -192,5 +193,32 @@ export class DrawingManager {
     if (this.currIdx >= this.graphCanvas.length) {
       this.currIdx -= 1
     }
+  }
+
+  updateCurrentGraphVertexValue(vertexId: string, value: any): void {
+    this.graphCanvas[this.currIdx].updateVertexValue(vertexId, value);
+  }
+
+  updateGraphVertexValue(i: number, vertexId: string, value: any): void {
+    this.checkValidLength(i);
+    this.graphCanvas[i].updateVertexValue(vertexId, value);
+  }
+
+  updateCurrentGraphVertexPosition(vertexId: string, x: number, y: number): void {
+    this.graphCanvas[this.currIdx].updateVertexPosition(vertexId, x, y);
+  }
+
+  updateGraphVertexPosition(i: number, vertexId: string, x: number, y: number): void {
+    this.checkValidLength(i);
+    this.graphCanvas[i].updateVertexPosition(vertexId, x, y);
+  }
+
+  updateCurrentGraphType(type: GraphType) {
+    this.graphCanvas[this.currIdx].updateGraphType(type);
+  }
+
+  updateGraphType(i: number, type: GraphType) {
+    this.checkValidLength(i);
+    this.graphCanvas[i].updateGraphType(type);
   }
 }

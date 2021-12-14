@@ -29,10 +29,15 @@ export class Graph implements GraphInterface {
     });
   }
 
-  removeVertex(_id: string): void {
-    if (!this.visitedVertices.has(_id)) {
-      throw new Error(`No such vertex id ${_id}`);
+  validateValidVertexId(_id: string): void {
+    if(!this.visitedVertices.has(_id)) {
+      throw new Error(`No such vertex with id ${_id}`);
     }
+  }
+
+
+  removeVertex(_id: string): void {
+    this.validateValidVertexId(_id);
     this.visitedVertices.delete(_id);
     this.vertices = this.vertices.filter(v => v._id !== _id);
     // Remove Edge
@@ -87,10 +92,28 @@ export class Graph implements GraphInterface {
     }
   }
 
-  getVertexDetail(_id: string): VertexDetailInterface {
+  updateVertexValue(_id: string, value: any): void {
     if (!this.visitedVertices.has(_id)) {
-      throw new Error(`No such vertex id ${_id}`);
+      throw new Error(`No such vertex with id ${_id}`);
     }
+
+    this.vertices.forEach(v => {
+      if (v._id === _id) {
+        v.value = value;
+      }
+    })
+  }
+
+  updateGraphName(name: string): void {
+    this.name = name;
+  }
+
+  updateGraphType(type: GraphType): void {
+    this.type = type; 
+  }
+
+  getVertexDetail(_id: string): VertexDetailInterface {
+    this.validateValidVertexId(_id);
     
     const vertexTo: VertexInfo[] = [];
     const vertexFrom: VertexInfo[] = [];

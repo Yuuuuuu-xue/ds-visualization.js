@@ -88,4 +88,12 @@ export class DialogManager {
   enableDialog(): void {
     this.dialogElement.classList.remove('hidden');
   } 
+
+  updateName(name: string): void {
+    this.dialog.updateName(name);
+  }
+
+  updateType(type: string): void {
+    this.dialog.updateType(type);
+  }
 }

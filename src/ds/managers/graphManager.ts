@@ -40,9 +40,13 @@ export class GraphManager implements GraphManagerInterface {
     return this.getCurrentGraph().name;
   };
 
-  setCurrentGraphName(name: string): void {
-    this.getCurrentGraph().name = name;
+  getNumberOfGraphs(): number {
+    return this.graphs.length;
   }
+
+  // setCurrentGraphName(name: string): void {
+  //   this.getCurrentGraph().name = name;
+  // }
 
   moveNextGraph(): void {
     if (this.currIdx >= this.graphs.length) {
@@ -137,5 +141,37 @@ export class GraphManager implements GraphManagerInterface {
     if (this.currIdx >= this.graphs.length) {
       this.currIdx -= 1;
     }
+  }
+
+  updateCurrentGraphVertexValue(_id: string, value: any): void {
+    this.graphs[this.currIdx].updateVertexValue(_id, value);
+  }
+
+  updateGraphVertexValue(i: number, _id: string, value: any): void {
+    this.checkValidLength(i);
+    this.graphs[i].updateVertexValue(_id, value);
+  }
+
+  validateValidVertexId(i: number, _id: string) {
+    this.checkValidLength(i);
+    this.graphs[i].validateValidVertexId(_id);
+  }
+
+  updateCurrentGraphName(name: string): void {
+    this.graphs[this.currIdx].updateGraphName(name);
+  }
+
+  updateGraphName(i: number, name: string): void {
+    this.checkValidLength(i);
+    this.graphs[i].updateGraphName(name);
+  }
+
+  updateCurrentGraphType(type: GraphType): void {
+    this.graphs[this.currIdx].updateGraphType(type);
+  }
+
+  updateGraphType(i: number, type: GraphType): void {
+    this.checkValidLength(i);
+    this.graphs[i].updateGraphType(type); 
   }
 }
