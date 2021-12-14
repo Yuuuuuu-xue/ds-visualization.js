@@ -22,6 +22,7 @@ export class VertexCanvas implements VertexCanvasInterface {
     const { draggable } = config;
     this.updateVertexWithEdgePosition = updateVertexWithEdgePosition;
     if (draggable === true) {
+      this.vertexElement.classList.add('draggable')
       dragElement(this.vertexElement, (x, y) => this.updateVertexWithEdgePosition(this.vertexId, x, y));
     }
 
