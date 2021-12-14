@@ -1,5 +1,4 @@
 import { VertexCanvasInterface } from "./types/vertexCanvasInterface";
-import { vertexStyle } from "./styles/vertex.style";
 import { VertexConfig } from "../ds/types/vertexConfig";
 import dragElement from "./utils/drag";
 
@@ -27,10 +26,11 @@ export class VertexCanvas implements VertexCanvasInterface {
     }
 
     if (backgroundImageSrc) {
-      const backgroundImage = document.createElement('img');
-      backgroundImage.classList.add('background-img');
-      backgroundImage.setAttribute('src', backgroundImageSrc);
-      this.vertexElement.insertAdjacentElement('beforeend', backgroundImage); 
+      // const backgroundImage = document.createElement('img');
+      // backgroundImage.classList.add('background-img');
+      // backgroundImage.setAttribute('src', backgroundImageSrc);
+      // this.vertexElement.insertAdjacentElement('beforeend', backgroundImage); 
+      this.vertexElement.style.background = `url('${backgroundImageSrc}') no-repeat center center / cover`
     }
 
   }
@@ -53,7 +53,8 @@ export class VertexCanvas implements VertexCanvasInterface {
     }
     this.x = x; 
     this.y = y;
-    this.vertexElement.setAttribute('style', vertexStyle(this.x, this.y));
+    this.vertexElement.style.left = `${x}px`;
+    this.vertexElement.style.top = `${y}px`
   }
 
   setInactive(): void {
