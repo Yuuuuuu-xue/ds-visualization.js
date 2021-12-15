@@ -127,6 +127,9 @@ export class DataStructureController implements DataStructureControllerInterface
   moveNextGraph(): void {
     const prevGraphElement = this.drawingManager.getCurrentGraph().getGraphElement();
     prevGraphElement.classList.add('graphAnimationForward')
+    
+    this.drawingManager.getCanvasElement().scrollLeft = 0;
+
     this.drawingManager.getPrevButtonElement().disableButtonElement();
     this.drawingManager.getNextButtonElement().disableButtonElement();
     setTimeout(() => {
@@ -154,7 +157,10 @@ export class DataStructureController implements DataStructureControllerInterface
 
   movePrevGraph(): void {    
     const prevGraphElement = this.drawingManager.getCurrentGraph().getGraphElement();
-    prevGraphElement.classList.add('graphAnimationBackward')
+    prevGraphElement.classList.add('graphAnimationBackward');
+
+    this.drawingManager.getCanvasElement().scrollLeft = 0;
+    
     this.drawingManager.getPrevButtonElement().disableButtonElement();
     this.drawingManager.getNextButtonElement().disableButtonElement();
     setTimeout(() => {
