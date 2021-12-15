@@ -1,6 +1,7 @@
 import { VertexCanvasInterface } from "./types/vertexCanvasInterface";
 import { VertexConfig } from "../ds/types/vertexConfig";
-import dragElement from "./utils/drag";
+import dragElement, { clearDragListener } from "./utils/drag";
+import { Style } from "../ds/types/style";
 
 export class VertexCanvas implements VertexCanvasInterface {
   x: number;
@@ -63,6 +64,74 @@ export class VertexCanvas implements VertexCanvasInterface {
     } else {
       this.vertexElement.style.cursor = 'pointer';
     }
+  }
+  
+  private configHideText(hideText?: boolean): void {
+    // Hide text
+    if (hideText !== undefined) {
+      if (!hideText) {
+        this.vertexElement.innerText = this.vertexValue;
+      }
+    }
+  }
+
+  private configDraggable(draggable?: boolean): void {
+    // Draggable
+    if (draggable !== undefined) {
+      if (draggable === true) {
+        this.vertexElement.classList.add('draggable');
+        dragElement(this.vertexElement, (x, y) => this.updateVertexWithEdgePosition(this.vertexId, x, y));
+      } else {
+        // We might need to remove the event listener
+        this.vertexElement.classList.remove('draggable');
+        clearDragListener(this.vertexElement);
+      }
+    }
+  }
+
+  private configBackgroundImageSrc(backgroundImageSrc?: string, hideText?: boolean): void {
+    // Background image source
+    if (backgroundImageSrc !== undefined) {
+      if (!hideText) {
+        this.vertexElement.style.background = `linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('${backgroundImageSrc}') no-repeat center center / cover`;
+      } else {
+        this.vertexElement.style.background = `url('${backgroundImageSrc}') no-repeat center center / cover`;
+      } 
+    }; 
+  }
+
+  private configStyle(style?: Style, draggable?: boolean) {
+    // Set the style
+    for (const styleKey in style) {
+      this.vertexElement.style[styleKey] = style[styleKey];
+    }
+
+    // Set the cursor
+    if (draggable) {
+      this.vertexElement.style.cursor = 'move';
+    } else if (this.disableActiveClick && this.clickCallback === undefined) {
+      this.vertexElement.style.cursor = 'default'
+    } else {
+      this.vertexElement.style.cursor = 'pointer';
+    }
+  }
+
+  updateConfig(config: VertexConfig): void {
+    const { draggable, backgroundImageSrc, hideText, style, disableActiveClick, clickCallback } = config;
+    // Update disable active click
+    if (disableActiveClick !== undefined) {
+      this.disableActiveClick = disableActiveClick === true;
+    }
+
+    // Update click callback
+    if (clickCallback !== undefined) {
+      this.clickCallback = clickCallback;
+    }
+
+    this.configHideText(hideText);
+    this.configDraggable(draggable);
+    this.configBackgroundImageSrc(backgroundImageSrc, hideText); 
+    this.configStyle(style, draggable);
   }
 
   getVertexElement(): HTMLButtonElement {

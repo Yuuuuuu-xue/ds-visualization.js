@@ -225,4 +225,13 @@ export class DrawingManager {
     this.checkValidLength(i);
     this.graphCanvas[i].updateGraphType(type);
   }
+
+  updateCurrentGraphVertexConfig(vertexId: string, config: VertexConfig): void {
+    this.graphCanvas[this.currIdx].updateVertexConfig(vertexId, config);
+  }
+
+  updateGraphVertexConfig(i: number, vertexId: string, config: VertexConfig): void {
+    this.checkValidLength(i);
+    this.graphCanvas[i].updateVertexConfig(vertexId, config);
+  }
 }

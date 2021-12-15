@@ -31,3 +31,9 @@ export default function dragElement(element: HTMLElement, updatePosition: (x: nu
   }
 }
 
+export function clearDragListener(element: HTMLElement): void { 
+  element.onmousedown = null;
+  element.onmouseup = null;
+  element.onmousemove = null;
+}
+

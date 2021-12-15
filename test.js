@@ -28,4 +28,5 @@ dsController.updateCurrentGraphVertexValue('3', 'New Value')
 dsController.setDialogWidth(250);
 dsController.setDialogHeight(400);
 dsController.showDialog();
+dsController.updateCurrentGraphVertexConfig('4', {style: {borderColor: "crimson"}})
 console.log(dsController.getCurrentGraphInfo());

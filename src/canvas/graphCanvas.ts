@@ -132,6 +132,14 @@ export class GraphCanvas implements GraphCanvasInterface {
       this.graphElement.parentElement.removeChild(this.graphElement);
     }
 
+    updateVertexConfig(vertexId: string, config: VertexConfig): void {
+      this.vertices.forEach(v => {
+        if (v.vertexId === vertexId) {
+          v.updateConfig(config);
+        }
+      });
+    }
+
     updateVertexValue(vertexId: string, value: any): void { 
       this.vertices.forEach(v => {
         if (v.vertexId === vertexId) {
