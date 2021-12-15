@@ -17,7 +17,7 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
 
-    const { draggable, backgroundImageSrc, hideText } = config;
+    const { draggable, backgroundImageSrc, hideText, style } = config;
 
     if (!hideText) {
       this.vertexElement.innerText = value;
@@ -43,6 +43,10 @@ export class VertexCanvas implements VertexCanvasInterface {
       } 
     }
 
+    // Set the style
+    for (const styleKey in style) {
+      this.vertexElement.style[styleKey] = style[styleKey];
+    }
   }
 
   getVertexElement(): HTMLButtonElement {
