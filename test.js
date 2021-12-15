@@ -1,9 +1,9 @@
 const dsController = new ds.DataStructureController(800, 400, document.getElementById("test"));
 dsController.pushVerticesToCurrentGraph([
   {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {draggable: true, backgroundImageSrc: './public/images/image.png'}},
-  {_id: '2', value: 'Second Vertex', x: 200, y: 300},
-  {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {draggable: true, backgroundImageSrc: './public/images/image2.jpg'}},
-  {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {backgroundImageSrc: './public/images/myProfile.jpg', hideText: true, style: {width: "150px", height: "150px"}, disableActiveClick: true}},
+  {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {disableActiveClick: true}},
+  {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {draggable: true, backgroundImageSrc: './public/images/image2.jpg', style: {a: 'a'}, }},
+  {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {backgroundImageSrc: './public/images/myProfile.jpg', hideText: true, style: {width: "150px", height: "150px"}, disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue")}},
   {_id: '5', value: 'Fifth Vertex', x: 750, y: 50},
   {_id: '6', value: 'Sixth Vertex', x: 460, y: 350},
   {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350}

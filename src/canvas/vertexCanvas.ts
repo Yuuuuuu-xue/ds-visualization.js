@@ -11,7 +11,7 @@ export class VertexCanvas implements VertexCanvasInterface {
   updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void;
   vertexValue: any;
   disableActiveClick: any;
-
+  clickCallback: () => void;
 
   constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig, updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void) {
     this.vertexId = vertexId;
@@ -21,9 +21,10 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement.classList.add('inactive');
     this.vertexValue = value; 
 
-    const { draggable, backgroundImageSrc, hideText, style, disableActiveClick } = config;
+    const { draggable, backgroundImageSrc, hideText, style, disableActiveClick, clickCallback } = config;
 
     this.disableActiveClick = disableActiveClick === true;
+    this.clickCallback = clickCallback;
 
     if (!hideText) {
       this.vertexElement.innerText = value;
@@ -57,7 +58,7 @@ export class VertexCanvas implements VertexCanvasInterface {
     // Set the cursor
     if (draggable) {
       this.vertexElement.style.cursor = 'move';
-    } else if (disableActiveClick) {
+    } else if (this.disableActiveClick && this.clickCallback === undefined) {
       this.vertexElement.style.cursor = 'not-allowed'
     } else {
       this.vertexElement.style.cursor = 'pointer';
@@ -73,10 +74,15 @@ export class VertexCanvas implements VertexCanvasInterface {
   }
 
   handleClick(): void {
-    if (this.isActive) {
-      this.setInactive();
-    } else {
-      this.setActive();
+    if (this.clickCallback !== undefined) {
+      this.clickCallback();
+    }
+    if (!this.disableActiveClick) {
+      if (this.isActive) {
+        this.setInactive();
+      } else {
+        this.setActive();
+      }
     }
   }
 

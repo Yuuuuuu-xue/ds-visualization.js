@@ -6,4 +6,5 @@ export interface VertexConfig {
   hideText?: boolean
   style?: Style
   disableActiveClick?: boolean
+  clickCallback?: () => void
 }

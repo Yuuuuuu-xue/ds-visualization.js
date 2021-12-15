@@ -35,6 +35,7 @@ export class GraphCanvas implements GraphCanvasInterface {
     handleVertexClick(newVertex: VertexCanvas): void {
 
         if (newVertex.getDisableActiveClick()) {
+          newVertex.handleClick();
           return;
         }
         this.vertices.forEach(v => {
