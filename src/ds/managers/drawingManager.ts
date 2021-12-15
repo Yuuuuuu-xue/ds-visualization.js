@@ -4,6 +4,7 @@ import { ButtonInterface } from "../../canvas/types/buttonInterface";
 import { Button } from "../../canvas/buttons/button";
 import { GraphType } from "../types/constantType";
 import { VertexConfig } from "../types/vertexConfig";
+import { GraphConfig } from "../types/graphConfig";
 
 
 export class DrawingManager {
@@ -75,7 +76,7 @@ export class DrawingManager {
   }
 
   createDefaultGraph(): void {
-    this.createGraphCanvas();
+    this.createGraphCanvas({mode: 'clickable'});
     this.graphCanvas[0].displayGraph();
   }
 
@@ -91,8 +92,8 @@ export class DrawingManager {
     throw new Error(message);
   };
 
-  createGraphCanvas(): void {
-    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog());
+  createGraphCanvas(config: GraphConfig): void {
+    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog(), config);
     this.graphCanvas.push(newGraphCanvas);
     this.canvasElement.insertAdjacentElement('beforeend', newGraphCanvas.graphElement);
   }

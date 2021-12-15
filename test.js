@@ -22,7 +22,9 @@ dsController.createGraph('undirected', 'Next Graph', [
   {_id: '2', value: 'New Second Vertex', x: 100, y: 200}
 ], [
   {vertexTo: '1', vertexFrom: '2'}
-]);
+], {
+  mode: 'non-clickable'
+});
 
 dsController.updateCurrentGraphVertexValue('3', 'New Value')
 dsController.setDialogWidth(250);
