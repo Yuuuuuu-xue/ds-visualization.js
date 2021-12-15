@@ -125,42 +125,59 @@ export class DataStructureController implements DataStructureControllerInterface
   }
 
   moveNextGraph(): void {
-    this.graphManager.moveNextGraph();
-
-    // Inactive
-    this.drawingManager.setCurrentGraphInactive();
-
-    this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
-    // Set the title
-    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
-
-    // Now if we react to the last one, we should disable to the next button
-    if(this.graphManager.getCurrentIdx() === this.graphManager.getGraphSize() - 1) {
-      this.drawingManager.getNextButtonElement().disableButtonElement();
-    }
-    this.drawingManager.getPrevButtonElement().enableButtonElement();
-
-    // Update dialog
-    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
+    const prevGraphElement = this.drawingManager.getCurrentGraph().getGraphElement();
+    prevGraphElement.classList.add('graphAnimationForward')
+    this.drawingManager.getPrevButtonElement().disableButtonElement();
+    this.drawingManager.getNextButtonElement().disableButtonElement();
+    setTimeout(() => {
+      this.graphManager.moveNextGraph();
+      // Inactive
+      this.drawingManager.setCurrentGraphInactive();
+  
+      this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
+      // Set the title
+      this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
+  
+      // Now if we react to the last one, we should disable to the next button
+      if(this.graphManager.getCurrentIdx() === this.graphManager.getGraphSize() - 1) {
+        this.drawingManager.getNextButtonElement().disableButtonElement();
+      } else {
+        this.drawingManager.getNextButtonElement().enableButtonElement();
+      }
+      this.drawingManager.getPrevButtonElement().enableButtonElement();
+  
+      // Update dialog
+      this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());    
+      prevGraphElement.classList.remove('graphAnimationForward');
+    }, 2000);
   };
 
-  movePrevGraph(): void {
-    this.graphManager.movePrevGraph();
+  movePrevGraph(): void {    
+    const prevGraphElement = this.drawingManager.getCurrentGraph().getGraphElement();
+    prevGraphElement.classList.add('graphAnimationBackward')
+    this.drawingManager.getPrevButtonElement().disableButtonElement();
+    this.drawingManager.getNextButtonElement().disableButtonElement();
+    setTimeout(() => {
+      this.graphManager.movePrevGraph();
 
-    // Inactive
-    this.drawingManager.setCurrentGraphInactive();
-
-    this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
-    this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
-
-    // If we reach to the first one, we should disable the prev button
-    if (this.graphManager.getCurrentIdx() === 0) {
-      this.drawingManager.getPrevButtonElement().disableButtonElement();
-    }
-    this.drawingManager.getNextButtonElement().enableButtonElement();
-    
-    // Update dialog
-    this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
+      // Inactive
+      this.drawingManager.setCurrentGraphInactive();
+  
+      this.drawingManager.displayGraph(this.graphManager.getCurrentIdx());
+      this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
+  
+      // If we reach to the first one, we should disable the prev button
+      if (this.graphManager.getCurrentIdx() === 0) {
+        this.drawingManager.getPrevButtonElement().disableButtonElement();
+      } else {
+        this.drawingManager.getPrevButtonElement().enableButtonElement();
+      }
+      this.drawingManager.getNextButtonElement().enableButtonElement();
+      
+      // Update dialog
+      this.dialogManager.setGraphDetail(this.graphManager.getCurrentGraphInfo());
+      prevGraphElement.classList.remove('graphAnimationBackward');
+    }, 2000)
   };
 
   pushVertexToCurrentGraph(_id: string, value: any, x: number, y: number, config: VertexConfig = {}): void {

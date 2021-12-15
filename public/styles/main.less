@@ -116,7 +116,22 @@
   .border();
   border: 2px solid @canvasBorder;
 
+  // &::-webkit-scrollbar {
+  //   width: 12px;
+  //   margin-right: 10px;
+  // }
 
+  // // &::-webkit-scrollbar-track {
+  // //   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  // //   border-radius: 10px;
+  // // }
+
+
+  // &::-webkit-scrollbar-thumb {
+  //   border-radius: 10px;
+  //   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  // }
+  
   .ds-canvas-button {
     .button();
     .sticky-vertical-center();
@@ -218,4 +233,39 @@
       z-index: 3;
     }
   }
+
+  .graphAnimationForward {
+
+    &::-webkit-scrollbar {
+      .hidden();
+    }
+    &::-webkit-scrollbar-thumb {
+      .hidden();
+    }
+    animation: sliderForward 2s ease-in-out forwards;
+  }
+
+  .graphAnimationBackward { 
+    animation: sliderBackward 2s ease-in-out forwards;
+  }
+
 };
+
+// Animation
+@keyframes sliderForward {
+  0% {
+    transform: translateX(0%);
+  }
+	100% { 
+    transform: translateX(-120%);
+  }
+}
+
+@keyframes sliderBackward {
+  0% {
+    transform: translateX(0%);
+  }
+	100% { 
+    transform: translateX(120%);
+  }
+}

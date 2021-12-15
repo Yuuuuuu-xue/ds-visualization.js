@@ -1,4 +1,4 @@
-const dsController = new ds.DataStructureController(800, 400, document.getElementById("test"));
+const dsController = new ds.DataStructureController(1500, 600, document.getElementById("test"));
 dsController.pushVerticesToCurrentGraph([
   {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {draggable: true, backgroundImageSrc: './public/images/image.png'}},
   {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {disableActiveClick: true}},
@@ -18,8 +18,8 @@ dsController.pushEdgesToCurrentGraph([
   {vertexTo: '3', vertexFrom: '6', weight: -20}
 ]);
 dsController.createGraph('undirected', 'Next Graph', [
-  {_id: '1', value: 'New First Vertex', x: 200, y: 200},
-  {_id: '2', value: 'New Second Vertex', x: 100, y: 500}
+  {_id: '1', value: 'New First Vertex', x: 200, y: 100},
+  {_id: '2', value: 'New Second Vertex', x: 100, y: 200}
 ], [
   {vertexTo: '1', vertexFrom: '2'}
 ]);

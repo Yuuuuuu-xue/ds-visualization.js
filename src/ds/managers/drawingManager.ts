@@ -70,6 +70,10 @@ export class DrawingManager {
 
   };
 
+  getCurrentGraph(): GraphCanvas {
+    return this.graphCanvas[this.currIdx];
+  }
+
   createDefaultGraph(): void {
     this.createGraphCanvas();
     this.graphCanvas[0].displayGraph();
