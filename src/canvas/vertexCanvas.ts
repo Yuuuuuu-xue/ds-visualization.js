@@ -7,8 +7,11 @@ export class VertexCanvas implements VertexCanvasInterface {
   y: number;
   vertexId: string;
   isActive: boolean;
-  vertexElement: HTMLButtonElement
-  updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void
+  vertexElement: HTMLButtonElement;
+  updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void;
+  vertexValue: any;
+  disableActiveClick: any;
+
 
   constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig, updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void) {
     this.vertexId = vertexId;
@@ -16,8 +19,11 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement = document.createElement('button');
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
+    this.vertexValue = value; 
 
-    const { draggable, backgroundImageSrc, hideText, style } = config;
+    const { draggable, backgroundImageSrc, hideText, style, disableActiveClick } = config;
+
+    this.disableActiveClick = disableActiveClick === true;
 
     if (!hideText) {
       this.vertexElement.innerText = value;
@@ -47,10 +53,23 @@ export class VertexCanvas implements VertexCanvasInterface {
     for (const styleKey in style) {
       this.vertexElement.style[styleKey] = style[styleKey];
     }
+
+    // Set the cursor
+    if (draggable) {
+      this.vertexElement.style.cursor = 'move';
+    } else if (disableActiveClick) {
+      this.vertexElement.style.cursor = 'not-allowed'
+    } else {
+      this.vertexElement.style.cursor = 'pointer';
+    }
   }
 
   getVertexElement(): HTMLButtonElement {
     return this.vertexElement;
+  }
+
+  getDisableActiveClick(): boolean {
+    return this.disableActiveClick;
   }
 
   handleClick(): void {

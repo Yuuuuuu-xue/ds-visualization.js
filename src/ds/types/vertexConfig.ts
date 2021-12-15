@@ -5,4 +5,5 @@ export interface VertexConfig {
   backgroundImageSrc?: string
   hideText?: boolean
   style?: Style
+  disableActiveClick?: boolean
 }
