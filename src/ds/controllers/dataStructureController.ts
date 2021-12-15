@@ -326,4 +326,12 @@ export class DataStructureController implements DataStructureControllerInterface
   updateGraphVertexConfig(i: number, _id: string, config: VertexConfig) {
     this.drawingManager.updateGraphVertexConfig(i, _id, config);
   }
+
+  updateCurrentGraphConfig(config: GraphConfig): void {
+    this.drawingManager.updateCurrentGraphConfig(config);
+  }
+
+  updateGraphConfig(i: number, config: GraphConfig): void {
+    this.drawingManager.updateGraphConfig(i, config);
+  }
 }

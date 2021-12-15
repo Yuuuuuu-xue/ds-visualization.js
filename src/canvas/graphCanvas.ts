@@ -12,7 +12,10 @@ export class GraphCanvas implements GraphCanvasInterface {
   graphElement: HTMLDivElement;
   updateDialog: (vertexId: string) => void;
   clearVertexDialog: () => void;
-  mode: Mode
+  mode: Mode;
+  traversedVertices: VertexCanvas[];
+  visitedVertices: Set<string>;
+  visitedEdges: Set<string>;
 
   constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig) {
     this.vertices = [];
@@ -23,10 +26,11 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.graphElement.classList.add('hidden');
     this.updateDialog = updateDialog;
     this.clearVertexDialog = clearVertexDialog;
-    
+    this.traversedVertices = [];
     const { mode } = config;
     this.mode = mode;
-    
+    this.visitedVertices = new Set();
+    this.visitedEdges = new Set();
   }
 
   setInactiveAll(): void {
@@ -38,36 +42,88 @@ export class GraphCanvas implements GraphCanvasInterface {
     })
   }
 
+  updateConfig(config: GraphConfig): void {
+    const { mode } = config;
+    this.mode = mode;
+  }
+
   handleVertexClick(newVertex: VertexCanvas): void {
     // Not clickable graph
     if (this.mode === 'non-clickable') {
       return;
-    }
-    if (newVertex.getDisableActiveClick()) {
-      newVertex.handleClick();
-      return;
-    }
-    this.vertices.forEach(v => {
-      if (v.vertexId !== newVertex.vertexId) {
-        v.setInactive();
+    } else if (this.mode === 'clickable') {
+      if (newVertex.getDisableActiveClick()) {
+        newVertex.handleClick();
+        return;
       }
-    });
-    this.edges.forEach(e => {
-      if (e.vertexFromId !== newVertex.vertexId && e.vertexToId !== newVertex.vertexId) {
-        e.setInactive();
-      } else {
-        if (!newVertex.isActive) {
-          e.setActive();
-        } else {
-          e.setInactive();
+      this.vertices.forEach(v => {
+        if (v.vertexId !== newVertex.vertexId) {
+          v.setInactive();
         }
+      });
+      this.edges.forEach(e => {
+        if (e.vertexFromId !== newVertex.vertexId && e.vertexToId !== newVertex.vertexId) {
+          e.setInactive();
+        } else {
+          if (!newVertex.isActive) {
+            e.setActive();
+          } else {
+            e.setInactive();
+          }
+        }
+      })
+      newVertex.handleClick();
+      this.updateDialog(newVertex.vertexId);
+      if(!newVertex.isActive) {
+        // Not active, clear the dialog
+        this.clearVertexDialog();
       }
-    })
-    newVertex.handleClick();
-    this.updateDialog(newVertex.vertexId);
-    if(!newVertex.isActive) {
-      // Not active, clear the dialog
-      this.clearVertexDialog();
+    } else if (this.mode === 'traverse') {
+      
+      if (this.traversedVertices.length >= 1) {
+        const lastVertex = this.traversedVertices[this.traversedVertices.length - 1];
+        // Find the correct edge
+        const incidentEdges = this.edges.filter(e => e.vertexToId === lastVertex.vertexId && e.vertexFromId === newVertex.vertexId);
+        if (incidentEdges.length > 0) {
+          incidentEdges[0].setActive();
+          // Set the vertex as active as well
+          newVertex.setActive();
+          this.visitedVertices.add(newVertex.vertexId);
+          this.traversedVertices.push(newVertex);
+          this.visitedEdges.add(JSON.stringify([lastVertex.vertexId, newVertex.vertexId]));
+        }
+      } else {
+        newVertex.setActive();
+        this.visitedVertices.add(newVertex.vertexId);
+        this.traversedVertices.push(newVertex);
+      }
+
+      // Update the canvas
+      const lastVertex = this.traversedVertices[this.traversedVertices.length - 1];
+      this.setCursor(lastVertex);
+    }
+  }
+
+  private setCursor(lastVertex?: VertexCanvas): void {
+    if (lastVertex) {
+      const canTraverseVertex = new Set();
+      this.edges.forEach(e => {
+        if (e.vertexToId === lastVertex.vertexId) {
+          canTraverseVertex.add(e.vertexFromId);
+        }
+      });
+      this.vertices.forEach(v => {
+        if (canTraverseVertex.has(v.vertexId)) { 
+          v.getVertexElement().style.cursor = 'pointer';
+        } else {
+          v.getVertexElement().style.cursor = 'not-allowed';
+        }
+      })
+    } else {
+      // Initila
+      this.vertices.forEach(v => {
+        v.getVertexElement().style.cursor = 'pointer';
+      });
     }
   }
 
