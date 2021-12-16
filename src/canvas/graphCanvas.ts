@@ -152,6 +152,10 @@ export class GraphCanvas implements GraphCanvasInterface {
     if (disallowRepeatedEdge !== undefined) {
       this.disallowRepeatedEdge = disallowRepeatedEdge;
     }
+
+    if (this.mode === 'traversable') {
+      this.setCursor(null);
+    }
   }
 
   private getEdgeDetail(): EdgeDetailInterface[] {
@@ -289,7 +293,7 @@ export class GraphCanvas implements GraphCanvasInterface {
   }
 
   pushVertex(vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
-    const newVertex = new VertexCanvas(x, y, vertexId, value, config, (_id: string, x: number, y: number) => this.updateVertexPosition(_id, x, y));
+    const newVertex = new VertexCanvas(x, y, vertexId, value, config, (_id: string, x: number, y: number) => this.updateVertexPosition(_id, x, y), this.mode);
     newVertex.getVertexElement().addEventListener('click', () => this.handleVertexClick(newVertex));
     this.vertices.push(newVertex);
     this.graphElement.insertAdjacentElement('beforeend', newVertex.getVertexElement());

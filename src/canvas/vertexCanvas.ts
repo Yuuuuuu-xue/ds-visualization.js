@@ -2,6 +2,7 @@ import { VertexCanvasInterface } from "./types/vertexCanvasInterface";
 import { VertexConfig } from "../ds/types/vertexConfig";
 import dragElement, { clearDragListener } from "./utils/drag";
 import { Style } from "../ds/types/style";
+import { Mode } from "../ds/types/graphConfig";
 
 export class VertexCanvas implements VertexCanvasInterface {
   x: number;
@@ -14,7 +15,7 @@ export class VertexCanvas implements VertexCanvasInterface {
   disableActiveClick: any;
   clickCallback: () => void;
 
-  constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig, updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void) {
+  constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig, updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void, graphMode: Mode) {
     this.vertexId = vertexId;
     this.isActive = false;
     this.vertexElement = document.createElement('button');
@@ -56,11 +57,15 @@ export class VertexCanvas implements VertexCanvasInterface {
       this.vertexElement.style[styleKey] = style[styleKey];
     }
 
-    // Set the cursor
-    if (draggable) {
-      this.vertexElement.style.cursor = 'move';
-    } else if (this.disableActiveClick && this.clickCallback === undefined) {
-      this.vertexElement.style.cursor = 'not-allowed'
+    if (graphMode !== 'traversable') {
+      // Set the cursor
+      if (draggable) {
+        this.vertexElement.style.cursor = 'move';
+      } else if (this.disableActiveClick && this.clickCallback === undefined) {
+        this.vertexElement.style.cursor = 'not-allowed'
+      } else {
+        this.vertexElement.style.cursor = 'pointer';
+      }
     } else {
       this.vertexElement.style.cursor = 'pointer';
     }

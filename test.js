@@ -34,5 +34,5 @@ dsController.setDialogWidth(250);
 dsController.setDialogHeight(400);
 dsController.showDialog();
 dsController.updateCurrentGraphVertexConfig('4', {style: {borderColor: "crimson"}})
-dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true, })
+dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true, disallowRepeatedVertex: true ,disallowRepeatedEdge: true})
 console.log(dsController.getCurrentGraphInfo());
