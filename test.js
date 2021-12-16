@@ -15,7 +15,8 @@ dsController.pushEdgesToCurrentGraph([
   {vertexTo: '2', vertexFrom: '1', weight: 2},
   {vertexTo: '4', vertexFrom: '3', weight: 10},
   {vertexTo: '1', vertexFrom: '2', weight: 0},
-  {vertexTo: '3', vertexFrom: '6', weight: -20}
+  {vertexTo: '3', vertexFrom: '6', weight: -20},
+  {vertexTo: '6', vertexFrom: '4'}
 ]);
 dsController.createGraph('undirected', 'Next Graph', [
   {_id: '1', value: 'New First Vertex', x: 200, y: 100},

@@ -1,4 +1,5 @@
 import { GraphType } from "../ds/types/constantType";
+import { EdgeDetailInterface } from "../ds/types/edgeDetailInterface";
 import { GraphConfig, Mode } from "../ds/types/graphConfig";
 import { VertexConfig } from "../ds/types/vertexConfig";
 import { EdgeCanvas } from "./edgeCanvas";
@@ -12,12 +13,14 @@ export class GraphCanvas implements GraphCanvasInterface {
   graphElement: HTMLDivElement;
   updateDialog: (vertexId: string) => void;
   clearVertexDialog: () => void;
+  setEdgeDialog: (edgeDetail: EdgeDetailInterface[]) => void;
+  clearEdgeDialog: () => void;
   mode: Mode;
   traversedVertices: VertexCanvas[];
   visitedVertices: Set<string>;
   visitedEdges: Set<string>;
 
-  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig) {
+  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[]) => void, clearEdgeDialog: () => void) {
     this.vertices = [];
     this.edges = [];
     this.display = false;
@@ -26,6 +29,8 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.graphElement.classList.add('hidden');
     this.updateDialog = updateDialog;
     this.clearVertexDialog = clearVertexDialog;
+    this.setEdgeDialog = setEdgeDialog;
+    this.clearEdgeDialog = clearEdgeDialog;
     this.traversedVertices = [];
     const { mode } = config;
     this.mode = mode;
@@ -45,6 +50,22 @@ export class GraphCanvas implements GraphCanvasInterface {
   updateConfig(config: GraphConfig): void {
     const { mode } = config;
     this.mode = mode;
+  }
+
+  private getEdgeDetail(): EdgeDetailInterface[] {
+    const output: EdgeDetailInterface[] = []; 
+    
+    for(let i = 0; i < this.traversedVertices.length - 1; i ++) {
+      const targetEdges = this.edges.filter(e => e.vertexToId === this.traversedVertices[i].vertexId && e.vertexFromId === this.traversedVertices[i + 1]. vertexId);
+      if (targetEdges.length > 0) {
+        output.push({
+          vertexTo: this.traversedVertices[i].vertexId,
+          vertexFrom: this.traversedVertices[i + 1].vertexId,
+          weight: targetEdges[0].weight
+        });
+      }
+    }
+    return output;
   }
 
   handleVertexClick(newVertex: VertexCanvas): void {
@@ -91,11 +112,13 @@ export class GraphCanvas implements GraphCanvasInterface {
           this.visitedVertices.add(newVertex.vertexId);
           this.traversedVertices.push(newVertex);
           this.visitedEdges.add(JSON.stringify([lastVertex.vertexId, newVertex.vertexId]));
+          this.setEdgeDialog(this.getEdgeDetail());
         }
       } else {
         newVertex.setActive();
         this.visitedVertices.add(newVertex.vertexId);
         this.traversedVertices.push(newVertex);
+        this.setEdgeDialog(this.getEdgeDetail());
       }
 
       // Update the canvas

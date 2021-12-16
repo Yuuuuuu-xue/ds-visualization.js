@@ -1,5 +1,6 @@
 import { Dialog } from "../entity/dialog/dialog";
 import { canvasStyle } from "../styles/canvas.style";
+import { EdgeDetailInterface } from "../types/edgeDetailInterface";
 import { GraphInfo } from "../types/graph";
 import { VertexDetailInterface } from "../types/vertexDetailInterface";
 
@@ -43,6 +44,7 @@ export class DialogManager {
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementNumVertex());
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementNumEdge());
     this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementVertexDetail());
+    this.dialogElement.insertAdjacentElement('beforeend', this.dialog.getElementEdgeDetail());
 
     // Not showing the dialog at first
     this.disableDialog();
@@ -79,6 +81,14 @@ export class DialogManager {
 
   setVertexDetail(vertexDetail: VertexDetailInterface) {
     this.dialog.setVertexDetail(vertexDetail);
+  }
+
+  setEdgeDetail(edgeDetail: EdgeDetailInterface[]) {
+    this.dialog.setEdgeDetail(edgeDetail);
+  }
+
+  clearEdgeDetail(): void {
+    this.dialog.clearEdgeDetail();
   }
 
   disableDialog(): void {

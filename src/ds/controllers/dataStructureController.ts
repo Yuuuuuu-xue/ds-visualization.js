@@ -2,6 +2,7 @@ import { DialogManager } from "../managers/dialogManager";
 import { DrawingManager } from "../managers/drawingManager";
 import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
+import { EdgeDetailInterface } from "../types/edgeDetailInterface";
 import EdgeInput from "../types/edgeInput";
 import { GraphInfo } from "../types/graph";
 import { GraphConfig } from "../types/graphConfig";
@@ -24,8 +25,10 @@ export class DataStructureController implements DataStructureControllerInterface
 
     const updateDialogBind = this.updateDialog.bind(this);
     const clearVertexDialogBind = this.clearVertexDialog.bind(this);
+    const setEdgeDialogBind = this.setEdgeDialog.bind(this);
+    const clearEdgeDialogBind = this.clearEdgeDialog.bind(this);
 
-    this.drawingManager = new DrawingManager(width, height, updateDialogBind, clearVertexDialogBind);
+    this.drawingManager = new DrawingManager(width, height, updateDialogBind, clearVertexDialogBind, setEdgeDialogBind, clearEdgeDialogBind);
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
 
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
@@ -44,6 +47,14 @@ export class DataStructureController implements DataStructureControllerInterface
 
   clearVertexDialog(): void {
     this.dialogManager.clearVertexDetail();
+  }
+
+  setEdgeDialog(edgeDetail: EdgeDetailInterface[]): void {
+    this.dialogManager.setEdgeDetail(edgeDetail);
+  }
+
+  clearEdgeDialog(): void {
+    this.dialogManager.clearEdgeDetail();
   }
 
   setCanvasWidth(width: number) {
