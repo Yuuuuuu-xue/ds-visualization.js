@@ -44,6 +44,10 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.visitedEdges = new Set();
   }
 
+  getMode(): Mode {
+    return this.mode;
+  }
+
   setInactiveAll(): void {
     this.vertices.forEach(v => {
     v.setInactive();
@@ -51,6 +55,27 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.edges.forEach(e => {
     e.setInactive();
     })
+  }
+
+  clearPath(): void {
+    // Set traversed vertices as inactive
+    this.traversedVertices.forEach(v => {
+      v.setInactive();
+    });
+    this.edges.forEach(e => {
+      if(this.visitedEdges.has(JSON.stringify([e.vertexToId, e.vertexFromId]))) {
+        e.setInactive();
+      }
+    });
+    this.setCursor(null);
+
+    // Reset the value
+    this.traversedVertices = [];
+    this.visitedVertices = new Set();
+    this.visitedEdges = new Set();
+
+    // Clear the dialog
+    this.clearEdgeDialog();
   }
 
   updateConfig(config: GraphConfig): void {

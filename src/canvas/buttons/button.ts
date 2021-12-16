@@ -23,4 +23,12 @@ export class Button implements ButtonInterface {
     this.buttonElemenet.classList.remove('disable');
     this.buttonElemenet.classList.add('enable');
   }
+
+  hideButtonElement(): void { 
+    this.buttonElemenet.classList.add('hidden');
+  }
+
+  displayButtonElement(): void {
+    this.buttonElemenet.classList.remove('hidden');
+  }
 }

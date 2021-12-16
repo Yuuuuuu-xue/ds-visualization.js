@@ -36,6 +36,7 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.getPrevButtonElement().disableButtonElement();
     this.drawingManager.getNextButtonElement().getButtonElement().addEventListener('click', () => this.handleNextButtonClick());
     this.drawingManager.getPrevButtonElement().getButtonElement().addEventListener('click', () => this.handlePrevButtonClick());
+    this.drawingManager.getClearPathButton().getButtonElement().addEventListener('click', () => this.handleClearPathButtonClick());
 
     this.targetElement.insertAdjacentElement('beforeend', this.dialogManager.getDialogElement());
 
@@ -101,14 +102,18 @@ export class DataStructureController implements DataStructureControllerInterface
   //   this.drawingManager.setCanvasTitle(title);
   // }
 
-  handleNextButtonClick(): void {
+  private handleClearPathButtonClick(): void {
+    this.drawingManager.setCurrentGraphClearPath();
+  }
+
+  private handleNextButtonClick(): void {
     if (this.graphManager.getCurrentIdx() < this.graphManager.getGraphSize() - 1) {
       // Then we can click to the next one
       this.moveNextGraph();
     }
   }
 
-  handlePrevButtonClick(): void {
+  private handlePrevButtonClick(): void {
     if (this.graphManager.getCurrentIdx() > 0) {
       this.movePrevGraph();
     }

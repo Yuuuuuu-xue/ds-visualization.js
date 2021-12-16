@@ -17,6 +17,12 @@
   z-index: 100;
 }
 
+.sticky {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+
 .sticky-horizontal-center { 
   position: sticky;
   text-align: center;
@@ -133,14 +139,21 @@
   
   .ds-canvas-button {
     .button();
-    .sticky-vertical-center();
-    
+
     &.ds-canvas-next {
       left: 92%;
+      .sticky-vertical-center();
     }
 
     &.ds-canvas-prev {
       left: 3%;
+      .sticky-vertical-center();
+    }
+
+    &.ds-canvas-clear-path {
+      .sticky();
+      left: 90%;
+      padding: 10px 5px;
     }
 
     &.disable {

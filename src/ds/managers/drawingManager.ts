@@ -16,8 +16,9 @@ export class DrawingManager {
   private canvasElement: HTMLDivElement;
   private canvasTitleElement: HTMLParagraphElement;
   private canvasCurrPageElement: HTMLParagraphElement;
-  private canvasNextButtonElement: ButtonInterface
+  private canvasNextButtonElement: ButtonInterface;
   private canvasPrevButtonElement: ButtonInterface;
+  private clearPathButtonElement: ButtonInterface;
   private updateDialog: (vertexId: string) => void;
   private clearVertexDialog: () => void;
   private setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void;
@@ -59,12 +60,20 @@ export class DrawingManager {
     // Prev page button
     this.canvasPrevButtonElement = new Button('prev', '<');
 
+    // Clear the path for (traversable) graph
+    this.clearPathButtonElement = new Button('clear-path', 'Clear Path');
+    // Since initial graph is not traversable, thus we will hide the button
+    this.clearPathButtonElement.hideButtonElement();
+    // Always enable
+    this.clearPathButtonElement.enableButtonElement();
+
     // Add to the canvas element
     this.canvasElement.insertAdjacentElement('beforeend', canvasBackgroundTitle);
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasTitleElement);
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasCurrPageElement);
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasNextButtonElement.getButtonElement());
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasPrevButtonElement.getButtonElement());
+    this.canvasElement.insertAdjacentElement('beforeend', this.clearPathButtonElement.getButtonElement());
 
     this.graphCanvas = [];
     this.createDefaultGraph();
@@ -125,6 +134,10 @@ export class DrawingManager {
     return this.canvasPrevButtonElement;
   }
 
+  getClearPathButton(): ButtonInterface {
+    return this.clearPathButtonElement;
+  }
+
   getWidth(): number {
     return this.width;
   }
@@ -133,12 +146,25 @@ export class DrawingManager {
     return this.height;
   }
   
+  private updateTraversableButtons(): void {
+    if (this.graphCanvas[this.currIdx].getMode() === 'traversable') {
+      this.clearPathButtonElement.displayButtonElement();
+    } else {
+      this.clearPathButtonElement.hideButtonElement();
+    }
+  }
+
+  setCurrentGraphClearPath(): void {
+    this.graphCanvas[this.currIdx].clearPath();
+  }
+
   displayGraph(newIdx: number): void {
     this.graphCanvas[this.currIdx].hideGraph(); 
     this.currIdx = newIdx;
     this.canvasCurrPageElement.innerText = `${this.currIdx + 1}`;
     // console.log(this.graphCanvas[this.currIdx], this.currIdx)
     this.graphCanvas[this.currIdx].displayGraph();
+    this.updateTraversableButtons();
   }
 
   pushVertexToCurrrentGraph(vertexId: string, x: number, y: number, value: any, config: VertexConfig): void {
@@ -241,10 +267,14 @@ export class DrawingManager {
 
   updateCurrentGraphConfig(config: GraphConfig): void {
     this.graphCanvas[this.currIdx].updateConfig(config);
+    this.updateTraversableButtons();
   }
 
   updateGraphConfig(i: number, config: GraphConfig): void {
     this.checkValidLength(i);
     this.graphCanvas[i].updateConfig(config);
+    if (i === this.currIdx) {
+      this.updateTraversableButtons();
+    }
   }
 }
