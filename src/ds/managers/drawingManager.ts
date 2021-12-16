@@ -163,7 +163,7 @@ export class DrawingManager {
       this.removeLastVertexButtonElement.displayButtonElement();
     } else {
       this.clearPathButtonElement.hideButtonElement();
-      this.removeLastVertexButtonElement.displayButtonElement();
+      this.removeLastVertexButtonElement.hideButtonElement();
     }
   }
 
@@ -178,9 +178,12 @@ export class DrawingManager {
 
   setCurrentGraphClearPath(): void {
     this.graphCanvas[this.currIdx].clearPath();
+    // disable the button
+    this.removeLastVertexButtonElement.disableButtonElement();
   }
 
   displayGraph(newIdx: number): void {
+    this.setCurrentGraphClearPath();
     this.graphCanvas[this.currIdx].hideGraph(); 
     this.currIdx = newIdx;
     this.canvasCurrPageElement.innerText = `${this.currIdx + 1}`;
