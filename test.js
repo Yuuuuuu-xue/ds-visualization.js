@@ -15,18 +15,23 @@ dsController.pushEdgesToCurrentGraph([
   {vertexTo: '2', vertexFrom: '1', weight: 2},
   {vertexTo: '4', vertexFrom: '3', weight: 10},
   {vertexTo: '1', vertexFrom: '2', weight: 0},
-  {vertexTo: '3', vertexFrom: '6', weight: -20}
+  {vertexTo: '3', vertexFrom: '6', weight: -20},
+  {vertexTo: '6', vertexFrom: '4'},
+  {vertexTo: '5', vertexFrom: '6'}
 ]);
 dsController.createGraph('undirected', 'Next Graph', [
   {_id: '1', value: 'New First Vertex', x: 200, y: 100},
   {_id: '2', value: 'New Second Vertex', x: 100, y: 200}
 ], [
   {vertexTo: '1', vertexFrom: '2'}
-]);
+], {
+  mode: 'non-clickable'
+});
 
 dsController.updateCurrentGraphVertexValue('3', 'New Value')
 dsController.setDialogWidth(250);
 dsController.setDialogHeight(400);
 dsController.showDialog();
 dsController.updateCurrentGraphVertexConfig('4', {style: {borderColor: "crimson"}})
+dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true, disallowRepeatedVertex: true, disallowRepeatedEdge: true})
 console.log(dsController.getCurrentGraphInfo());

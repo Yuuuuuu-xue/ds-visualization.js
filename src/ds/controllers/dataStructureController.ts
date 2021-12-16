@@ -2,8 +2,10 @@ import { DialogManager } from "../managers/dialogManager";
 import { DrawingManager } from "../managers/drawingManager";
 import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
+import { EdgeDetailInterface } from "../types/edgeDetailInterface";
 import EdgeInput from "../types/edgeInput";
 import { GraphInfo } from "../types/graph";
+import { GraphConfig } from "../types/graphConfig";
 import { VertexConfig } from "../types/vertexConfig";
 import VertexInput from "../types/vertexInput";
 
@@ -23,8 +25,10 @@ export class DataStructureController implements DataStructureControllerInterface
 
     const updateDialogBind = this.updateDialog.bind(this);
     const clearVertexDialogBind = this.clearVertexDialog.bind(this);
+    const setEdgeDialogBind = this.setEdgeDialog.bind(this);
+    const clearEdgeDialogBind = this.clearEdgeDialog.bind(this);
 
-    this.drawingManager = new DrawingManager(width, height, updateDialogBind, clearVertexDialogBind);
+    this.drawingManager = new DrawingManager(width, height, updateDialogBind, clearVertexDialogBind, setEdgeDialogBind, clearEdgeDialogBind);
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
 
     this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
@@ -45,6 +49,14 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.clearVertexDetail();
   }
 
+  setEdgeDialog(edgeDetail: EdgeDetailInterface[], enableWeight?: boolean): void {
+    this.dialogManager.setEdgeDetail(edgeDetail, enableWeight);
+  }
+
+  clearEdgeDialog(): void {
+    this.dialogManager.clearEdgeDetail();
+  }
+
   setCanvasWidth(width: number) {
     this.drawingManager.setWidth(width);
   }
@@ -61,12 +73,12 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setHeight(height);
   }
 
-  createGraph(type: string, name: string, vertices: VertexInput[] = [], edges: EdgeInput[] = []): void {
+  createGraph(type: string, name: string, vertices: VertexInput[] = [], edges: EdgeInput[] = [], config: GraphConfig={mode: 'clickable'}): void {
     if (this.graphManager.getCurrentIdx() === 0) {
       this.drawingManager.getNextButtonElement().enableButtonElement();
     }
     this.graphManager.createGraph(type, name);
-    this.drawingManager.createGraphCanvas();
+    this.drawingManager.createGraphCanvas(config);
     const graphSize = this.graphManager.getGraphSize() - 1;
     this.pushVerticesToGraph(graphSize, vertices);
     this.pushEdgesToGraph(graphSize, edges);
@@ -324,5 +336,13 @@ export class DataStructureController implements DataStructureControllerInterface
 
   updateGraphVertexConfig(i: number, _id: string, config: VertexConfig) {
     this.drawingManager.updateGraphVertexConfig(i, _id, config);
+  }
+
+  updateCurrentGraphConfig(config: GraphConfig): void {
+    this.drawingManager.updateCurrentGraphConfig(config);
+  }
+
+  updateGraphConfig(i: number, config: GraphConfig): void {
+    this.drawingManager.updateGraphConfig(i, config);
   }
 }

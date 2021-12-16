@@ -1,3 +1,4 @@
+import { EdgeDetailInterface } from "../../types/edgeDetailInterface";
 import { GraphInfo } from "../../types/graph";
 import { VertexDetailInterface, VertexInfo } from "../../types/vertexDetailInterface";
 
@@ -7,6 +8,7 @@ export class Dialog {
   numVertex: HTMLDivElement;
   numEdge: HTMLDivElement;
   vertexDetail: HTMLDivElement;
+  edgeDetail: HTMLDivElement;
 
   constructor() {
     this.name = document.createElement('div');
@@ -28,6 +30,10 @@ export class Dialog {
     this.vertexDetail = document.createElement('div');
     this.vertexDetail.classList.add('ds-dialog-vertexDetail');   
     this.vertexDetail.classList.add('multiple-line');
+    
+    this.edgeDetail = document.createElement('div');
+    this.edgeDetail.classList.add('ds-dialog-edgeDetail');
+    this.edgeDetail.classList.add('multiple-line');
   }
 
   updateName(name: string) {
@@ -56,6 +62,10 @@ export class Dialog {
 
   getElementVertexDetail(): HTMLDivElement {
     return this.vertexDetail;
+  }
+
+  getElementEdgeDetail(): HTMLDivElement {
+    return this.edgeDetail;
   }
 
   private setInnerHTML(divElement: HTMLDivElement, spanBody: string, paraBody: string) {
@@ -88,8 +98,59 @@ export class Dialog {
     this.vertexDetail.innerHTML = '';
   }
 
+  clearEdgeDetail(): void {
+    this.edgeDetail.innerHTML = '';
+  }
+
+  private getPathDetail(edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) {
+    let output = '';
+    edgeDetail.forEach((e, i) => {
+      output += 
+      enableWeight === true ?
+      `
+        <li>
+          ${i + 1}. (${e.vertexTo}, ${e.vertexFrom}) with weight = ${e.weight ? e.weight : 1}
+        </li>
+      ` :
+      `
+        <li>
+          ${i + 1}. (${e.vertexTo}, ${e.vertexFrom})
+        </li>
+      `
+    });
+    return output;
+  }
+
+  private getTotalWeight(edgeDetail: EdgeDetailInterface[]): number {
+    let totalWeight = 0;
+    edgeDetail.forEach(e => {
+      totalWeight += e.weight ? e.weight : 1
+    });
+    return totalWeight;
+  }
+
+  setEdgeDetail(edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) {
+    this.clearEdgeDetail();
+    this.clearVertexDetail();
+
+    this.edgeDetail.innerHTML += `
+      <p class='ds-dialog-title'>Edge Info</p>
+      <p class='one-line'><span>Path: </span></p>
+      <ul> 
+        ${this.getPathDetail(edgeDetail, enableWeight)}
+      </ul>
+    `;
+
+    if (enableWeight === true) { 
+      this.edgeDetail.innerHTML += `
+        <p class='one-line'><span>Total weight: </span>${this.getTotalWeight(edgeDetail)}</p>
+      `
+    }
+  }
+
   setVertexDetail(vertexDetail: VertexDetailInterface) {
-    this.vertexDetail.innerHTML = '';
+    this.clearVertexDetail();
+    this.clearEdgeDetail();
     
     this.vertexDetail.innerHTML += `
       <p class='ds-dialog-title'>Vertex Info</p>
