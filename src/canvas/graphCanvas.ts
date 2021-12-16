@@ -261,6 +261,11 @@ export class GraphCanvas implements GraphCanvasInterface {
     const newEdge = new EdgeCanvas(vertexTo.x, vertexTo.y, vertexFrom.x, vertexFrom.y, vertexFromId, vertexToId, type, weight);
     this.edges.push(newEdge);
     this.graphElement.insertAdjacentElement('beforeend', newEdge.getEdgeElement());
+    if (type === 'undirected') {
+      const reverseEdge = new EdgeCanvas(vertexFrom.x, vertexFrom.y, vertexTo.x, vertexTo.y, vertexToId, vertexFromId, type, weight);
+      this.edges.push(reverseEdge);
+      this.graphElement.insertAdjacentElement('beforeend', reverseEdge.getEdgeElement());
+    }
   }
 
   getGraphElement(): HTMLDivElement {

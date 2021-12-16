@@ -1,4 +1,5 @@
 const dsController = new ds.DataStructureController(1500, 600, document.getElementById("test"));
+dsController.updateCurrentGraphType('undirected');
 dsController.pushVerticesToCurrentGraph([
   {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {draggable: true, backgroundImageSrc: './public/images/image.png'}},
   {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {disableActiveClick: true}},
@@ -14,7 +15,7 @@ dsController.pushEdgesToCurrentGraph([
   {vertexTo: '1', vertexFrom: '3', weight: 24},
   {vertexTo: '2', vertexFrom: '1', weight: 2},
   {vertexTo: '4', vertexFrom: '3', weight: 10},
-  {vertexTo: '1', vertexFrom: '2', weight: 0},
+  // {vertexTo: '1', vertexFrom: '2', weight: 0},
   {vertexTo: '3', vertexFrom: '6', weight: -20},
   {vertexTo: '6', vertexFrom: '4'},
   {vertexTo: '5', vertexFrom: '6'}
@@ -33,5 +34,5 @@ dsController.setDialogWidth(250);
 dsController.setDialogHeight(400);
 dsController.showDialog();
 dsController.updateCurrentGraphVertexConfig('4', {style: {borderColor: "crimson"}})
-dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true, disallowRepeatedVertex: true, disallowRepeatedEdge: true})
+dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true, })
 console.log(dsController.getCurrentGraphInfo());
