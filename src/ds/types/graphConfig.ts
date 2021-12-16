@@ -1,7 +1,9 @@
 export interface GraphConfig {
   mode: Mode,
-  enableWeight?: boolean
+  // all other config are used when mode === 'traverse'
+  enableWeight?: boolean,
+  disallowRepeatedVertex?: boolean
 }
 
 
-export type Mode = "non-clickable" | "clickable" | "traverse"
+export type Mode = "non-clickable" | "clickable" | "traversable"
