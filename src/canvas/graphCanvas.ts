@@ -21,6 +21,7 @@ export class GraphCanvas implements GraphCanvasInterface {
   visitedEdges: Set<string>;
   enableWeight?: boolean;
   disallowRepeatedVertex?: boolean
+  disallowRepeatedEdge?: boolean
 
   constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void, clearEdgeDialog: () => void) {
     this.vertices = [];
@@ -34,11 +35,11 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.setEdgeDialog = setEdgeDialog;
     this.clearEdgeDialog = clearEdgeDialog;
     this.traversedVertices = [];
-    const { mode, enableWeight, disallowRepeatedVertex } = config;
+    const { mode, enableWeight, disallowRepeatedVertex, disallowRepeatedEdge } = config;
     this.mode = mode;
     this.enableWeight = enableWeight;
     this.disallowRepeatedVertex = disallowRepeatedVertex;
-
+    this.disallowRepeatedEdge = disallowRepeatedEdge;
     this.visitedVertices = new Set();
     this.visitedEdges = new Set();
   }
@@ -53,7 +54,7 @@ export class GraphCanvas implements GraphCanvasInterface {
   }
 
   updateConfig(config: GraphConfig): void {
-    const { mode, enableWeight, disallowRepeatedVertex } = config;
+    const { mode, enableWeight, disallowRepeatedVertex, disallowRepeatedEdge } = config;
     this.mode = mode;
 
     if (enableWeight !== undefined) {
@@ -62,6 +63,10 @@ export class GraphCanvas implements GraphCanvasInterface {
 
     if (disallowRepeatedVertex !== undefined) {
       this.disallowRepeatedVertex = disallowRepeatedVertex;
+    }
+    
+    if (disallowRepeatedEdge !== undefined) {
+      this.disallowRepeatedEdge = disallowRepeatedEdge;
     }
   }
 
@@ -122,6 +127,12 @@ export class GraphCanvas implements GraphCanvasInterface {
         }
 
         const lastVertex = this.traversedVertices[this.traversedVertices.length - 1];
+
+        // Check if this is a repeated edge
+        if (this.disallowRepeatedEdge === true && this.visitedEdges.has(JSON.stringify([lastVertex.vertexId, newVertex.vertexId]))) {
+          return;
+        }
+
         // Find the correct edge
         const incidentEdges = this.edges.filter(e => e.vertexToId === lastVertex.vertexId && e.vertexFromId === newVertex.vertexId);
         if (incidentEdges.length > 0) {
@@ -151,7 +162,13 @@ export class GraphCanvas implements GraphCanvasInterface {
       const canTraverseVertex = new Set();
       this.edges.forEach(e => {
         if (e.vertexToId === lastVertex.vertexId) {
-          canTraverseVertex.add(e.vertexFromId);
+          if (this.disallowRepeatedEdge) {
+            if (!this.visitedEdges.has(JSON.stringify([e.vertexToId, e.vertexFromId]))) {
+              canTraverseVertex.add(e.vertexFromId);
+            }
+          } else {
+            canTraverseVertex.add(e.vertexFromId);
+          }
         }
       });
       this.vertices.forEach(v => {
