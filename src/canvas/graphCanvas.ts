@@ -20,10 +20,11 @@ export class GraphCanvas implements GraphCanvasInterface {
   visitedVertices: Set<string>;
   visitedEdges: Set<string>;
   enableWeight?: boolean;
-  disallowRepeatedVertex?: boolean
-  disallowRepeatedEdge?: boolean
+  disallowRepeatedVertex?: boolean;
+  disallowRepeatedEdge?: boolean;
+  enableRemoveLastVertexButton: () => void;
 
-  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void, clearEdgeDialog: () => void) {
+  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void, clearEdgeDialog: () => void, enableRemoveLastVertexButton: () => void) {
     this.vertices = [];
     this.edges = [];
     this.display = false;
@@ -42,6 +43,7 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.disallowRepeatedEdge = disallowRepeatedEdge;
     this.visitedVertices = new Set();
     this.visitedEdges = new Set();
+    this.enableRemoveLastVertexButton = enableRemoveLastVertexButton;
   }
 
   getMode(): Mode {
@@ -76,6 +78,37 @@ export class GraphCanvas implements GraphCanvasInterface {
 
     // Clear the dialog
     this.clearEdgeDialog();
+  }
+
+  getNumTraversedVertices(): number {
+    return this.traversedVertices.length;
+  }
+
+  removeLastVertex(): void {
+    if (this.traversedVertices.length > 0) {
+      const lastVertexFrom = this.traversedVertices.pop();
+      // If not last vertex, then also an edge
+      if (this.traversedVertices.length > 0) {
+        const lastVertexTo = this.traversedVertices[this.traversedVertices.length - 1]; 
+        this.edges.forEach(e => {
+          if (e.vertexToId === lastVertexTo.vertexId && e.vertexFromId ===  lastVertexFrom.vertexId) {
+            e.setInactive();
+          }
+          // Remove from visited
+          this.visitedEdges.delete(JSON.stringify([lastVertexTo.vertexId, lastVertexFrom.vertexId]));
+        });
+        this.visitedVertices.delete(lastVertexFrom.vertexId);
+        // Set the cursor
+        this.visitedVertices.delete(lastVertexFrom.vertexId);
+        this.setCursor(lastVertexTo);
+      } else {
+        this.visitedVertices.delete(lastVertexFrom.vertexId);
+        this.setCursor(null);
+      }
+
+      lastVertexFrom.setInactive();
+      this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
+    }
   }
 
   updateConfig(config: GraphConfig): void {
@@ -174,6 +207,9 @@ export class GraphCanvas implements GraphCanvasInterface {
         this.visitedVertices.add(newVertex.vertexId);
         this.traversedVertices.push(newVertex);
         this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
+
+        // Since thi sis the first traversed vertex, so we will enable the button
+        this.enableRemoveLastVertexButton(); 
       }
 
       // Update the canvas

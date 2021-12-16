@@ -19,6 +19,7 @@ export class DrawingManager {
   private canvasNextButtonElement: ButtonInterface;
   private canvasPrevButtonElement: ButtonInterface;
   private clearPathButtonElement: ButtonInterface;
+  private removeLastVertexButtonElement: ButtonInterface;
   private updateDialog: (vertexId: string) => void;
   private clearVertexDialog: () => void;
   private setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void;
@@ -67,6 +68,11 @@ export class DrawingManager {
     // Always enable
     this.clearPathButtonElement.enableButtonElement();
 
+    // Remove edge
+    this.removeLastVertexButtonElement = new Button('remove-last-vertex', 'Remove Last Edge');
+    this.removeLastVertexButtonElement.hideButtonElement();
+    this.removeLastVertexButtonElement.disableButtonElement();
+
     // Add to the canvas element
     this.canvasElement.insertAdjacentElement('beforeend', canvasBackgroundTitle);
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasTitleElement);
@@ -74,6 +80,7 @@ export class DrawingManager {
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasNextButtonElement.getButtonElement());
     this.canvasElement.insertAdjacentElement('beforeend', this.canvasPrevButtonElement.getButtonElement());
     this.canvasElement.insertAdjacentElement('beforeend', this.clearPathButtonElement.getButtonElement());
+    this.canvasElement.insertAdjacentElement('beforeend', this.removeLastVertexButtonElement.getButtonElement());
 
     this.graphCanvas = [];
     this.createDefaultGraph();
@@ -105,7 +112,7 @@ export class DrawingManager {
   };
 
   createGraphCanvas(config: GraphConfig): void {
-    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog(), config, (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => this.setEdgeDialog(edgeDetail, enableWeight), () => this.clearEdgeDialog());
+    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog(), config, (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => this.setEdgeDialog(edgeDetail, enableWeight), () => this.clearEdgeDialog(), () => this.removeLastVertexButtonElement.enableButtonElement());
     this.graphCanvas.push(newGraphCanvas);
     this.canvasElement.insertAdjacentElement('beforeend', newGraphCanvas.graphElement);
   }
@@ -138,6 +145,10 @@ export class DrawingManager {
     return this.clearPathButtonElement;
   }
 
+  getRemoveLastEdgeButton(): ButtonInterface {
+    return this.removeLastVertexButtonElement;
+  }
+
   getWidth(): number {
     return this.width;
   }
@@ -149,8 +160,19 @@ export class DrawingManager {
   private updateTraversableButtons(): void {
     if (this.graphCanvas[this.currIdx].getMode() === 'traversable') {
       this.clearPathButtonElement.displayButtonElement();
+      this.removeLastVertexButtonElement.displayButtonElement();
     } else {
       this.clearPathButtonElement.hideButtonElement();
+      this.removeLastVertexButtonElement.displayButtonElement();
+    }
+  }
+
+  removeLastTraversedVertexFromCurrentGraph(): void {
+    this.graphCanvas[this.currIdx].removeLastVertex();
+
+    if (this.graphCanvas[this.currIdx].getNumTraversedVertices() === 0) {
+      // Diable
+      this.removeLastVertexButtonElement.disableButtonElement();
     }
   }
 

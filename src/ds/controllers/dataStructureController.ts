@@ -37,6 +37,7 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.getNextButtonElement().getButtonElement().addEventListener('click', () => this.handleNextButtonClick());
     this.drawingManager.getPrevButtonElement().getButtonElement().addEventListener('click', () => this.handlePrevButtonClick());
     this.drawingManager.getClearPathButton().getButtonElement().addEventListener('click', () => this.handleClearPathButtonClick());
+    this.drawingManager.getRemoveLastEdgeButton().getButtonElement().addEventListener('click', () => this.handleRemoveLastVertexButtonClick());
 
     this.targetElement.insertAdjacentElement('beforeend', this.dialogManager.getDialogElement());
 
@@ -104,6 +105,10 @@ export class DataStructureController implements DataStructureControllerInterface
 
   private handleClearPathButtonClick(): void {
     this.drawingManager.setCurrentGraphClearPath();
+  }
+
+  private handleRemoveLastVertexButtonClick(): void {
+    this.drawingManager.removeLastTraversedVertexFromCurrentGraph();
   }
 
   private handleNextButtonClick(): void {

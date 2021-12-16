@@ -152,8 +152,15 @@
 
     &.ds-canvas-clear-path {
       .sticky();
-      left: 90%;
+      left: 85%;
       padding: 10px 5px;
+    }
+
+    &.ds-canvas-remove-last-vertex {
+      .sticky();
+      left: 85%;
+      padding: 10px 5px;
+      top: 30%;
     }
 
     &.disable {
@@ -196,6 +203,7 @@
     }
     &.active {
       border: 2px solid @activeColor;
+      z-index: 2;
 
       &::after {
         border-left: @arrowSize solid @activeColor;
@@ -216,7 +224,7 @@
     width: @buttonRadius;
     height: @buttonRadius;
     border-radius: 50%;
-    z-index: 2;
+    z-index: 3;
     overflow: hidden;
     text-align: center;
     font-size: 1.1rem;
@@ -242,7 +250,7 @@
     }
 
     &.dragging {
-      z-index: 3;
+      z-index: 4;
     }
   }
 
