@@ -65,7 +65,7 @@ export class GraphCanvas implements GraphCanvasInterface {
       v.setInactive();
     });
     this.edges.forEach(e => {
-      if(this.visitedEdges.has(JSON.stringify([e.vertexToId, e.vertexFromId]))) {
+      if(this.visitedEdges.has(e.getSeralizedEdge())) {
         e.setInactive();
       }
     });
@@ -224,7 +224,7 @@ export class GraphCanvas implements GraphCanvasInterface {
       this.edges.forEach(e => {
         if (e.vertexToId === lastVertex.vertexId) {
           if (this.disallowRepeatedEdge) {
-            if (!this.visitedEdges.has(JSON.stringify([e.vertexToId, e.vertexFromId]))) {
+            if (!this.visitedEdges.has(e.getSeralizedEdge())) {
               canTraverseVertex.add(e.vertexFromId);
             }
           } else {

@@ -31,6 +31,9 @@ export class EdgeCanvas implements EdgeCanvasInterface {
         return Math.atan2((this.y2 - this.y1), (this.x2 - this.x1)) * (180 / Math.PI);
     }
 
+    getSeralizedEdge(): string {
+      return JSON.stringify([this.vertexToId, this.vertexFromId]);
+    }
 
     constructor(x1: number, y1: number, x2: number, y2: number, vertexFromId: string, vertexToId: string, type: GraphType, weight?: number) {
         this.weight = weight;
