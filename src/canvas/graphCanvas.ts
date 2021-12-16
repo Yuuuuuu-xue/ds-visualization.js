@@ -4,6 +4,7 @@ import { GraphConfig, Mode } from "../ds/types/graphConfig";
 import { VertexConfig } from "../ds/types/vertexConfig";
 import { EdgeCanvas } from "./edgeCanvas";
 import { GraphCanvasInterface } from "./types/graphCanvasInterface";
+import seralizeEdge from "./utils/seralizeEdge";
 import { VertexCanvas } from "./vertexCanvas";
 
 export class GraphCanvas implements GraphCanvasInterface {
@@ -17,8 +18,8 @@ export class GraphCanvas implements GraphCanvasInterface {
   clearEdgeDialog: () => void;
   mode: Mode;
   traversedVertices: VertexCanvas[];
-  visitedVertices: Set<string>;
-  visitedEdges: Set<string>;
+  visitedVertices: Map<string, number>;
+  visitedEdges: Map<string, number>;
   enableWeight?: boolean;
   disallowRepeatedVertex?: boolean;
   disallowRepeatedEdge?: boolean;
@@ -41,8 +42,8 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.enableWeight = enableWeight;
     this.disallowRepeatedVertex = disallowRepeatedVertex;
     this.disallowRepeatedEdge = disallowRepeatedEdge;
-    this.visitedVertices = new Set();
-    this.visitedEdges = new Set();
+    this.visitedVertices = new Map();
+    this.visitedEdges = new Map();
     this.enableRemoveLastVertexButton = enableRemoveLastVertexButton;
   }
 
@@ -73,8 +74,8 @@ export class GraphCanvas implements GraphCanvasInterface {
 
     // Reset the value
     this.traversedVertices = [];
-    this.visitedVertices = new Set();
-    this.visitedEdges = new Set();
+    this.visitedVertices = new Map();
+    this.visitedEdges = new Map();
 
     // Clear the dialog
     this.clearEdgeDialog();
@@ -92,21 +93,46 @@ export class GraphCanvas implements GraphCanvasInterface {
         const lastVertexTo = this.traversedVertices[this.traversedVertices.length - 1]; 
         this.edges.forEach(e => {
           if (e.vertexToId === lastVertexTo.vertexId && e.vertexFromId ===  lastVertexFrom.vertexId) {
-            e.setInactive();
+            // Remove from visited edges
+            const seralizedEdge = seralizeEdge(lastVertexTo.vertexId, lastVertexFrom.vertexId);
+            const mapEdgeValue = this.visitedEdges.get(seralizedEdge);
+            if (mapEdgeValue <= 1) {
+              this.visitedEdges.delete(seralizedEdge);
+            } else {
+              this.visitedEdges.set(seralizedEdge, mapEdgeValue - 1);
+            }
+            // Set inactive if we remove it
+            if (!this.visitedEdges.has(seralizedEdge)) {
+              e.setInactive();
+            }
           }
-          // Remove from visited
-          this.visitedEdges.delete(JSON.stringify([lastVertexTo.vertexId, lastVertexFrom.vertexId]));
         });
-        this.visitedVertices.delete(lastVertexFrom.vertexId);
+
+        // If value is less than or equal to 1, then we delete it directly
+        const mapValue = this.visitedVertices.get(lastVertexFrom.vertexId); 
+        if (mapValue <= 1) {
+          this.visitedVertices.delete(lastVertexFrom.vertexId);
+        } else {
+          // Decrement by 1
+          this.visitedVertices.set(lastVertexFrom.vertexId, mapValue - 1);
+        }
         // Set the cursor
-        this.visitedVertices.delete(lastVertexFrom.vertexId);
         this.setCursor(lastVertexTo);
       } else {
-        this.visitedVertices.delete(lastVertexFrom.vertexId);
+        // If value is less than or equal to 1, then we delete it directly
+        const mapValue = this.visitedVertices.get(lastVertexFrom.vertexId); 
+        if (mapValue <= 1) {
+          this.visitedVertices.delete(lastVertexFrom.vertexId);
+        } else {
+          // Decrement by 1
+          this.visitedVertices.set(lastVertexFrom.vertexId, mapValue - 1);
+        }
         this.setCursor(null);
       }
-
-      lastVertexFrom.setInactive();
+      // If visitiedVertices does not have this vertex meaning that no previous move involve with this vertex, then inactive
+      if (!this.visitedVertices.has(lastVertexFrom.vertexId)) {
+        lastVertexFrom.setInactive();
+      }
       this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
     }
   }
@@ -179,7 +205,7 @@ export class GraphCanvas implements GraphCanvasInterface {
       
       if (this.traversedVertices.length >= 1) {
 
-        // Check if this is a repeated vertex
+        // Check if this is a repeated vertex, if we has the vertices this means it's value >= 1, so will be repeated
         if (this.disallowRepeatedVertex === true && this.visitedVertices.has(newVertex.vertexId)) {
           return;
         }
@@ -187,7 +213,7 @@ export class GraphCanvas implements GraphCanvasInterface {
         const lastVertex = this.traversedVertices[this.traversedVertices.length - 1];
 
         // Check if this is a repeated edge
-        if (this.disallowRepeatedEdge === true && this.visitedEdges.has(JSON.stringify([lastVertex.vertexId, newVertex.vertexId]))) {
+        if (this.disallowRepeatedEdge === true && this.visitedEdges.has(seralizeEdge(lastVertex.vertexId, newVertex.vertexId))) {
           return;
         }
 
@@ -197,14 +223,29 @@ export class GraphCanvas implements GraphCanvasInterface {
           incidentEdges[0].setActive();
           // Set the vertex as active as well
           newVertex.setActive();
-          this.visitedVertices.add(newVertex.vertexId);
+          // Check if we have it or not
+          if (this.visitedVertices.has(newVertex.vertexId)) {
+            this.visitedVertices.set(newVertex.vertexId, this.visitedVertices.get(newVertex.vertexId) + 1); // Increment it by 1
+          } else {
+            this.visitedVertices.set(newVertex.vertexId, 1); // First time
+          }
           this.traversedVertices.push(newVertex);
-          this.visitedEdges.add(JSON.stringify([lastVertex.vertexId, newVertex.vertexId]));
+          // Check if we have it or not
+          const seralizedEdge = seralizeEdge(lastVertex.vertexId, newVertex.vertexId);
+          if (this.visitedEdges.has(seralizedEdge)) {
+            this.visitedEdges.set(seralizedEdge, this.visitedEdges.get(seralizedEdge) + 1);
+          } else {
+            this.visitedEdges.set(seralizedEdge, 1);
+          }
           this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
         }
       } else {
         newVertex.setActive();
-        this.visitedVertices.add(newVertex.vertexId);
+        if (this.visitedVertices.has(newVertex.vertexId)) {
+          this.visitedVertices.set(newVertex.vertexId, this.visitedVertices.get(newVertex.vertexId) + 1); // Increment it by 1
+        } else {
+          this.visitedVertices.set(newVertex.vertexId, 1); // First time
+        }
         this.traversedVertices.push(newVertex);
         this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
 
