@@ -32,5 +32,5 @@ dsController.setDialogWidth(250);
 dsController.setDialogHeight(400);
 dsController.showDialog();
 dsController.updateCurrentGraphVertexConfig('4', {style: {borderColor: "crimson"}})
-dsController.updateCurrentGraphConfig({mode: 'traverse'})
+dsController.updateCurrentGraphConfig({mode: 'traverse', enableWeight: true})
 console.log(dsController.getCurrentGraphInfo());

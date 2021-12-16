@@ -1,5 +1,6 @@
 export interface GraphConfig {
-  mode: Mode
+  mode: Mode,
+  enableWeight?: boolean
 }
 
 

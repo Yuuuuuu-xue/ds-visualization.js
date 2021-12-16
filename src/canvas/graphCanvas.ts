@@ -13,14 +13,15 @@ export class GraphCanvas implements GraphCanvasInterface {
   graphElement: HTMLDivElement;
   updateDialog: (vertexId: string) => void;
   clearVertexDialog: () => void;
-  setEdgeDialog: (edgeDetail: EdgeDetailInterface[]) => void;
+  setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void;
   clearEdgeDialog: () => void;
   mode: Mode;
   traversedVertices: VertexCanvas[];
   visitedVertices: Set<string>;
   visitedEdges: Set<string>;
+  enableWeight?: boolean
 
-  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[]) => void, clearEdgeDialog: () => void) {
+  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void, clearEdgeDialog: () => void) {
     this.vertices = [];
     this.edges = [];
     this.display = false;
@@ -32,8 +33,9 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.setEdgeDialog = setEdgeDialog;
     this.clearEdgeDialog = clearEdgeDialog;
     this.traversedVertices = [];
-    const { mode } = config;
+    const { mode, enableWeight } = config;
     this.mode = mode;
+    this.enableWeight = enableWeight;
     this.visitedVertices = new Set();
     this.visitedEdges = new Set();
   }
@@ -48,8 +50,12 @@ export class GraphCanvas implements GraphCanvasInterface {
   }
 
   updateConfig(config: GraphConfig): void {
-    const { mode } = config;
+    const { mode, enableWeight } = config;
     this.mode = mode;
+
+    if (enableWeight !== undefined) {
+      this.enableWeight = enableWeight;
+    }
   }
 
   private getEdgeDetail(): EdgeDetailInterface[] {
@@ -112,13 +118,13 @@ export class GraphCanvas implements GraphCanvasInterface {
           this.visitedVertices.add(newVertex.vertexId);
           this.traversedVertices.push(newVertex);
           this.visitedEdges.add(JSON.stringify([lastVertex.vertexId, newVertex.vertexId]));
-          this.setEdgeDialog(this.getEdgeDetail());
+          this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
         }
       } else {
         newVertex.setActive();
         this.visitedVertices.add(newVertex.vertexId);
         this.traversedVertices.push(newVertex);
-        this.setEdgeDialog(this.getEdgeDetail());
+        this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
       }
 
       // Update the canvas

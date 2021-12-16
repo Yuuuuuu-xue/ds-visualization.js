@@ -83,8 +83,8 @@ export class DialogManager {
     this.dialog.setVertexDetail(vertexDetail);
   }
 
-  setEdgeDetail(edgeDetail: EdgeDetailInterface[]) {
-    this.dialog.setEdgeDetail(edgeDetail);
+  setEdgeDetail(edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) {
+    this.dialog.setEdgeDetail(edgeDetail, enableWeight);
   }
 
   clearEdgeDetail(): void {

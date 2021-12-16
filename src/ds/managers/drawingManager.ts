@@ -20,10 +20,10 @@ export class DrawingManager {
   private canvasPrevButtonElement: ButtonInterface;
   private updateDialog: (vertexId: string) => void;
   private clearVertexDialog: () => void;
-  private setEdgeDialog: (edgeDetail: EdgeDetailInterface[]) => void;
+  private setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void;
   private clearEdgeDialog: () => void;
 
-  constructor(width: number, height: number, updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, setEdgeDialog: (edgeDetail: EdgeDetailInterface[]) => void, clearEdgeDialog: () => void) {
+  constructor(width: number, height: number, updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void, clearEdgeDialog: () => void) {
     if (width <= 0) {
       this.raiseError("Width must be positive number");
     }
@@ -96,7 +96,7 @@ export class DrawingManager {
   };
 
   createGraphCanvas(config: GraphConfig): void {
-    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog(), config, (edgeDetail: EdgeDetailInterface[]) => this.setEdgeDialog(edgeDetail), () => this.clearEdgeDialog());
+    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog(), config, (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => this.setEdgeDialog(edgeDetail, enableWeight), () => this.clearEdgeDialog());
     this.graphCanvas.push(newGraphCanvas);
     this.canvasElement.insertAdjacentElement('beforeend', newGraphCanvas.graphElement);
   }

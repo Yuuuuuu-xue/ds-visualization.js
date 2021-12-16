@@ -49,8 +49,8 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.clearVertexDetail();
   }
 
-  setEdgeDialog(edgeDetail: EdgeDetailInterface[]): void {
-    this.dialogManager.setEdgeDetail(edgeDetail);
+  setEdgeDialog(edgeDetail: EdgeDetailInterface[], enableWeight?: boolean): void {
+    this.dialogManager.setEdgeDetail(edgeDetail, enableWeight);
   }
 
   clearEdgeDialog(): void {
