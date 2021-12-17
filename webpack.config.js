@@ -27,7 +27,7 @@ module.exports = {
   },
   output: {
     // path: path.resolve(__dirname, 'dist'),
-    path: path.resolve('./public/library'),
+    path: path.resolve('./frontend/public/library'),
     filename: 'ds.js'
   }
 }

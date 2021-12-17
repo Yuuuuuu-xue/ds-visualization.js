@@ -1,0 +1,284 @@
+// Constants
+@buttonRadius: 100px;
+@canvasBorder: crimson;
+@dialogBorder: salmon;
+@inactiveColor: rgb(65, 65, 65);
+@activeColor: #24973f;
+@buttonBorder: 5px;
+@white: white;
+@black: black;
+@arrowSize: 17px;
+
+/****************** MIXINS ******************************/
+.absolute-horizontal-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.sticky {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+
+.sticky-horizontal-center { 
+  position: sticky;
+  text-align: center;
+  left: 0;
+  z-index: 1000; 
+}
+
+.absolute-vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.sticky-vertical-center {
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+}
+
+.button {
+  border-radius: 20px;
+  background: @white;
+  padding: 20px 10px;
+  font-size: 1.3em;
+  font-weight: bold;
+  border: 2px solid @canvasBorder;
+
+  &.enable {
+    &:hover {
+      background: @canvasBorder;
+      color: @white;  
+    }
+  }
+}
+
+.reset {
+  p, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+  }
+}
+
+.border {
+  position: relative;
+  padding: 5px;
+  overflow: auto;
+}
+
+.background-title {
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: underline;
+  margin: 10px 0;
+}
+
+/************* END ********************/
+
+.hidden {
+  display: none;
+}
+
+.ds-dialog {
+  .reset();
+  .border();
+  border: 2px solid @dialogBorder;
+
+  .ds-dialog-background-title {
+    .background-title();
+  }
+
+  .ds-dialog-title {
+    text-align: center;
+    .title();
+  }
+
+  .one-line {
+    margin: 10px 0;
+
+    span {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+.ds-canvas {
+  .reset();
+  .border();
+  border: 2px solid @canvasBorder;
+
+  &::-webkit-scrollbar {
+    width: 12px;
+    margin-right: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  .ds-canvas-button {
+    .button();
+
+    &.ds-canvas-next {
+      left: 92%;
+      .sticky-vertical-center();
+    }
+
+    &.ds-canvas-prev {
+      left: 3%;
+      .sticky-vertical-center();
+    }
+
+    &.ds-canvas-clear-path {
+      .sticky();
+      left: 85%;
+      padding: 10px 5px;
+    }
+
+    &.ds-canvas-remove-last-vertex {
+      .sticky();
+      left: 85%;
+      padding: 10px 5px;
+      top: 30%;
+    }
+
+    &.disable {
+      opacity: 0.3;
+    }
+  }
+
+
+  .ds-canvas-title {
+    .title();
+    .sticky-horizontal-center();  
+    top: 1%;
+    // .absolute-horizontal-center();
+  }
+
+  .ds-canvas-curr-page {
+    .sticky-horizontal-center();
+    top: 95%;
+    font-size: 1.2em;
+  }
+
+  .ds-canvas-background-title {
+    .background-title();
+  }
+
+  .edge {
+    position: absolute;
+    z-index: 1;
+
+    &.directed::after {
+      position: absolute;
+      content: '';
+      bottom: -@arrowSize;
+      right: 0;
+      width: 0;
+      height: 0;
+      transform: translate(-48px, 0px);
+      border-top: @arrowSize solid transparent;
+      border-bottom: @arrowSize solid transparent;
+    }
+    &.active {
+      border: 2px solid @activeColor;
+      z-index: 2;
+
+      &::after {
+        border-left: @arrowSize solid @activeColor;
+      }
+    }
+
+    &.inactive {
+      border: 2px solid @inactiveColor;
+
+      &::after {
+        border-left: @arrowSize solid @inactiveColor;
+      }
+    }
+  }
+
+  .vertex {
+    position: absolute;
+    width: @buttonRadius;
+    height: @buttonRadius;
+    border-radius: 50%;
+    z-index: 3;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    
+    // &.draggable {
+    //   cursor: move;
+    // }
+
+    &.active {
+      background-color: @activeColor;
+      color: @white;
+      border: @buttonBorder solid @activeColor;
+      text-shadow: 1px 1px @black;
+    }
+
+    &.inactive {
+      background-color: @white;
+      color: @black;
+      border: @buttonBorder solid @inactiveColor;
+      text-shadow: 1px 1px @white;
+    }
+
+    &.dragging {
+      z-index: 4;
+    }
+  }
+
+  .graphAnimationForward {
+    animation: sliderForward 2s ease-in-out forwards;
+  }
+
+  .graphAnimationBackward { 
+    animation: sliderBackward 2s ease-in-out forwards;
+  }
+
+};
+
+// Animation
+@keyframes sliderForward {
+  0% {
+    transform: translateX(0%);
+  }
+	100% { 
+    transform: translateX(-120%);
+  }
+}
+
+@keyframes sliderBackward {
+  0% {
+    transform: translateX(0%);
+  }
+	100% { 
+    transform: translateX(120%);
+  }
+}

@@ -1,0 +1,28 @@
+@import '../../variable.scss';
+
+.home {
+  .title {
+    font-size: 15vw;
+    padding: 5vh; 
+    text-align: center;
+    color: $red-2;
+  }
+  
+  .source-code-button {
+    display: block;
+    text-align: end;
+  }
+  
+  .description {
+    text-align: center;
+    font-size: 3rem;
+    margin: 100px 20px;
+    color: $red-3;
+  }
+  
+  .source-code-button {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+  }
+}

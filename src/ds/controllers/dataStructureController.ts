@@ -12,12 +12,12 @@ import VertexInput from "../types/vertexInput";
 export class DataStructureController implements DataStructureControllerInterface {
   private graphManager: GraphManager;
   private drawingManager: DrawingManager;
-  private targetElement: HTMLDivElement;
+  // private targetElement: HTMLDivElement;
   private dialogManager: DialogManager;
 
-  constructor(width: number, height: number, targetElement: HTMLDivElement) {   
+  constructor(width: number, height: number) { // , targetElement: HTMLDivElement) {   
     
-    this.targetElement = targetElement;
+    // this.targetElement = targetElement;
 
     this.graphManager = new GraphManager();        
     this.dialogManager = new DialogManager(width, height);
@@ -31,7 +31,7 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager = new DrawingManager(width, height, updateDialogBind, clearVertexDialogBind, setEdgeDialogBind, clearEdgeDialogBind);
     this.drawingManager.setCanvasTitle(this.graphManager.getCurrentGraphName());
 
-    this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
+    // this.targetElement.insertAdjacentElement('beforeend', this.drawingManager.getCanvasElement());
     this.drawingManager.getNextButtonElement().disableButtonElement();
     this.drawingManager.getPrevButtonElement().disableButtonElement();
     this.drawingManager.getNextButtonElement().getButtonElement().addEventListener('click', () => this.handleNextButtonClick());
@@ -39,7 +39,7 @@ export class DataStructureController implements DataStructureControllerInterface
     this.drawingManager.getClearPathButton().getButtonElement().addEventListener('click', () => this.handleClearPathButtonClick());
     this.drawingManager.getRemoveLastEdgeButton().getButtonElement().addEventListener('click', () => this.handleRemoveLastVertexButtonClick());
 
-    this.targetElement.insertAdjacentElement('beforeend', this.dialogManager.getDialogElement());
+    // this.targetElement.insertAdjacentElement('beforeend', this.dialogManager.getDialogElement());
 
   }
 
@@ -94,8 +94,16 @@ export class DataStructureController implements DataStructureControllerInterface
     return this.graphManager.getGraphSize();
   }
 
-  setTargetElement(targetElement: HTMLDivElement): void {
-    this.targetElement = targetElement;
+  // setTargetElement(targetElement: HTMLDivElement): void {
+  //   this.targetElement = targetElement;
+  // }
+
+  getCanvasElement(): HTMLDivElement {
+    return this.drawingManager.getCanvasElement();
+  }
+
+  getDialogElement(): HTMLDivElement {
+    return this.dialogManager.getDialogElement();
   }
 
   // setCurrentGraphTitle(title: string): void {
