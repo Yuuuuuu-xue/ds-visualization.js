@@ -3,7 +3,7 @@ import setTitle from '../../utils/setTitle';
 import './Demo.scss';
 import Navbar from '../../Components/Navbar';
 import '../Layout.scss';
-import { getCGController, getCGControllerToString, getGCController, getGCControllerToString, getVCController, getVCControllerToString } from './graph';
+import { getCGController, getCGControllerToString, getGCController, getGCControllerToString, getTGController, getTGControllerToString, getVCController, getVCControllerToString } from './graph';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import GraphDemo from '../../Components/GraphDemo';
@@ -18,6 +18,7 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
   const dsCGC = getCGController(ds);
   const dsVCC = getVCController(ds);
   const dsGCC = getGCController(ds);
+  const dsTGC = getTGController(ds);
 
   const insertDom = (dsController: any, includeDialog: boolean, target: HTMLElement | null): void => {
     if (target) {
@@ -33,7 +34,8 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
     setTitle('Demo');
     insertDom(dsCGC, true, document.getElementById('clickable-graph-demo'));
     insertDom(dsVCC, true, document.getElementById('config-vertex-demo'));
-    insertDom(dsGCC, true, document.getElementById('config-graph-demo'))
+    insertDom(dsGCC, true, document.getElementById('config-graph-demo'));
+    insertDom(dsTGC, true, document.getElementById('traversable-graph-demo'));
   }, []);
 
   const graphDemoProps = [
@@ -54,11 +56,22 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
     {
       sectionId: 'config-graph',
       subtitle: 'Graph Configuration',
-      description: `In addition, we can also easily config the graph. The following example provides three graphs with differnt modes. A graph with mode traversable means 
-        user can click the vertices to walk through the graph. A graph with mode clickable means user can click any vertex to see their info (i.e. in-neighbours and out-neighbours). This 
-        is the default mode. A graph with mode non-clickable means that user cannot click on any vertices.
+      description: `In addition, we can also easily config the graph. The following example provides three graphs with differnt modes. A graph with mode 'traversable' means 
+        user can click the vertices to walk through the graph. A graph with mode 'clickable' means user can click any vertex to see their info (i.e. in-neighbours and out-neighbours). This 
+        is the default mode. A graph with mode 'non-clickable' means that user cannot click on any vertices.
       `,
       codeBody: getGCControllerToString(),
+      withDialog: true
+    },
+    {
+      sectionId: 'traversable-graph',
+      subtitle: 'Traversable Graph',
+      description: `When graph mode is set to 'traversable', then we can also config additional fields. In the following example, we have four graphs. For the first graph,
+      we can traverse the vertices and edges any times we want and we disable the weight so we cannot see the weight for each edge. For the second graph, we can
+      traverse the graph but cannot repeat any vertices with enabled weight. For the third graph, we can traverse the graph but cannot repeat any edges with enabled
+      weight. For the last graph, we can traverse the graph but cannot repeat any vertices and any edges with enabled weight.
+      `,
+      codeBody: getTGControllerToString(),
       withDialog: true
     }
   ]
