@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 interface Props {
-  options: [string, string][];
+  options: [string, string, boolean][];
 };
 
 const Navbar: FC<Props> = ({ options }): ReactElement => {
@@ -22,7 +22,7 @@ const Navbar: FC<Props> = ({ options }): ReactElement => {
   };
 
   return (
-    <AppBar position="static" sx={{background: "#880C25"}}>
+    <AppBar position="sticky" sx={{background: "#880C25",}}>
       <Toolbar variant="dense" >
         {options.length === 0 
           ? 
@@ -51,9 +51,16 @@ const Navbar: FC<Props> = ({ options }): ReactElement => {
                 onClose={handleCloseMenu}
               >
                 {options.map((option) => (
-                  <MenuItem key={option[1]} onClick={() => handleCloseMenu(option[1])}>
-                    <Typography textAlign="center">{option[0]}</Typography> 
-                  </MenuItem>
+                    option[2] === true ? 
+                    <MenuItem key={option[1]} onClick={() => handleCloseMenu(option[1])}>
+                      <Typography textAlign="center">{option[0]}</Typography> 
+                    </MenuItem>                  
+                     :
+                    <MenuItem key={option[1]} onClick={() => setAnchorEl(null)}>
+                      <a href={option[1]} >
+                        <Typography textAlign="center">{option[0]}</Typography> 
+                      </a>
+                   </MenuItem>
                 ))}
               </Menu>
             </Box>

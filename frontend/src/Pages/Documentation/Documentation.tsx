@@ -17,7 +17,7 @@ const Documentation: FC<Props> = (): ReactElement => {
   return (
     <div className='documentation'>
       <Navbar options={[
-        ['Home', '/']
+        ['Home', '/', true]
       ]} />
 
       <h1 className='title'>Documentation</h1>

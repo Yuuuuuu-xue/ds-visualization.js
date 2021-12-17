@@ -6,7 +6,7 @@ import '../Layout.scss';
 import { getCGController, getCGControllerToString, getVCController, getVCControllerToString } from './graph';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import GraphDemo from './GraphDemo';
+import GraphDemo from '../../Components/GraphDemo';
 
 interface Props {
   ds: any
@@ -54,9 +54,9 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
   return (
     <div className='demo layout'>
       <Navbar options={[
-        ['Home', '/'],
-        ['Clickable', '#clickable-graph'],
-        ['Vertex Configuration', '#config-vertex']
+        ['Home', '/', true],
+        ['Clickable', '#clickable-graph', false],
+        ['Vertex Configuration', '#config-vertex', false]
       ]} />
       {graphDemoProps.map(props => (
         <GraphDemo key={props.sectionId} sectionId={props.sectionId} description={props.description} subtitle={props.subtitle} codeBody={props.codeBody} withDialog={props.withDialog} />
