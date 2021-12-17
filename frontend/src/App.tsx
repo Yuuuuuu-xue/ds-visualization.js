@@ -6,7 +6,7 @@ import Demo from './Pages/Demo/Demo';
 import './App.scss';
 
 function App() {
-  // const ds = (window as any).ds;
+  const ds = (window as any).ds;
   // let dsController = new ds.DataStructureController(800, 400);
 
   // useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/setup' element={<Setup />} />
         <Route path='/documentation' element= {<Documentation />} />
-        <Route path='/demo' element = {<Demo />} />
+        <Route path='/demo' element = {<Demo ds={ds} />} />
       </Routes>
     </Router>
   );

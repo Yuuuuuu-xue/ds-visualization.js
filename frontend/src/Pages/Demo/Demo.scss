@@ -1,5 +1,18 @@
 .demo {
-  .title {
-    font-size: 3em;
+  .graph {
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+  #clickable-graph-demo {
+    .ds-canvas {
+      float: left;
+    }
+  }
+
+  .code {
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 20px;
   }
 }
