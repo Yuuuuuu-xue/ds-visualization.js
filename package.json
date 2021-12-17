@@ -3,7 +3,7 @@
     "node": "14.18.1"
   },
   "scripts": {
-    "build": "npm run install-all && npx webpack && cd ./frontend && npm run build",
+    "build": "npm run install-all && npx webpack && cd frontend && npm run build",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "install-all": "npm install && cd frontend && npm install"
