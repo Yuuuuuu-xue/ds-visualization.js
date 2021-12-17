@@ -7,6 +7,7 @@ import './Home.scss';
 import Grid from '@mui/material/Grid';
 import setTitle from "../../utils/setTitle";
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../Components/Navbar'; 
 
 interface Props {
 
@@ -39,6 +40,8 @@ const Home: FC<Props> = (): ReactElement => {
 
   return (
     <div className="home">
+      <Navbar options={[]} />
+      
       <h1 className="title">DS.js</h1>
       {/* <ColorOutlinedButton className="source-code-button" variant="outlined" size="large" onClick={() => window.open('https://github.com/Yuuuuuu-xue', '_blank') }>
         Source Code
