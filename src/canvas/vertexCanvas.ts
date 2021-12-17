@@ -58,7 +58,7 @@ export class VertexCanvas implements VertexCanvasInterface {
       this.vertexElement.style[styleKey] = style[styleKey];
     }
 
-    if (graphMode !== 'traversable') {
+    if (graphMode === 'clickable') {
       // Set the cursor
       if (draggable) {
         this.vertexElement.style.cursor = 'move';
@@ -67,6 +67,8 @@ export class VertexCanvas implements VertexCanvasInterface {
       } else {
         this.vertexElement.style.cursor = 'pointer';
       }
+    } else if (graphMode === 'non-clickable') {
+      this.vertexElement.style.cursor = 'not-allowed'
     } else {
       this.vertexElement.style.cursor = 'pointer';
     }
