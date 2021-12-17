@@ -1,10 +1,11 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useEffect } from "react";
 import Button from '@mui/material/Button';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { styled } from "@mui/material/styles";
 import './Home.scss';
 import Grid from '@mui/material/Grid';
+import setTitle from "../../utils/setTitle";
 
 interface Props {
 
@@ -28,6 +29,11 @@ const ColorOutlinedButton = styled(Button)(({ theme }) => ({
 
 
 const Home: FC<Props> = (): ReactElement => {
+
+  useEffect(() => {
+    setTitle('Home')
+  }, [])
+
   return (
     <div className="home">
       <h1 className="title">DS.js</h1>
