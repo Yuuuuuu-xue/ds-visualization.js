@@ -3,6 +3,7 @@ import Documentation from './Pages/Documentation/Documentation';
 import Home from './Pages/Home/Home';
 import Setup from './Pages/Setup/Setup';
 import Demo from './Pages/Demo/Demo';
+import './App.scss';
 
 function App() {
   // const ds = (window as any).ds;
