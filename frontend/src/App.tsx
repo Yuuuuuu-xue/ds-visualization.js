@@ -4,6 +4,7 @@ import Home from './Pages/Home/Home';
 import Setup from './Pages/Setup/Setup';
 import Demo from './Pages/Demo/Demo';
 import './App.scss';
+import Navbar from "./Components/Navbar";
 
 function App() {
   // const ds = (window as any).ds;
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <Router>
+      <Navbar options={[['test', '#test'], ['Test test', '#test test']]} />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/setup' element={<Setup />} />

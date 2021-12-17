@@ -1,7 +1,7 @@
 import { FC, ReactElement, useEffect } from "react";
 import Button from '@mui/material/Button';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import GitHubIcon from '@mui/icons-material/GitHub';
+
 import { styled } from "@mui/material/styles";
 import './Home.scss';
 import Grid from '@mui/material/Grid';
@@ -40,11 +40,11 @@ const Home: FC<Props> = (): ReactElement => {
   return (
     <div className="home">
       <h1 className="title">DS.js</h1>
-      <ColorOutlinedButton className="source-code-button" variant="outlined" size="large" onClick={() => window.open('https://github.com/Yuuuuuu-xue', '_blank') }>
+      {/* <ColorOutlinedButton className="source-code-button" variant="outlined" size="large" onClick={() => window.open('https://github.com/Yuuuuuu-xue', '_blank') }>
         Source Code
         &nbsp;&nbsp;
         <GitHubIcon />
-      </ColorOutlinedButton>
+      </ColorOutlinedButton> */}
       <p className="description">
         A library that helps developers to draw and create interactions for end-users visualizing data structures. 
       </p>
