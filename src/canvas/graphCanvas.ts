@@ -404,4 +404,12 @@ export class GraphCanvas implements GraphCanvasInterface {
     e.updateType(type);
     });
   }
+
+  getVertices(): VertexCanvas[] {
+    return this.vertices
+  }
+  
+  getEdges(): EdgeCanvas[] {
+    return this.edges;
+  }
 };

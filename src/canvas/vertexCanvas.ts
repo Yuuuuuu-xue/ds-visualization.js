@@ -14,6 +14,7 @@ export class VertexCanvas implements VertexCanvasInterface {
   vertexValue: any;
   disableActiveClick: any;
   clickCallback: () => void;
+  config: VertexConfig;
 
   constructor(x: number, y: number, vertexId: string, value: any, config: VertexConfig, updateVertexWithEdgePosition: (_id: string, x: number, y: number) => void, graphMode: Mode) {
     this.vertexId = vertexId;
@@ -22,7 +23,7 @@ export class VertexCanvas implements VertexCanvasInterface {
     this.vertexElement.classList.add('vertex');
     this.vertexElement.classList.add('inactive');
     this.vertexValue = value; 
-
+    this.config = config;
     const { draggable, backgroundImageSrc, hideText, style, disableActiveClick, clickCallback } = config;
 
     this.disableActiveClick = disableActiveClick === true;

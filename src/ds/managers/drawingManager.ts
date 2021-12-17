@@ -6,6 +6,8 @@ import { GraphType } from "../types/constantType";
 import { VertexConfig } from "../types/vertexConfig";
 import { GraphConfig } from "../types/graphConfig";
 import { EdgeDetailInterface } from "../types/edgeDetailInterface";
+import { VertexCanvas } from "../../canvas/vertexCanvas";
+import { EdgeCanvas } from "../../canvas/edgeCanvas";
 
 
 export class DrawingManager {
@@ -301,5 +303,23 @@ export class DrawingManager {
     if (i === this.currIdx) {
       this.updateTraversableButtons();
     }
+  }
+
+  getCurrentGraphVertices(): VertexCanvas[] {
+    return this.graphCanvas[this.currIdx].getVertices();
+  }
+
+  getGraphVertices(i: number): VertexCanvas[] {
+    this.checkValidLength(i);
+    return this.graphCanvas[i].getVertices();
+  }
+  
+  getCurrentGraphEdges(): EdgeCanvas[] {
+    return this.graphCanvas[this.currIdx].getEdges();
+  }
+
+  getGraphEdges(i: number): EdgeCanvas[] {
+    this.checkValidLength(i);
+    return this.graphCanvas[i].getEdges();
   }
 }

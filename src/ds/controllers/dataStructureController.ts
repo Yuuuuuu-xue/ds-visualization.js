@@ -1,7 +1,10 @@
+import { EdgeCanvas } from "../../canvas/edgeCanvas";
+import { VertexCanvas } from "../../canvas/vertexCanvas";
 import { DialogManager } from "../managers/dialogManager";
 import { DrawingManager } from "../managers/drawingManager";
 import { GraphManager } from "../managers/graphManager";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
+import { Edge } from "../types/edge";
 import { EdgeDetailInterface } from "../types/edgeDetailInterface";
 import EdgeInput from "../types/edgeInput";
 import { GraphInfo } from "../types/graph";
@@ -362,5 +365,51 @@ export class DataStructureController implements DataStructureControllerInterface
 
   updateGraphConfig(i: number, config: GraphConfig): void {
     this.drawingManager.updateGraphConfig(i, config);
+  }
+
+  private convertVertexCanvasToVertexInput(vertices: VertexCanvas[]): VertexInput[] {
+    const output: VertexInput[] = [];
+    vertices.forEach(v => {
+      output.push({
+        _id: v.vertexId,
+        value: v.vertexValue,
+        x: v.x,
+        y: v.y,
+        config: v.config
+      });
+    })
+    return output;
+  }
+
+  getCurrentGraphVertexInput(): VertexInput[] {
+    const vertices = this.drawingManager.getCurrentGraphVertices();
+    return this.convertVertexCanvasToVertexInput(vertices);
+  }
+
+  getGraphVertexInput(i: number): VertexInput[] {
+    const vertices = this.drawingManager.getGraphVertices(i);
+    return this.convertVertexCanvasToVertexInput(vertices);
+  }
+
+  private convertEdgeCanvasToEdgeInput(edges: EdgeCanvas[]): EdgeInput[] {
+    const output: EdgeInput[] = [];
+    edges.forEach(e => {
+      output.push({
+        vertexTo: e.vertexToId,
+        vertexFrom: e.vertexFromId,
+        weight: e.weight
+      })
+    });
+    return output;
+  }
+
+  getCurrentGraphEdgeInput(): EdgeInput[] {
+    const edges = this.drawingManager.getCurrentGraphEdges();
+    return this.convertEdgeCanvasToEdgeInput(edges);
+  }
+
+  getGraphEdgeInput(i: number): EdgeInput[] { 
+    const edges = this.drawingManager.getGraphEdges(i);
+    return this.convertEdgeCanvasToEdgeInput(edges);
   }
 }

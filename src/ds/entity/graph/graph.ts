@@ -4,6 +4,7 @@ import { GraphInterface } from "../../types/graph";
 import { GraphInfo } from "../../types/graph";
 import { VertexDetailInterface, VertexInfo } from "../../types/vertexDetailInterface";
 import { GraphType } from "../../types/constantType";
+import VertexInput from "../../types/vertexInput";
 
 export class Graph implements GraphInterface {
   vertices: Vertex[];
