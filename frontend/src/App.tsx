@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Documentation from './Pages/Documentation/Documentation';
 import Home from './Pages/Home/Home';
+import Setup from './Pages/Setup/Setup';
+import Demo from './Pages/Demo/Demo';
 
 function App() {
   // const ds = (window as any).ds;
@@ -14,6 +16,9 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/setup' element={<Setup />} />
+        <Route path='/documentation' element= {<Documentation />} />
+        <Route path='/demo' element = {<Demo />} />
       </Routes>
     </Router>
   );

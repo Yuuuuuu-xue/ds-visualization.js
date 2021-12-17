@@ -29,7 +29,7 @@ const ColorOutlinedButton = styled(Button)(({ theme }) => ({
 
 const Home: FC<Props> = (): ReactElement => {
   return (
-    <div className="app">
+    <div className="home">
       <h1 className="title">DS.js</h1>
       <ColorOutlinedButton className="source-code-button" variant="outlined" size="large">
         Source Code
