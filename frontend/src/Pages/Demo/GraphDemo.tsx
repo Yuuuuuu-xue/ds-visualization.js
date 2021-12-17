@@ -6,23 +6,21 @@ interface Props {
   sectionId: string,
   description: string,
   subtitle: string,
-  title: string,
-  codeBody: string
+  codeBody: string,
+  withDialog: boolean
 };
 
-const GraphDemo: FC<Props> = ({ sectionId, description, subtitle, title, codeBody }): ReactElement => {
+const GraphDemo: FC<Props> = ({ sectionId, description, subtitle, codeBody, withDialog }): ReactElement => {
   return (
-    <>
-    <h1 className='title'>{title}</h1>
     <section className='section' id={sectionId}>
       <h3 className='subtitle'>{subtitle}</h3>
       <p className='description'>
         {description}
       </p>
-      <div id={`${sectionId}-demo`} className='graph'>
+      <div id={`${sectionId}-demo`} className={`graph ${withDialog === true ? 'with-dialog' : ''}`}>
       </div>
       <p className='description'>
-        Demo Code
+        Demo Code:
       </p> 
       <div className='code'>
         <SyntaxHighlighter 
@@ -33,7 +31,6 @@ const GraphDemo: FC<Props> = ({ sectionId, description, subtitle, title, codeBod
         </SyntaxHighlighter>
       </div>
     </section>
-    </>
   )
 };
 
