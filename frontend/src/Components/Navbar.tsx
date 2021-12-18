@@ -56,11 +56,12 @@ const Navbar: FC<Props> = ({ options }): ReactElement => {
                       <Typography textAlign="center">{option[0]}</Typography> 
                     </MenuItem>                  
                      :
-                    <MenuItem key={option[1]} onClick={() => setAnchorEl(null)}>
-                      <a href={option[1]} >
-                        <Typography textAlign="center">{option[0]}</Typography> 
-                      </a>
-                   </MenuItem>
+                    
+                    <a href={option[1]} >
+                      <MenuItem key={option[1]} onClick={() => setAnchorEl(null)}>
+                        <Typography textAlign="center">{option[0]}</Typography>
+                      </MenuItem>
+                    </a>
                 ))}
               </Menu>
             </Box>
