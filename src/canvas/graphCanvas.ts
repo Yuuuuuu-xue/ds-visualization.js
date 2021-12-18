@@ -24,8 +24,9 @@ export class GraphCanvas implements GraphCanvasInterface {
   disallowRepeatedVertex?: boolean;
   disallowRepeatedEdge?: boolean;
   enableRemoveLastVertexButton: () => void;
+  type: GraphType;
 
-  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void, clearEdgeDialog: () => void, enableRemoveLastVertexButton: () => void) {
+  constructor(updateDialog: (vertexId: string) => void, clearVertexDialog: () => void, config: GraphConfig, setEdgeDialog: (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => void, clearEdgeDialog: () => void, enableRemoveLastVertexButton: () => void, type: GraphType) {
     this.vertices = [];
     this.edges = [];
     this.display = false;
@@ -45,6 +46,7 @@ export class GraphCanvas implements GraphCanvasInterface {
     this.visitedVertices = new Map();
     this.visitedEdges = new Map();
     this.enableRemoveLastVertexButton = enableRemoveLastVertexButton;
+    this.type = type;
   }
 
   getMode(): Mode {
@@ -173,6 +175,31 @@ export class GraphCanvas implements GraphCanvasInterface {
     }
     return output;
   }
+  
+  handleVertexHelper(incidentEdges: EdgeCanvas[], newVertex: VertexCanvas, lastVertex: VertexCanvas): void {
+    if (incidentEdges.length > 0) {
+      incidentEdges[0].setActive();
+      // Set the vertex as active as well
+      newVertex.setActive();
+      // Check if we have it or not
+      if (this.visitedVertices.has(newVertex.vertexId)) {
+        this.visitedVertices.set(newVertex.vertexId, this.visitedVertices.get(newVertex.vertexId) + 1); // Increment it by 1
+      } else {
+        this.visitedVertices.set(newVertex.vertexId, 1); // First time
+      }
+      this.traversedVertices.push(newVertex);
+      // Check if we have it or not
+      const seralizedEdge = seralizeEdge(lastVertex.vertexId, newVertex.vertexId);
+      if (this.visitedEdges.has(seralizedEdge)) {
+        this.visitedEdges.set(seralizedEdge, this.visitedEdges.get(seralizedEdge) + 1);
+      } else {
+        this.visitedEdges.set(seralizedEdge, 1);
+      }
+      this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
+    }
+  }
+
+
 
   handleVertexClick(newVertex: VertexCanvas): void {
     // Not clickable graph
@@ -223,25 +250,15 @@ export class GraphCanvas implements GraphCanvasInterface {
 
         // Find the correct edge
         const incidentEdges = this.edges.filter(e => e.vertexToId === lastVertex.vertexId && e.vertexFromId === newVertex.vertexId);
-        if (incidentEdges.length > 0) {
-          incidentEdges[0].setActive();
-          // Set the vertex as active as well
-          newVertex.setActive();
-          // Check if we have it or not
-          if (this.visitedVertices.has(newVertex.vertexId)) {
-            this.visitedVertices.set(newVertex.vertexId, this.visitedVertices.get(newVertex.vertexId) + 1); // Increment it by 1
-          } else {
-            this.visitedVertices.set(newVertex.vertexId, 1); // First time
-          }
-          this.traversedVertices.push(newVertex);
-          // Check if we have it or not
-          const seralizedEdge = seralizeEdge(lastVertex.vertexId, newVertex.vertexId);
+        this.handleVertexHelper(incidentEdges, newVertex, lastVertex);
+        // If graph is undirected, the ndo the same thing
+        if (this.type === 'undirected') {
+          const seralizedEdge = seralizeEdge(newVertex.vertexId, lastVertex.vertexId);
           if (this.visitedEdges.has(seralizedEdge)) {
             this.visitedEdges.set(seralizedEdge, this.visitedEdges.get(seralizedEdge) + 1);
           } else {
             this.visitedEdges.set(seralizedEdge, 1);
           }
-          this.setEdgeDialog(this.getEdgeDetail(), this.enableWeight);
         }
       } else {
         newVertex.setActive();

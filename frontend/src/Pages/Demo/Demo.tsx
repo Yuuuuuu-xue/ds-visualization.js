@@ -3,7 +3,7 @@ import setTitle from '../../utils/setTitle';
 import './Demo.scss';
 import Navbar from '../../Components/Navbar';
 import '../Layout.scss';
-import { getBController, getBControllerToString, getCGController, getCGControllerToString, getGCController, getGCControllerToString, getTGController, getTGControllerToString, getVCController, getVCControllerToString } from './graph';
+import { getBController, getBControllerToString, getCGController, getCGControllerToString, getGCController, getGCControllerToString, getSPWController, getSPWControllerToString, getTAController, getTAControllerToString, getTGController, getTGControllerToString, getVCController, getVCControllerToString } from './graph';
 import GraphDemo from '../../Components/GraphDemo';
 
 interface Props {
@@ -18,6 +18,8 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
   const dsGCC = getGCController(ds);
   const dsTGC = getTGController(ds);
   const dsBC = getBController(ds);
+  const dsTAC = getTAController(ds);
+  const dsSPWC = getSPWController(ds);
 
   const insertDom = (dsController: any, includeDialog: boolean, target: HTMLElement | null): void => {
     if (target) {
@@ -36,6 +38,8 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
     insertDom(dsGCC, true, document.getElementById('config-graph-demo'));
     insertDom(dsTGC, true, document.getElementById('traversable-graph-demo'));
     insertDom(dsBC, false, document.getElementById('application-bilateral-demo'));
+    insertDom(dsTAC, false, document.getElementById('application-traverse-demo'));
+    insertDom(dsSPWC, true, document.getElementById('application-shortest-path-weight-demo'))
   }, []);
 
   const graphDemoProps = [
@@ -83,6 +87,20 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
       description: 'Try to drag around vertices and determine if the following graph is bilaterial graph or not.',
       withDialog: false,
       codeBody: getBControllerToString()
+    },
+    {
+      sectionId: 'application-traverse',
+      subtitle: 'Traverse Graph Application',
+      description: 'Following graphs are examples of Hamiltonian graph and Eulerian graph. Try to walk through the graph and vertify the claim.',
+      codeBody: getTAControllerToString(),
+      withDialog: false
+    },
+    {
+      sectionId: 'application-shortest-path-weight',
+      subtitle: 'Shortest Weight Path',
+      description: 'Traverse the graph and find the shortest path weight from A to F.',
+      codeBody: getSPWControllerToString(),
+      withDialog: true
     }
   ]
 

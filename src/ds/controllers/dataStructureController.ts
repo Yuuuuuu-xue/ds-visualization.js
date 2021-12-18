@@ -3,6 +3,7 @@ import { VertexCanvas } from "../../canvas/vertexCanvas";
 import { DialogManager } from "../managers/dialogManager";
 import { DrawingManager } from "../managers/drawingManager";
 import { GraphManager } from "../managers/graphManager";
+import { GraphType } from "../types/constantType";
 import { DataStructureControllerInterface } from "../types/dataStructureController";
 import { Edge } from "../types/edge";
 import { EdgeDetailInterface } from "../types/edgeDetailInterface";
@@ -78,12 +79,12 @@ export class DataStructureController implements DataStructureControllerInterface
     this.dialogManager.setHeight(height);
   }
 
-  createGraph(type: string, name: string, vertices: VertexInput[] = [], edges: EdgeInput[] = [], config: GraphConfig={mode: 'clickable'}): void {
+  createGraph(type: GraphType, name: string, vertices: VertexInput[] = [], edges: EdgeInput[] = [], config: GraphConfig={mode: 'clickable'}): void {
     if (this.graphManager.getCurrentIdx() === 0) {
       this.drawingManager.getNextButtonElement().enableButtonElement();
     }
     this.graphManager.createGraph(type, name);
-    this.drawingManager.createGraphCanvas(config);
+    this.drawingManager.createGraphCanvas(type, config);
     const graphSize = this.graphManager.getGraphSize() - 1;
     this.pushVerticesToGraph(graphSize, vertices);
     this.pushEdgesToGraph(graphSize, edges);

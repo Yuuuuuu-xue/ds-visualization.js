@@ -97,7 +97,7 @@ export class DrawingManager {
   }
 
   createDefaultGraph(): void {
-    this.createGraphCanvas({mode: 'clickable'});
+    this.createGraphCanvas('directed', {mode: 'clickable'});
     this.graphCanvas[0].displayGraph();
   }
 
@@ -113,8 +113,8 @@ export class DrawingManager {
     throw new Error(message);
   };
 
-  createGraphCanvas(config: GraphConfig): void {
-    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog(), config, (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => this.setEdgeDialog(edgeDetail, enableWeight), () => this.clearEdgeDialog(), () => this.removeLastVertexButtonElement.enableButtonElement());
+  createGraphCanvas(type: GraphType, config: GraphConfig): void {
+    const newGraphCanvas = new GraphCanvas((vertexId: string) => this.updateDialog(vertexId), () => this.clearVertexDialog(), config, (edgeDetail: EdgeDetailInterface[], enableWeight?: boolean) => this.setEdgeDialog(edgeDetail, enableWeight), () => this.clearEdgeDialog(), () => this.removeLastVertexButtonElement.enableButtonElement(), type);
     this.graphCanvas.push(newGraphCanvas);
     this.canvasElement.insertAdjacentElement('beforeend', newGraphCanvas.graphElement);
   }

@@ -359,6 +359,170 @@ const getBControllerToString = (): string => {
   `
 }
 
+const getTAController = (ds: any): any => {
+  const dsController = new ds.DataStructureController(1200, 600);
+
+  dsController.updateCurrentGraphConfig({mode: 'traversable', disallowRepeatedVertex: true});
+  dsController.updateCurrentGraphType('undirected');
+  dsController.updateCurrentGraphName('Hamiltonian Graph')
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: '1', x: 50, y: 50},
+    {_id: '2', value: '2', x: 280, y: 420},
+    {_id: '3', value: '3', x: 400, y: 200},
+    {_id: '4', value: '4', x: 600, y: 100},
+    {_id: '5', value: '5', x: 800, y: 200},
+    {_id: '6', value: '6', x: 620, y: 400},
+  ]);
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '1', vertexFrom: '2'},
+    {vertexTo: '2', vertexFrom: '3'},
+    {vertexTo: '3', vertexFrom: '6'},
+    {vertexTo: '2', vertexFrom: '6'},
+    {vertexTo: '6', vertexFrom: '5'},
+    {vertexTo: '3', vertexFrom: '4'},
+    {vertexTo: '4', vertexFrom: '5'}, 
+    {vertexTo: '1', vertexFrom: '3'}, 
+    {vertexTo: '1', vertexFrom: '4'},
+    {vertexTo: '4', vertexFrom: '6'}
+  ]);
+  dsController.createGraph('undirected', 'Eulierian Graph', [
+    {_id: '1', value: '1', x: 500, y: 100},
+    {_id: '2', value: '2', x: 250, y: 250},
+    {_id: '3', value: '3', x: 750, y: 250},
+    {_id: '4', value: '4', x: 250, y: 450},
+    {_id: '5', value: '5', x: 750, y: 450},
+    {_id: '6', value: '6', x: 500, y: 350},
+  ], [
+    {vertexTo: '1', vertexFrom: '2'},
+    {vertexTo: '2', vertexFrom: '3'},
+    {vertexTo: '1', vertexFrom: '3'},
+    {vertexTo: '2', vertexFrom: '4'},
+    {vertexTo: '4', vertexFrom: '5'},
+    {vertexTo: '3', vertexFrom: '5'},
+    {vertexTo: '2', vertexFrom: '6'},
+    {vertexTo: '3', vertexFrom: '6'},
+    {vertexTo: '4', vertexFrom: '6'},
+    {vertexTo: '5', vertexFrom: '6'}
+  ], {mode: 'traversable', disallowRepeatedEdge: true})
+  return dsController;
+};
+
+const getTAControllerToString = (): string => {
+  return `
+  const dsController = new ds.DataStructureController(1200, 600);
+
+  dsController.updateCurrentGraphConfig({mode: 'traversable', disallowRepeatedVertex: true});
+  dsController.updateCurrentGraphType('undirected');
+  dsController.updateCurrentGraphName('Hamiltonian Graph')
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: '1', x: 50, y: 50},
+    {_id: '2', value: '2', x: 280, y: 420},
+    {_id: '3', value: '3', x: 400, y: 200},
+    {_id: '4', value: '4', x: 600, y: 100},
+    {_id: '5', value: '5', x: 800, y: 200},
+    {_id: '6', value: '6', x: 620, y: 400},
+  ]);
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '1', vertexFrom: '2'},
+    {vertexTo: '2', vertexFrom: '3'},
+    {vertexTo: '3', vertexFrom: '6'},
+    {vertexTo: '2', vertexFrom: '6'},
+    {vertexTo: '6', vertexFrom: '5'},
+    {vertexTo: '3', vertexFrom: '4'},
+    {vertexTo: '4', vertexFrom: '5'}, 
+    {vertexTo: '1', vertexFrom: '3'}, 
+    {vertexTo: '1', vertexFrom: '4'},
+    {vertexTo: '4', vertexFrom: '6'}
+  ]);
+  dsController.createGraph('undirected', 'Eulierian Graph', [
+    {_id: '1', value: '1', x: 500, y: 100},
+    {_id: '2', value: '2', x: 250, y: 250},
+    {_id: '3', value: '3', x: 750, y: 250},
+    {_id: '4', value: '4', x: 250, y: 450},
+    {_id: '5', value: '5', x: 750, y: 450},
+    {_id: '6', value: '6', x: 500, y: 350},
+  ], [
+    {vertexTo: '1', vertexFrom: '2'},
+    {vertexTo: '2', vertexFrom: '3'},
+    {vertexTo: '1', vertexFrom: '3'},
+    {vertexTo: '2', vertexFrom: '4'},
+    {vertexTo: '4', vertexFrom: '5'},
+    {vertexTo: '3', vertexFrom: '5'},
+    {vertexTo: '2', vertexFrom: '6'},
+    {vertexTo: '3', vertexFrom: '6'},
+    {vertexTo: '4', vertexFrom: '6'},
+    {vertexTo: '5', vertexFrom: '6'}
+  ], {mode: 'traversable', disallowRepeatedEdge: true});
+
+  // Insert into the dom
+  const target = document.getElementById('target');
+  target.insertAdjacentElement('beforeend', dsController.getCanvasElement());
+  `
+}
+
+const getSPWController = (ds: any): any => {
+  const dsController = new ds.DataStructureController(800, 400);
+
+  dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true});
+  dsController.updateCurrentGraphName('Shortest Path Weight')
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: 'A', x: 50, y: 200},
+    {_id: '2', value: 'B', x: 150, y: 40},
+    {_id: '3', value: 'C', x: 180, y: 300},
+    {_id: '4', value: 'D', x: 400, y: 80},
+    {_id: '5', value: 'E', x: 420, y: 280},
+    {_id: '6', value: 'F', x: 550, y: 180},
+  ]);
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '1', vertexFrom: '2', weight: 4},
+    {vertexTo: '1', vertexFrom: '3', weight: 2},
+    {vertexTo: '2', vertexFrom: '3', weight: 5},
+    {vertexTo: '2', vertexFrom: '4', weight: 10},
+    {vertexTo: '3', vertexFrom: '5', weight: 3},
+    {vertexTo: '5', vertexFrom: '4', weight: 4},
+    {vertexTo: '4', vertexFrom: '6', weight: 11}
+  ]);
+
+  dsController.setDialogWidth(250);
+  dsController.setDialogHeight(400);
+  dsController.showDialog();
+  return dsController;
+};
+
+const getSPWControllerToString = (): string => {
+  return `
+  const dsController = new ds.DataStructureController(800, 400);
+
+  dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true});
+  dsController.updateCurrentGraphName('Shortest Path Weight')
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: 'A', x: 50, y: 200},
+    {_id: '2', value: 'B', x: 150, y: 40},
+    {_id: '3', value: 'C', x: 180, y: 300},
+    {_id: '4', value: 'D', x: 400, y: 80},
+    {_id: '5', value: 'E', x: 420, y: 280},
+    {_id: '6', value: 'F', x: 550, y: 180},
+  ]);
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '1', vertexFrom: '2', weight: 4},
+    {vertexTo: '1', vertexFrom: '3', weight: 2},
+    {vertexTo: '2', vertexFrom: '3', weight: 5},
+    {vertexTo: '2', vertexFrom: '4', weight: 10},
+    {vertexTo: '3', vertexFrom: '5', weight: 3},
+    {vertexTo: '5', vertexFrom: '4', weight: 4},
+    {vertexTo: '4', vertexFrom: '6', weight: 11}
+  ]);
+
+  dsController.setDialogWidth(250);
+  dsController.setDialogHeight(400);
+  dsController.showDialog();
+  
+  // Insert into the dom
+  const target = document.getElementById('target');
+  target.insertAdjacentElement('beforeend', dsController.getCanvasElement());
+  `
+}
+
 export {
   getCGController,
   getCGControllerToString,
@@ -369,5 +533,9 @@ export {
   getTGController,
   getTGControllerToString,
   getBController,
-  getBControllerToString
+  getBControllerToString,
+  getTAController,
+  getTAControllerToString,
+  getSPWController,
+  getSPWControllerToString
 };
