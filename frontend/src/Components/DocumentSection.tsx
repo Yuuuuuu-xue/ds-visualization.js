@@ -15,7 +15,7 @@ const DocumentSection: FC<Props> = ({ sectionId, subtitle, codeData }): ReactEle
     <section className='section' id={sectionId}>
       <h3 className='subtitle'>{subtitle}</h3> 
       {codeData.map(c => (
-        <DocumentationBlock key={c.header} description={c.description} header={c.header} codeBody={c.codeBody} exampleDescription={c.exampleDescription} exampleCode={c.exampleCode} />
+        <DocumentationBlock key={c.header} description={c.description} header={c.header} codeBody={c.codeBody} exampleCode={c.exampleCode} />
       ))}
     </section>
   );

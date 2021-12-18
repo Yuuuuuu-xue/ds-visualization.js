@@ -3,7 +3,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CodeBlockData } from './CodeBlockData';
 
-const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, exampleDescription, exampleCode }): ReactElement => {
+const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, exampleCode }): ReactElement => {
   return (
     <div className='documentation-block'>
       {header ? 
@@ -30,16 +30,12 @@ const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, 
         </div>
         : null
       }
-      { 
-        exampleDescription ? 
-        <p className='description'>
-          {description}
-        </p>
-        : null
-      }
       {
         exampleCode ? 
         <div className='code'>
+          <p className='description'>
+            Example:
+          </p>
           <SyntaxHighlighter
             language='typescript'
             style={docco}
