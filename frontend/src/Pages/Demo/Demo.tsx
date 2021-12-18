@@ -3,7 +3,7 @@ import setTitle from '../../utils/setTitle';
 import './Demo.scss';
 import Navbar from '../../Components/Navbar';
 import '../Layout.scss';
-import { getCGController, getCGControllerToString, getGCController, getGCControllerToString, getTGController, getTGControllerToString, getVCController, getVCControllerToString } from './graph';
+import { getBController, getBControllerToString, getCGController, getCGControllerToString, getGCController, getGCControllerToString, getTGController, getTGControllerToString, getVCController, getVCControllerToString } from './graph';
 import GraphDemo from '../../Components/GraphDemo';
 
 interface Props {
@@ -17,6 +17,7 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
   const dsVCC = getVCController(ds);
   const dsGCC = getGCController(ds);
   const dsTGC = getTGController(ds);
+  const dsBC = getBController(ds);
 
   const insertDom = (dsController: any, includeDialog: boolean, target: HTMLElement | null): void => {
     if (target) {
@@ -34,6 +35,7 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
     insertDom(dsVCC, true, document.getElementById('config-vertex-demo'));
     insertDom(dsGCC, true, document.getElementById('config-graph-demo'));
     insertDom(dsTGC, true, document.getElementById('traversable-graph-demo'));
+    insertDom(dsBC, false, document.getElementById('application-bilateral-demo'));
   }, []);
 
   const graphDemoProps = [
@@ -74,21 +76,37 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
     }
   ]
 
+  const applicationDemo = [
+    {
+      sectionId: 'application-bilateral',
+      subtitle: 'Is Bilaterial graph',
+      description: 'Try to drag around vertices and determine if the following graph is bilaterial graph or not.',
+      withDialog: false,
+      codeBody: getBControllerToString()
+    }
+  ]
+
   return (
     <div className='demo layout'>
       <Navbar options={[
         ['Home', '/', true],
         ['Clickable', '#clickable-graph', false],
         ['Vertex Configuration', '#config-vertex', false],
-        ['Graph Configuration', '#config-graph', false]
+        ['Graph Configuration', '#config-graph', false],
+        ['Is Bilpartile Graph', '#application-bilateral', false]
       ]} />
       <p className='title'>
         Demo
       </p>
       {graphDemoProps.map(props => (
-        <GraphDemo key={props.sectionId} sectionId={props.sectionId} description={props.description} subtitle={props.subtitle} codeBody={props.codeBody} withDialog={props.withDialog} />
+        <GraphDemo key={props.sectionId} sectionId={props.sectionId} description={props.description} codeBody={props.codeBody} subtitle={props.subtitle} withDialog={props.withDialog} />
       ))}
-      
+      <p className='title'>
+        Application
+      </p>
+      {applicationDemo.map(a => (
+        <GraphDemo key={a.sectionId} sectionId={a.sectionId} description={a.description} subtitle={a.subtitle} codeBody={a.codeBody} withDialog={a.withDialog} />
+      ))}
     </div>
   )
 }

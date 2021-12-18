@@ -57,8 +57,8 @@ const Navbar: FC<Props> = ({ options }): ReactElement => {
                     </MenuItem>                  
                      :
                     
-                    <a href={option[1]} >
-                      <MenuItem key={option[1]} onClick={() => setAnchorEl(null)}>
+                    <a key={option[1]} href={option[1]} >
+                      <MenuItem  onClick={() => setAnchorEl(null)}>
                         <Typography textAlign="center">{option[0]}</Typography>
                       </MenuItem>
                     </a>

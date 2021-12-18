@@ -6,7 +6,7 @@ interface Props {
   sectionId: string,
   description: string,
   subtitle: string,
-  codeBody: string,
+  codeBody?: string,
   withDialog: boolean
 };
 
@@ -22,14 +22,14 @@ const GraphDemo: FC<Props> = ({ sectionId, description, subtitle, codeBody, with
       <p className='description'>
         Demo Code:
       </p> 
-      <div className='code'>
+      {codeBody && <div className='code'>
         <SyntaxHighlighter 
           language='typescript' 
           style={docco}
         >
           {codeBody}
         </SyntaxHighlighter>
-      </div>
+      </div>}
     </section>
   )
 };

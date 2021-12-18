@@ -289,6 +289,76 @@ const getTGControllerToString = (): string => {
   `
 };
 
+const getBController = (ds: any): any => {
+  const dsController = new ds.DataStructureController(1200, 600);
+  const vertexConfig1 = {draggable: true, style: {backgroundColor: '#45B8AC', borderColor: '#308078'}, disableActiveClick: true};
+  const vertexConfig2 = {draggable: true, style: {backgroundColor: '#D65076', borderColor: '#b02950'}, disableActiveClick: true};
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: '1', x: 100, y: 100, config: vertexConfig1},
+    {_id: '2', value: '2', x: 1000, y: 100, config: vertexConfig2},
+    {_id: '3', value: '3', x: 100, y: 400, config: vertexConfig2},
+    {_id: '4', value: '4', x: 1000, y: 400, config: vertexConfig1},
+    {_id: '5', value: '5', x: 350, y: 180, config: vertexConfig2},
+    {_id: '6', value: '6', x: 750, y: 180, config: vertexConfig1},
+    {_id: '7', value: '7', x: 350, y: 320, config: vertexConfig1},
+    {_id: '8', value: '8', x: 750, y: 320, config: vertexConfig2}
+  ]);
+  dsController.updateCurrentGraphType('undirected');
+  dsController.updateCurrentGraphName('Is Bilateral Graph?')
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '1', vertexFrom: '5'},
+    {vertexTo: '1', vertexFrom: '3'},
+    {vertexTo: '3', vertexFrom: '7'},
+    {vertexTo: '5', vertexFrom: '7'},
+    {vertexTo: '7', vertexFrom: '8'},
+    {vertexTo: '5', vertexFrom: '6'},
+    {vertexTo: '6', vertexFrom: '8'},
+    {vertexTo: '6', vertexFrom: '2'},
+    {vertexTo: '8', vertexFrom: '4'},
+    {vertexTo: '2', vertexFrom: '4'},
+    {vertexTo: '1', vertexFrom: '2'},
+    {vertexTo: '3', vertexFrom: '4'}
+  ])
+  return dsController
+};
+
+const getBControllerToString = (): string => {
+  return `
+  const dsController = new ds.DataStructureController(1200, 600);
+  const vertexConfig1 = {draggable: true, style: {backgroundColor: '#45B8AC', borderColor: '#308078'}, disableActiveClick: true};
+  const vertexConfig2 = {draggable: true, style: {backgroundColor: '#D65076', borderColor: '#b02950'}, disableActiveClick: true};
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: '1', x: 100, y: 100, config: vertexConfig1},
+    {_id: '2', value: '2', x: 1000, y: 100, config: vertexConfig2},
+    {_id: '3', value: '3', x: 100, y: 400, config: vertexConfig2},
+    {_id: '4', value: '4', x: 1000, y: 400, config: vertexConfig1},
+    {_id: '5', value: '5', x: 350, y: 180, config: vertexConfig2},
+    {_id: '6', value: '6', x: 750, y: 180, config: vertexConfig1},
+    {_id: '7', value: '7', x: 350, y: 320, config: vertexConfig1},
+    {_id: '8', value: '8', x: 750, y: 320, config: vertexConfig2}
+  ]);
+  dsController.updateCurrentGraphType('undirected');
+  dsController.updateCurrentGraphName('Is Bilateral Graph?')
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '1', vertexFrom: '5'},
+    {vertexTo: '1', vertexFrom: '3'},
+    {vertexTo: '3', vertexFrom: '7'},
+    {vertexTo: '5', vertexFrom: '7'},
+    {vertexTo: '7', vertexFrom: '8'},
+    {vertexTo: '5', vertexFrom: '6'},
+    {vertexTo: '6', vertexFrom: '8'},
+    {vertexTo: '6', vertexFrom: '2'},
+    {vertexTo: '8', vertexFrom: '4'},
+    {vertexTo: '2', vertexFrom: '4'},
+    {vertexTo: '1', vertexFrom: '2'},
+    {vertexTo: '3', vertexFrom: '4'}
+  ])
+
+  const target = document.getElementById('target');
+  target.insertAdjacentElement('beforeend', dsController.getCanvasElement());
+  `
+}
+
 export {
   getCGController,
   getCGControllerToString,
@@ -297,5 +367,7 @@ export {
   getGCController,
   getGCControllerToString,
   getTGController,
-  getTGControllerToString
+  getTGControllerToString,
+  getBController,
+  getBControllerToString
 };
