@@ -417,6 +417,7 @@ export class GraphCanvas implements GraphCanvasInterface {
   }
 
   updateGraphType(type: GraphType): void {
+    this.type = type;
     this.edges.forEach(e => {
     e.updateType(type);
     });

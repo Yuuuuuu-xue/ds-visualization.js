@@ -110,7 +110,7 @@ const getVCControllerToString = (): string => {
     dsVCC.pushVerticesToCurrentGraph([
       {_id: '1', value: 'Drag Me', x: 50, y: 50, config: {draggable: true, backgroundImageSrc: './images/image.png'}},
       {_id: '2', value: 'Do not Click Me', x: 200, y: 300, config: {disableActiveClick: true}},
-      {_id: '3', value: 'Drag Me With Image', x: 300, y: 200, config: {draggable: true, backgroundImageSrc: './images/image2.jpg', }},
+      {_id: '3', value: 'Drag Me With Image', x: 300, y: 200, config: {draggable: true, backgroundImageSrc: './images/image2.jpg', }}, 
       {_id: '4', value: 'FourtVertex', x: 500, y: 200, config: {backgroundImageSrc: './images/myProfile.jpg', hideText: true, style: {width: "150px", height: "150px"}, disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue")}},
       {_id: '5', value: 'Styled Vertex', x: 750, y: 50},
       {_id: '6', value: 'I am Normal', x: 460, y: 350},
@@ -523,6 +523,90 @@ const getSPWControllerToString = (): string => {
   `
 }
 
+const getNVController = (ds: any): any => {
+  const dsController = new ds.DataStructureController(1200, 600);
+  dsController.updateCurrentGraphType('undirected');
+  const vertexConfig = {disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue"), hideText: true}
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: 'Yu 1', x: 500, y: 300, config: {...vertexConfig, backgroundImageSrc: './images/myProfile.jpg', style: {width: "150px", height: "150px", transform: 'translate(-25px, -25px)'}}},
+    {_id: '2', value: 'Yu 2', x: 400, y: 150, config: {...vertexConfig, backgroundImageSrc: './images/profile1.jpeg'}},
+    {_id: '3', value: 'Yu 3', x: 650, y: 120, config: {...vertexConfig, backgroundImageSrc: './images/profile2.jpeg'}},
+    {_id: '4', value: 'Yu 4', x: 420, y: 440, config: {...vertexConfig, backgroundImageSrc: './images/profile3.jpeg'}},
+    {_id: '5', value: 'Yu 5', x: 120, y: 420, config: {...vertexConfig, backgroundImageSrc: './images/profile4.jpeg'}},
+    {_id: '6', value: 'Yu 6', x: 620, y: 510, config: {...vertexConfig, backgroundImageSrc: './images/profile5.jpeg'}},
+    {_id: '7', value: 'Yu 7', x: 910, y: 400, config: {...vertexConfig, backgroundImageSrc: './images/profile6.jpeg'}},
+    {_id: '8', value: 'Yu 8', x: 900, y: 150, config: {...vertexConfig, backgroundImageSrc: './images/profile7.jpeg'}},
+    {_id: '9', value: 'Yu 9', x: 130, y: 130, config: {...vertexConfig, backgroundImageSrc: './images/profile8.jpeg'}},
+    {_id: '10', value: 'Yu 10', x: 220, y: 310, config: {...vertexConfig, backgroundImageSrc: './images/profile9.jpeg'}}
+  ]);
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '2', vertexFrom: '1'},
+    {vertexTo: '3', vertexFrom: '1'},
+    {vertexTo: '4', vertexFrom: '1'},
+    {vertexTo: '5', vertexFrom: '1'},
+    {vertexTo: '6', vertexFrom: '1'},
+    {vertexTo: '7', vertexFrom: '1'},
+    {vertexTo: '8', vertexFrom: '1'},
+    {vertexTo: '9', vertexFrom: '1'},
+    {vertexTo: '10', vertexFrom: '1'}
+  ])
+  dsController.updateCurrentGraphName('Today');
+  dsController.createGraph('directed', 'A month ago', dsController.getCurrentGraphVertexInput(), dsController.getCurrentGraphEdgeInput());
+  dsController.updateGraphType(1, 'undirected');
+  dsController.removeVertexFromGraph(1, '4'); 
+  dsController.removeVertexFromGraph(1, '7');
+  dsController.removeVertexFromGraph(1, '9');
+  dsController.updateGraphVertexConfig(1, '5', {backgroundImageSrc: './images/otherUserImg.jpg', hideText: true});
+
+  dsController.createGraph('directed', 'A year ago', [{_id: '1', value: 'Yu 1', x: 500, y: 300, config: {...vertexConfig, backgroundImageSrc: './images/myProfile.jpg', style: {width: "150px", height: "150px", transform: 'translate(-25px, -25px)'}}}], []);
+
+  return dsController;
+};
+
+const getNVControllerToString = (): string => {
+  return `
+  const dsController = new ds.DataStructureController(1200, 600);
+  dsController.updateCurrentGraphType('undirected');
+  const vertexConfig = {disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue"), hideText: true}
+  dsController.pushVerticesToCurrentGraph([
+    {_id: '1', value: 'Yu 1', x: 500, y: 300, config: {...vertexConfig, backgroundImageSrc: './images/myProfile.jpg', style: {width: "150px", height: "150px", transform: 'translate(-25px, -25px)'}}},
+    {_id: '2', value: 'Yu 2', x: 400, y: 150, config: {...vertexConfig, backgroundImageSrc: './images/profile1.jpeg'}},
+    {_id: '3', value: 'Yu 3', x: 650, y: 120, config: {...vertexConfig, backgroundImageSrc: './images/profile2.jpeg'}},
+    {_id: '4', value: 'Yu 4', x: 420, y: 440, config: {...vertexConfig, backgroundImageSrc: './images/profile3.jpeg'}},
+    {_id: '5', value: 'Yu 5', x: 120, y: 420, config: {...vertexConfig, backgroundImageSrc: './images/profile4.jpeg'}},
+    {_id: '6', value: 'Yu 6', x: 620, y: 510, config: {...vertexConfig, backgroundImageSrc: './images/profile5.jpeg'}},
+    {_id: '7', value: 'Yu 7', x: 910, y: 400, config: {...vertexConfig, backgroundImageSrc: './images/profile6.jpeg'}},
+    {_id: '8', value: 'Yu 8', x: 900, y: 150, config: {...vertexConfig, backgroundImageSrc: './images/profile7.jpeg'}},
+    {_id: '9', value: 'Yu 9', x: 130, y: 130, config: {...vertexConfig, backgroundImageSrc: './images/profile8.jpeg'}},
+    {_id: '10', value: 'Yu 10', x: 220, y: 310, config: {...vertexConfig, backgroundImageSrc: './images/profile9.jpeg'}}
+  ]);
+  dsController.pushEdgesToCurrentGraph([
+    {vertexTo: '2', vertexFrom: '1'},
+    {vertexTo: '3', vertexFrom: '1'},
+    {vertexTo: '4', vertexFrom: '1'},
+    {vertexTo: '5', vertexFrom: '1'},
+    {vertexTo: '6', vertexFrom: '1'},
+    {vertexTo: '7', vertexFrom: '1'},
+    {vertexTo: '8', vertexFrom: '1'},
+    {vertexTo: '9', vertexFrom: '1'},
+    {vertexTo: '10', vertexFrom: '1'}
+  ])
+  dsController.updateCurrentGraphName('Today');
+  dsController.createGraph('directed', 'A month ago', dsController.getCurrentGraphVertexInput(), dsController.getCurrentGraphEdgeInput());
+  dsController.updateGraphType(1, 'undirected');
+  dsController.removeVertexFromGraph(1, '4'); 
+  dsController.removeVertexFromGraph(1, '7');
+  dsController.removeVertexFromGraph(1, '9');
+  dsController.updateGraphVertexConfig(1, '5', {backgroundImageSrc: './images/otherUserImg.jpg', hideText: true});
+
+  dsController.createGraph('directed', 'A year ago', [{_id: '1', value: 'Yu 1', x: 500, y: 300, config: {...vertexConfig, backgroundImageSrc: './images/myProfile.jpg', style: {width: "150px", height: "150px", transform: 'translate(-25px, -25px)'}}}], []);
+  
+  // Insert into the dom
+  const target = document.getElementById('target');
+  target.insertAdjacentElement('beforeend', dsController.getCanvasElement());
+  `
+}
+
 export {
   getCGController,
   getCGControllerToString,
@@ -537,5 +621,7 @@ export {
   getTAController,
   getTAControllerToString,
   getSPWController,
-  getSPWControllerToString
+  getSPWControllerToString,
+  getNVController,
+  getNVControllerToString,
 };

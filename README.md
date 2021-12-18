@@ -3,6 +3,10 @@
 ## Author
 - Yuuuuuu-xue (Yu Xue)
 
+## Landing page
+
+
+
 ## Run the code locally
 1. Clone the repo
 2. Install all the dependencies
@@ -18,7 +22,7 @@
    npm run dev
    ```
 
-## Production url
+## Alpha Release Production url
 https://ds-library-yu-xue.herokuapp.com/
 
 ## Instruction and Alpha release
