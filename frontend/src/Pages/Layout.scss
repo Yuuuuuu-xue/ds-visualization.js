@@ -5,6 +5,7 @@
     text-align: center;
     font-size: 4em;
     color: $primary-color;
+    font-family: $primary-font;
   }
 
   .subtitle {
@@ -13,6 +14,7 @@
     text-decoration: underline;
     margin-left: 20px;
     color: $secondary-color;
+    font-family: $primary-font;
   }
 
   .description {

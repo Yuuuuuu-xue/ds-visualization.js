@@ -2,10 +2,11 @@
 
 .home {
   .title {
-    font-size: 15vw;
+    font-size: 14vw;
     padding: 5vh; 
     text-align: center;
     color: $primary-color;
+    font-family: $primary-font;
   }
   
   .source-code-button {
@@ -18,6 +19,7 @@
     font-size: 3rem;
     margin: 100px 20px;
     color: $red-3;
+    font-family: $secondary-font;
   }
   
   .source-code-button {
