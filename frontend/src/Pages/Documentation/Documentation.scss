@@ -1,5 +1,26 @@
+@import '../../variable.scss';
+
 .documentation {
-  .title {
-    font-size: 3em;
+  .documentation-block {
+    
+    margin-left: 20px;
+
+    .header {
+      margin-top: 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: underline;
+      color: $red-2;
+    }
+
+    .description {
+      margin-left: 0;
+      font-size: 1.1em;
+    }
+
+    .code {
+      width: 80%;
+    }
+    
   }
 }

@@ -24,7 +24,7 @@ const GraphDemo: FC<Props> = ({ sectionId, description, subtitle, codeBody, with
       </p> 
       <div className='code'>
         <SyntaxHighlighter 
-          language='javascript' 
+          language='typescript' 
           style={docco}
         >
           {codeBody}

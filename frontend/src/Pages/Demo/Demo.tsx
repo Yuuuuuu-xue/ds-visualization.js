@@ -4,8 +4,6 @@ import './Demo.scss';
 import Navbar from '../../Components/Navbar';
 import '../Layout.scss';
 import { getCGController, getCGControllerToString, getGCController, getGCControllerToString, getTGController, getTGControllerToString, getVCController, getVCControllerToString } from './graph';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import GraphDemo from '../../Components/GraphDemo';
 
 interface Props {
@@ -84,6 +82,9 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
         ['Vertex Configuration', '#config-vertex', false],
         ['Graph Configuration', '#config-graph', false]
       ]} />
+      <p className='title'>
+        Demo
+      </p>
       {graphDemoProps.map(props => (
         <GraphDemo key={props.sectionId} sectionId={props.sectionId} description={props.description} subtitle={props.subtitle} codeBody={props.codeBody} withDialog={props.withDialog} />
       ))}
