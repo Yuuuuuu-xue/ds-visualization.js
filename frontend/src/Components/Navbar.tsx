@@ -22,7 +22,7 @@ const Navbar: FC<Props> = ({ options }): ReactElement => {
   };
 
   return (
-    <AppBar position="sticky" sx={{background: "#880C25",}}>
+    <AppBar position="sticky" sx={{background: "#1A2238",}}>
       <Toolbar variant="dense" >
         {options.length === 0 
           ? 

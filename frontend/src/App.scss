@@ -1,3 +1,5 @@
+@import './variable.scss';
+
 body, p, a, ul, li {
   margin: 0;
   padding: 0;
@@ -13,4 +15,8 @@ h1, h2, h3, h4, h5 {
 
 ul {
   list-style: none;
+}
+
+body {
+  background-color: $background-color;
 }

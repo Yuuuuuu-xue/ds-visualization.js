@@ -1,7 +1,10 @@
+@import '../variable.scss';
+
 .layout {
   .title { 
     text-align: center;
     font-size: 4em;
+    color: $primary-color;
   }
 
   .subtitle {
@@ -9,6 +12,7 @@
     font-weight: bold;
     text-decoration: underline;
     margin-left: 20px;
+    color: $secondary-color;
   }
 
   .description {
