@@ -1,6 +1,7 @@
 import { FC, ReactElement } from "react";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { solarizedLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Paper } from '@mui/material';
 
 interface Props {
   sectionId: string,
@@ -22,14 +23,15 @@ const GraphDemo: FC<Props> = ({ sectionId, description, subtitle, codeBody, with
       <p className='description'>
         Demo Code:
       </p> 
-      {codeBody && <div className='code'>
+      {codeBody && 
+      <Paper className='code' elevation={3} sx={{padding: '1px 10px;', marginTop: '10px', marginBottom: '20px'}}> 
         <SyntaxHighlighter 
           language='typescript' 
           style={ solarizedLight }
         >
           {codeBody}
         </SyntaxHighlighter>
-      </div>}
+      </Paper>}
     </section>
   )
 };

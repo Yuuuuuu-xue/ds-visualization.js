@@ -1,7 +1,9 @@
+import { Paper } from '@mui/material';
 import { FC, ReactElement } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { solarizedLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CodeBlockData } from './CodeBlockData';
+
 
 const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, exampleCode }): ReactElement => {
   return (
@@ -20,29 +22,31 @@ const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, 
       }
       {
         codeBody ? 
-        <div className='code'> 
+        <Paper className='code' elevation={3} sx={{padding: '1px 10px;', marginTop: '10px', marginBottom: '20px'}}> 
           <SyntaxHighlighter 
             language='typescript' 
             style={solarizedLight}
           >
             {codeBody}
           </SyntaxHighlighter>
-        </div>
+        </Paper>
         : null
       }
       {
         exampleCode ? 
-        <div className='code'>
+        <>
           <p className='description'>
             Example:
           </p>
-          <SyntaxHighlighter
-            language='typescript'
-            style={solarizedLight}
-          >
-            {exampleCode}
-          </SyntaxHighlighter>
-        </div>
+          <Paper className='code' elevation={3} sx={{padding: '1px 10px;', marginTop: '10px', marginBottom: '20px'}}> 
+            <SyntaxHighlighter
+              language='typescript'
+              style={solarizedLight}
+            >
+              {exampleCode}
+            </SyntaxHighlighter>
+          </Paper>
+        </>
         : null
       }
     </div>
