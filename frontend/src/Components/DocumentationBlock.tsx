@@ -1,6 +1,6 @@
 import { FC, ReactElement } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { solarizedLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { CodeBlockData } from './CodeBlockData';
 
 const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, exampleCode }): ReactElement => {
@@ -23,7 +23,7 @@ const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, 
         <div className='code'> 
           <SyntaxHighlighter 
             language='typescript' 
-            style={docco}
+            style={solarizedLight}
           >
             {codeBody}
           </SyntaxHighlighter>
@@ -38,7 +38,7 @@ const DocumentationBlock: FC<CodeBlockData> = ({ header, description, codeBody, 
           </p>
           <SyntaxHighlighter
             language='typescript'
-            style={docco}
+            style={solarizedLight}
           >
             {exampleCode}
           </SyntaxHighlighter>

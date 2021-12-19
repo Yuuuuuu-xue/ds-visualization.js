@@ -1,6 +1,6 @@
 import { FC, ReactElement } from "react";
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { solarizedLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface Props {
   sectionId: string,
@@ -25,7 +25,7 @@ const GraphDemo: FC<Props> = ({ sectionId, description, subtitle, codeBody, with
       {codeBody && <div className='code'>
         <SyntaxHighlighter 
           language='typescript' 
-          style={docco}
+          style={ solarizedLight }
         >
           {codeBody}
         </SyntaxHighlighter>

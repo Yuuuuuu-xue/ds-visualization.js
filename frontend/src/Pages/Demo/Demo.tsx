@@ -121,6 +121,8 @@ const Demo: FC<Props> = ({ ds }): ReactElement => {
         ['Vertex Configuration', '#config-vertex', false],
         ['Graph Configuration', '#config-graph', false],
         ['Is Bilpartile Graph', '#application-bilateral', false],
+        ['Graph Traverse', '#application-traverse', false],
+        ['Shortest Path Weight', '#application-shortest-path-weight', false],
         ['Network Visualization', '#application-network-visualization', false]
       ]} />
       <p className='title'>

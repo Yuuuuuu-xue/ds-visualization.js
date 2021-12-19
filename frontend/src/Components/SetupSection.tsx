@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/default-highlight';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { solarizedLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { SetupSectionData } from './SetupSectionPropsType';
 
 
@@ -18,7 +18,7 @@ const SetupSection: FC<SetupSectionData> = ({ sectionId, subtitle, codeDescripti
           <div className='code'>
             <SyntaxHighlighter
               language='html'
-              style={docco}
+              style={solarizedLight}
             >
               {c.codeBody}
             </SyntaxHighlighter>

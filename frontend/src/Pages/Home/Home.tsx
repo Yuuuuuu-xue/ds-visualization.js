@@ -49,7 +49,7 @@ const Home: FC<Props> = (): ReactElement => {
         <GitHubIcon />
       </ColorOutlinedButton> */}
       <p className="description">
-        A library that helps developers to draw and create interactions for end-users visualizing data structures. 
+        An open source front-end library that helps developers to draw and create interactions for end-users visualizing data structures. 
       </p>
       <Grid container spacing={2}>
         <Grid xs={4} sx={{textAlign: "center"}}>
