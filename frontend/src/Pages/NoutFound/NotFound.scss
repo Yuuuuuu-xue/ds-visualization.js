@@ -1,0 +1,11 @@
+@import '../../variable.scss';
+
+.not-found {
+  .title {
+    font-size: 14vw;
+    padding: 5vh; 
+    text-align: center;
+    color: $primary-color;
+    font-family: $primary-font;
+  }
+}

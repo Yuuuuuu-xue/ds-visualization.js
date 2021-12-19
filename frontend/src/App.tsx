@@ -4,6 +4,7 @@ import Home from './Pages/Home/Home';
 import Setup from './Pages/Setup/Setup';
 import Demo from './Pages/Demo/Demo';
 import './App.scss';
+import NotFound from "./Pages/NoutFound/NotFound";
 
 function App() {
   const ds = (window as any).ds;
@@ -20,6 +21,7 @@ function App() {
         <Route path='/setup' element={<Setup />} />
         <Route path='/documentation' element= {<Documentation />} />
         <Route path='/demo' element = {<Demo ds={ds} />} />
+        <Route path='*' element={<NotFound /> } />
       </Routes>
     </Router>
   );
