@@ -7,7 +7,6 @@ import './App.scss';
 import NotFound from "./Pages/NoutFound/NotFound";
 
 function App() {
-  const ds = (window as any).ds;
   // let dsController = new ds.DataStructureController(800, 400);
 
   // useEffect(() => {
@@ -20,7 +19,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/setup' element={<Setup />} />
         <Route path='/documentation' element= {<Documentation />} />
-        <Route path='/demo' element = {<Demo ds={ds} />} />
+        <Route path='/demo' element = {<Demo />} />
         <Route path='*' element={<NotFound /> } />
       </Routes>
     </Router>

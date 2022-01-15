@@ -7,20 +7,20 @@ import { getBController, getBControllerToString, getCGController, getCGControlle
 import GraphDemo from '../../Components/GraphDemo';
 
 interface Props {
-  ds: any
+
 }
 
 
-const Demo: FC<Props> = ({ ds }): ReactElement => {
+const Demo: FC<Props> = ({ }): ReactElement => {
 
-  const dsCGC = getCGController(ds);
-  const dsVCC = getVCController(ds);
-  const dsGCC = getGCController(ds);
-  const dsTGC = getTGController(ds);
-  const dsBC = getBController(ds);
-  const dsTAC = getTAController(ds);
-  const dsSPWC = getSPWController(ds);
-  const dsNVC = getNVController(ds);
+  const dsCGC = getCGController();
+  const dsVCC = getVCController();
+  const dsGCC = getGCController();
+  const dsTGC = getTGController();
+  const dsBC = getBController();
+  const dsTAC = getTAController();
+  const dsSPWC = getSPWController();
+  const dsNVC = getNVController();
 
   const insertDom = (dsController: any, includeDialog: boolean, target: HTMLElement | null): void => {
     if (target) {

@@ -1,13 +1,16 @@
-const getCGController = (ds: any): any => {
-  const dsCGC = new ds.DataStructureController(800, 400);
+import { DataStructureController } from "data-structure-ds.js";
+
+const getCGController = (): any => {
+  console.log(DataStructureController)
+  const dsCGC = new DataStructureController(800, 400);
   dsCGC.pushVerticesToCurrentGraph([
-    {_id: '1', value: 'First Vertex', x: 50, y: 50},
-    {_id: '2', value: 'Second Vertex', x: 200, y: 300},
-    {_id: '3', value: 'Third Vertex', x: 300, y: 200},
-    {_id: '4', value: 'Fourth Vertex', x: 500, y: 200},
-    {_id: '5', value: 'Fifth Vertex', x: 750, y: 50},
-    {_id: '6', value: 'Sixth Vertex', x: 460, y: 350},
-    {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350}
+    {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {}},
+    {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {}},
+    {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {}},
+    {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {}},
+    {_id: '5', value: 'Fifth Vertex', x: 750, y: 50, config: {}},
+    {_id: '6', value: 'Sixth Vertex', x: 460, y: 350, config: {}},
+    {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350, config: {}}
   ]);
   dsCGC.pushEdgesToCurrentGraph([
     {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -21,8 +24,8 @@ const getCGController = (ds: any): any => {
     {vertexTo: '5', vertexFrom: '6'}
   ]);
   dsCGC.createGraph('undirected', 'Undirected Graph', [
-    {_id: '1', value: 'New First Vertex', x: 200, y: 100},
-    {_id: '2', value: 'New Second Vertex', x: 100, y: 200}
+    {_id: '1', value: 'New First Vertex', x: 200, y: 100, config: {}},
+    {_id: '2', value: 'New Second Vertex', x: 100, y: 200, config: {}}
   ], [
     {vertexTo: '1', vertexFrom: '2'}
   ]);
@@ -35,15 +38,15 @@ const getCGController = (ds: any): any => {
 
 const getCGControllerToString = (): string => {
   return `
-    const dsCGC = new ds.DataStructureController(800, 400);
+    const dsCGC = new DataStructureController(800, 400);
     dsCGC.pushVerticesToCurrentGraph([
-      {_id: '1', value: 'First Vertex', x: 50, y: 50},
-      {_id: '2', value: 'Second Vertex', x: 200, y: 300},
-      {_id: '3', value: 'Third Vertex', x: 300, y: 200},
-      {_id: '4', value: 'Fourth Vertex', x: 500, y: 200},
-      {_id: '5', value: 'Fifth Vertex', x: 750, y: 50},
-      {_id: '6', value: 'Sixth Vertex', x: 460, y: 350},
-      {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350}
+      {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {}},
+      {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {}},
+      {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {}},
+      {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {}},
+      {_id: '5', value: 'Fifth Vertex', x: 750, y: 50, config: {}},
+      {_id: '6', value: 'Sixth Vertex', x: 460, y: 350, config: {}},
+      {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350, config: {}}
     ]);
     dsCGC.pushEdgesToCurrentGraph([
       {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -57,8 +60,8 @@ const getCGControllerToString = (): string => {
       {vertexTo: '5', vertexFrom: '6'}
     ]);
     dsCGC.createGraph('undirected', 'Undirected Graph', [
-      {_id: '1', value: 'New First Vertex', x: 200, y: 100},
-      {_id: '2', value: 'New Second Vertex', x: 100, y: 200}
+      {_id: '1', value: 'New First Vertex', x: 200, y: 100, config: {}},
+      {_id: '2', value: 'New Second Vertex', x: 100, y: 200, config: {}}
     ], [
       {vertexTo: '1', vertexFrom: '2'}
     ]);
@@ -74,16 +77,16 @@ const getCGControllerToString = (): string => {
   `
 };
 
-const getVCController = (ds: any): any => {
-  const dsVCC = new ds.DataStructureController(800, 400);
+const getVCController = (): any => {
+  const dsVCC = new DataStructureController(800, 400);
   dsVCC.pushVerticesToCurrentGraph([
     {_id: '1', value: 'Drag Me', x: 50, y: 50, config: {draggable: true, backgroundImageSrc: './images/image.png'}},
     {_id: '2', value: 'Do not Click Me', x: 200, y: 300, config: {disableActiveClick: true}},
     {_id: '3', value: 'Drag Me With Image', x: 300, y: 200, config: {draggable: true, backgroundImageSrc: './images/image2.jpg', }},
     {_id: '4', value: 'FourtVertex', x: 500, y: 200, config: {backgroundImageSrc: './images/myProfile.jpg', hideText: true, style: {width: "150px", height: "150px"}, disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue")}},
-    {_id: '5', value: 'Styled Vertex', x: 750, y: 50},
-    {_id: '6', value: 'I am Normal', x: 460, y: 350},
-    {_id: '7', value: 'I am Normal too', x: 1600, y: 350}
+    {_id: '5', value: 'Styled Vertex', x: 750, y: 50, config: {}},
+    {_id: '6', value: 'I am Normal', x: 460, y: 350, config: {}},
+    {_id: '7', value: 'I am Normal too', x: 1600, y: 350, config: {}}
   ]);
   dsVCC.pushEdgesToCurrentGraph([
     {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -106,15 +109,15 @@ const getVCController = (ds: any): any => {
 
 const getVCControllerToString = (): string => {
   return `
-    const dsVCC = new ds.DataStructureController(800, 400);
+    const dsVCC = new DataStructureController(800, 400);
     dsVCC.pushVerticesToCurrentGraph([
       {_id: '1', value: 'Drag Me', x: 50, y: 50, config: {draggable: true, backgroundImageSrc: './images/image.png'}},
       {_id: '2', value: 'Do not Click Me', x: 200, y: 300, config: {disableActiveClick: true}},
-      {_id: '3', value: 'Drag Me With Image', x: 300, y: 200, config: {draggable: true, backgroundImageSrc: './images/image2.jpg', }}, 
+      {_id: '3', value: 'Drag Me With Image', x: 300, y: 200, config: {draggable: true, backgroundImageSrc: './images/image2.jpg', }},
       {_id: '4', value: 'FourtVertex', x: 500, y: 200, config: {backgroundImageSrc: './images/myProfile.jpg', hideText: true, style: {width: "150px", height: "150px"}, disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue")}},
-      {_id: '5', value: 'Styled Vertex', x: 750, y: 50},
-      {_id: '6', value: 'I am Normal', x: 460, y: 350},
-      {_id: '7', value: 'I am Normal too', x: 1600, y: 350}
+      {_id: '5', value: 'Styled Vertex', x: 750, y: 50, config: {}},
+      {_id: '6', value: 'I am Normal', x: 460, y: 350, config: {}},
+      {_id: '7', value: 'I am Normal too', x: 1600, y: 350, config: {}}
     ]);
     dsVCC.pushEdgesToCurrentGraph([
       {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -140,16 +143,16 @@ const getVCControllerToString = (): string => {
   `
 }
 
-const getGCController = (ds: any): any => {
-  const dsController = new ds.DataStructureController(800, 400);
+const getGCController = (): any => {
+  const dsController = new DataStructureController(800, 400);
   dsController.pushVerticesToCurrentGraph([
-    {_id: '1', value: 'First Vertex', x: 50, y: 50},
-    {_id: '2', value: 'Second Vertex', x: 200, y: 300},
-    {_id: '3', value: 'Third Vertex', x: 300, y: 200},
-    {_id: '4', value: 'Fourth Vertex', x: 500, y: 200},
-    {_id: '5', value: 'Fifth Vertex', x: 750, y: 50},
-    {_id: '6', value: 'Sixth Vertex', x: 460, y: 350},
-    {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350}
+    {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {}},
+    {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {}},
+    {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {}},
+    {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {}},
+    {_id: '5', value: 'Fifth Vertex', x: 750, y: 50, config: {}},
+    {_id: '6', value: 'Sixth Vertex', x: 460, y: 350, config: {}},
+    {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350, config: {}}
   ]);
   dsController.pushEdgesToCurrentGraph([
     {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -174,15 +177,15 @@ const getGCController = (ds: any): any => {
 
 const getGCControllerToString = (): string => {
   return `
-    const dsController = new ds.DataStructureController(800, 400);
+    const dsController = new DataStructureController(800, 400);
     dsController.pushVerticesToCurrentGraph([
-      {_id: '1', value: 'First Vertex', x: 50, y: 50},
-      {_id: '2', value: 'Second Vertex', x: 200, y: 300},
-      {_id: '3', value: 'Third Vertex', x: 300, y: 200},
-      {_id: '4', value: 'Fourth Vertex', x: 500, y: 200},
-      {_id: '5', value: 'Fifth Vertex', x: 750, y: 50},
-      {_id: '6', value: 'Sixth Vertex', x: 460, y: 350},
-      {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350}
+      {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {}},
+      {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {}},
+      {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {}},
+      {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {}},
+      {_id: '5', value: 'Fifth Vertex', x: 750, y: 50, config: {}},
+      {_id: '6', value: 'Sixth Vertex', x: 460, y: 350, config: {}},
+      {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350, config: {}}
     ]);
     dsController.pushEdgesToCurrentGraph([
       {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -210,16 +213,16 @@ const getGCControllerToString = (): string => {
   `
 }
 
-const getTGController = (ds: any): any => {
-  const dsController = new ds.DataStructureController(800, 400);
+const getTGController = (): any => {
+  const dsController = new DataStructureController(800, 400);
   dsController.pushVerticesToCurrentGraph([
-    {_id: '1', value: 'First Vertex', x: 50, y: 50},
-    {_id: '2', value: 'Second Vertex', x: 200, y: 300},
-    {_id: '3', value: 'Third Vertex', x: 300, y: 200},
-    {_id: '4', value: 'Fourth Vertex', x: 500, y: 200},
-    {_id: '5', value: 'Fifth Vertex', x: 750, y: 50},
-    {_id: '6', value: 'Sixth Vertex', x: 460, y: 350},
-    {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350}
+    {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {}},
+    {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {}},
+    {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {}},
+    {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {}},
+    {_id: '5', value: 'Fifth Vertex', x: 750, y: 50, config: {}},
+    {_id: '6', value: 'Sixth Vertex', x: 460, y: 350, config: {}},
+    {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350, config: {}}
   ]);
   dsController.pushEdgesToCurrentGraph([
     {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -248,15 +251,15 @@ const getTGController = (ds: any): any => {
 
 const getTGControllerToString = (): string => {
   return `
-    const dsController = new ds.DataStructureController(800, 400);
+    const dsController = new DataStructureController(800, 400);
     dsController.pushVerticesToCurrentGraph([
-      {_id: '1', value: 'First Vertex', x: 50, y: 50},
-      {_id: '2', value: 'Second Vertex', x: 200, y: 300},
-      {_id: '3', value: 'Third Vertex', x: 300, y: 200},
-      {_id: '4', value: 'Fourth Vertex', x: 500, y: 200},
-      {_id: '5', value: 'Fifth Vertex', x: 750, y: 50},
-      {_id: '6', value: 'Sixth Vertex', x: 460, y: 350},
-      {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350}
+      {_id: '1', value: 'First Vertex', x: 50, y: 50, config: {}},
+      {_id: '2', value: 'Second Vertex', x: 200, y: 300, config: {}},
+      {_id: '3', value: 'Third Vertex', x: 300, y: 200, config: {}},
+      {_id: '4', value: 'Fourth Vertex', x: 500, y: 200, config: {}},
+      {_id: '5', value: 'Fifth Vertex', x: 750, y: 50, config: {}},
+      {_id: '6', value: 'Sixth Vertex', x: 460, y: 350, config: {}},
+      {_id: '7', value: 'Seventh Vertex', x: 1600, y: 350, config: {}}
     ]);
     dsController.pushEdgesToCurrentGraph([
       {vertexTo: '4', vertexFrom: '5', weight: 43},
@@ -281,7 +284,6 @@ const getTGControllerToString = (): string => {
     dsController.createGraph('directed', 'No Repeated Vertex and Edge', dsController.getCurrentGraphVertexInput(), dsController.getCurrentGraphEdgeInput(), 
       {mode: 'traversable', enableWeight: true, disallowRepeatedVertex: true, disallowRepeatedEdge: true})
 
-
     // Insert into the dom
     const target = document.getElementById('target');
     target.insertAdjacentElement('beforeend', dsController.getCanvasElement());
@@ -289,8 +291,8 @@ const getTGControllerToString = (): string => {
   `
 };
 
-const getBController = (ds: any): any => {
-  const dsController = new ds.DataStructureController(1200, 600);
+const getBController = (): any => {
+  const dsController = new DataStructureController(1200, 600);
   const vertexConfig1 = {draggable: true, style: {backgroundColor: '#45B8AC', borderColor: '#308078'}, disableActiveClick: true};
   const vertexConfig2 = {draggable: true, style: {backgroundColor: '#D65076', borderColor: '#b02950'}, disableActiveClick: true};
   dsController.pushVerticesToCurrentGraph([
@@ -324,7 +326,7 @@ const getBController = (ds: any): any => {
 
 const getBControllerToString = (): string => {
   return `
-  const dsController = new ds.DataStructureController(1200, 600);
+  const dsController = new DataStructureController(1200, 600);
   const vertexConfig1 = {draggable: true, style: {backgroundColor: '#45B8AC', borderColor: '#308078'}, disableActiveClick: true};
   const vertexConfig2 = {draggable: true, style: {backgroundColor: '#D65076', borderColor: '#b02950'}, disableActiveClick: true};
   dsController.pushVerticesToCurrentGraph([
@@ -359,19 +361,19 @@ const getBControllerToString = (): string => {
   `
 }
 
-const getTAController = (ds: any): any => {
-  const dsController = new ds.DataStructureController(1200, 600);
+const getTAController = (): any => {
+  const dsController = new DataStructureController(1200, 600);
 
   dsController.updateCurrentGraphConfig({mode: 'traversable', disallowRepeatedVertex: true});
   dsController.updateCurrentGraphType('undirected');
   dsController.updateCurrentGraphName('Hamiltonian Graph')
   dsController.pushVerticesToCurrentGraph([
-    {_id: '1', value: '1', x: 50, y: 50},
-    {_id: '2', value: '2', x: 280, y: 420},
-    {_id: '3', value: '3', x: 400, y: 200},
-    {_id: '4', value: '4', x: 600, y: 100},
-    {_id: '5', value: '5', x: 800, y: 200},
-    {_id: '6', value: '6', x: 620, y: 400},
+    {_id: '1', value: '1', x: 50, y: 50, config: {}},
+    {_id: '2', value: '2', x: 280, y: 420, config: {}},
+    {_id: '3', value: '3', x: 400, y: 200, config: {}},
+    {_id: '4', value: '4', x: 600, y: 100, config: {}},
+    {_id: '5', value: '5', x: 800, y: 200, config: {}},
+    {_id: '6', value: '6', x: 620, y: 400, config: {}},
   ]);
   dsController.pushEdgesToCurrentGraph([
     {vertexTo: '1', vertexFrom: '2'},
@@ -386,12 +388,12 @@ const getTAController = (ds: any): any => {
     {vertexTo: '4', vertexFrom: '6'}
   ]);
   dsController.createGraph('undirected', 'Eulierian Graph', [
-    {_id: '1', value: '1', x: 500, y: 100},
-    {_id: '2', value: '2', x: 250, y: 250},
-    {_id: '3', value: '3', x: 750, y: 250},
-    {_id: '4', value: '4', x: 250, y: 450},
-    {_id: '5', value: '5', x: 750, y: 450},
-    {_id: '6', value: '6', x: 500, y: 350},
+    {_id: '1', value: '1', x: 500, y: 100, config: {}},
+    {_id: '2', value: '2', x: 250, y: 250, config: {}},
+    {_id: '3', value: '3', x: 750, y: 250, config: {}},
+    {_id: '4', value: '4', x: 250, y: 450, config: {}},
+    {_id: '5', value: '5', x: 750, y: 450, config: {}},
+    {_id: '6', value: '6', x: 500, y: 350, config: {}},
   ], [
     {vertexTo: '1', vertexFrom: '2'},
     {vertexTo: '2', vertexFrom: '3'},
@@ -409,18 +411,18 @@ const getTAController = (ds: any): any => {
 
 const getTAControllerToString = (): string => {
   return `
-  const dsController = new ds.DataStructureController(1200, 600);
+  const dsController = new DataStructureController(1200, 600);
 
   dsController.updateCurrentGraphConfig({mode: 'traversable', disallowRepeatedVertex: true});
   dsController.updateCurrentGraphType('undirected');
   dsController.updateCurrentGraphName('Hamiltonian Graph')
   dsController.pushVerticesToCurrentGraph([
-    {_id: '1', value: '1', x: 50, y: 50},
-    {_id: '2', value: '2', x: 280, y: 420},
-    {_id: '3', value: '3', x: 400, y: 200},
-    {_id: '4', value: '4', x: 600, y: 100},
-    {_id: '5', value: '5', x: 800, y: 200},
-    {_id: '6', value: '6', x: 620, y: 400},
+    {_id: '1', value: '1', x: 50, y: 50, config: {}},
+    {_id: '2', value: '2', x: 280, y: 420, config: {}},
+    {_id: '3', value: '3', x: 400, y: 200, config: {}},
+    {_id: '4', value: '4', x: 600, y: 100, config: {}},
+    {_id: '5', value: '5', x: 800, y: 200, config: {}},
+    {_id: '6', value: '6', x: 620, y: 400, config: {}},
   ]);
   dsController.pushEdgesToCurrentGraph([
     {vertexTo: '1', vertexFrom: '2'},
@@ -435,12 +437,12 @@ const getTAControllerToString = (): string => {
     {vertexTo: '4', vertexFrom: '6'}
   ]);
   dsController.createGraph('undirected', 'Eulierian Graph', [
-    {_id: '1', value: '1', x: 500, y: 100},
-    {_id: '2', value: '2', x: 250, y: 250},
-    {_id: '3', value: '3', x: 750, y: 250},
-    {_id: '4', value: '4', x: 250, y: 450},
-    {_id: '5', value: '5', x: 750, y: 450},
-    {_id: '6', value: '6', x: 500, y: 350},
+    {_id: '1', value: '1', x: 500, y: 100, config: {}},
+    {_id: '2', value: '2', x: 250, y: 250, config: {}},
+    {_id: '3', value: '3', x: 750, y: 250, config: {}},
+    {_id: '4', value: '4', x: 250, y: 450, config: {}},
+    {_id: '5', value: '5', x: 750, y: 450, config: {}},
+    {_id: '6', value: '6', x: 500, y: 350, config: {}},
   ], [
     {vertexTo: '1', vertexFrom: '2'},
     {vertexTo: '2', vertexFrom: '3'},
@@ -452,7 +454,7 @@ const getTAControllerToString = (): string => {
     {vertexTo: '3', vertexFrom: '6'},
     {vertexTo: '4', vertexFrom: '6'},
     {vertexTo: '5', vertexFrom: '6'}
-  ], {mode: 'traversable', disallowRepeatedEdge: true});
+  ], {mode: 'traversable', disallowRepeatedEdge: true})
 
   // Insert into the dom
   const target = document.getElementById('target');
@@ -460,18 +462,18 @@ const getTAControllerToString = (): string => {
   `
 }
 
-const getSPWController = (ds: any): any => {
-  const dsController = new ds.DataStructureController(800, 400);
+const getSPWController = (): any => {
+  const dsController = new DataStructureController(800, 400);
 
   dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true});
   dsController.updateCurrentGraphName('Shortest Path Weight')
   dsController.pushVerticesToCurrentGraph([
-    {_id: '1', value: 'A', x: 50, y: 200},
-    {_id: '2', value: 'B', x: 150, y: 40},
-    {_id: '3', value: 'C', x: 180, y: 300},
-    {_id: '4', value: 'D', x: 400, y: 80},
-    {_id: '5', value: 'E', x: 420, y: 280},
-    {_id: '6', value: 'F', x: 550, y: 180},
+    {_id: '1', value: 'A', x: 50, y: 200, config: {}},
+    {_id: '2', value: 'B', x: 150, y: 40, config: {}},
+    {_id: '3', value: 'C', x: 180, y: 300, config: {}},
+    {_id: '4', value: 'D', x: 400, y: 80, config: {}},
+    {_id: '5', value: 'E', x: 420, y: 280, config: {}},
+    {_id: '6', value: 'F', x: 550, y: 180, config: {}},
   ]);
   dsController.pushEdgesToCurrentGraph([
     {vertexTo: '1', vertexFrom: '2', weight: 4},
@@ -491,17 +493,17 @@ const getSPWController = (ds: any): any => {
 
 const getSPWControllerToString = (): string => {
   return `
-  const dsController = new ds.DataStructureController(800, 400);
+  const dsController = new DataStructureController(800, 400);
 
   dsController.updateCurrentGraphConfig({mode: 'traversable', enableWeight: true});
   dsController.updateCurrentGraphName('Shortest Path Weight')
   dsController.pushVerticesToCurrentGraph([
-    {_id: '1', value: 'A', x: 50, y: 200},
-    {_id: '2', value: 'B', x: 150, y: 40},
-    {_id: '3', value: 'C', x: 180, y: 300},
-    {_id: '4', value: 'D', x: 400, y: 80},
-    {_id: '5', value: 'E', x: 420, y: 280},
-    {_id: '6', value: 'F', x: 550, y: 180},
+    {_id: '1', value: 'A', x: 50, y: 200, config: {}},
+    {_id: '2', value: 'B', x: 150, y: 40, config: {}},
+    {_id: '3', value: 'C', x: 180, y: 300, config: {}},
+    {_id: '4', value: 'D', x: 400, y: 80, config: {}},
+    {_id: '5', value: 'E', x: 420, y: 280, config: {}},
+    {_id: '6', value: 'F', x: 550, y: 180, config: {}},
   ]);
   dsController.pushEdgesToCurrentGraph([
     {vertexTo: '1', vertexFrom: '2', weight: 4},
@@ -523,8 +525,8 @@ const getSPWControllerToString = (): string => {
   `
 }
 
-const getNVController = (ds: any): any => {
-  const dsController = new ds.DataStructureController(1200, 600);
+const getNVController = (): any => {
+  const dsController = new DataStructureController(1200, 600);
   dsController.updateCurrentGraphType('undirected');
   const vertexConfig = {disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue"), hideText: true}
   dsController.pushVerticesToCurrentGraph([
@@ -565,7 +567,7 @@ const getNVController = (ds: any): any => {
 
 const getNVControllerToString = (): string => {
   return `
-  const dsController = new ds.DataStructureController(1200, 600);
+  const dsController = new DataStructureController(1200, 600);
   dsController.updateCurrentGraphType('undirected');
   const vertexConfig = {disableActiveClick: true, clickCallback: () => window.open("https://github.com/Yuuuuuu-xue"), hideText: true}
   dsController.pushVerticesToCurrentGraph([
