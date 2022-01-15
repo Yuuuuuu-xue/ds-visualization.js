@@ -1,3 +1,3 @@
 import { DataStructureController } from "./ds/controllers/dataStructureController";
-export {DataStructureController};
-
+import * as styles from './main.css';
+export {DataStructureController, styles};

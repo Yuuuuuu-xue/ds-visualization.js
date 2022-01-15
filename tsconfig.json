@@ -3,7 +3,6 @@
     "module": "es6",
     "target": "es5",
     "outDir": "./dist/",
-    "sourceMap": true,
     "declaration": true,
     "removeComments": true,
     "plugins": [{"name": "typescript-plugin-css-modules"}]

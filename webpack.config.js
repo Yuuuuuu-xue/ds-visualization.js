@@ -1,13 +1,16 @@
 const path = require('path')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 module.exports = {
   context: path.resolve('library'),
   entry: './index.ts',
-  mode: "development",
+  mode: "production",
   module: {
     rules: [
       {
-        use: [{
+        use: [
+        {
           loader: 'expose-loader',
           options: {
             exposes: {
@@ -15,15 +18,35 @@ module.exports = {
               override: true
             },
           }
-        }, {
+        }, 
+        {
           loader: 'ts-loader'
         }],
         exclude: /node_modules/
+      },
+      {
+        test: /\.(less)$/,
+        use: [{
+            loader: MiniCssExtractPlugin.loader 
+        }, {
+            loader: 'css-loader' // translates CSS into CommonJS
+        }, {
+            loader: 'less-loader' // compiles Less to CSS
+        }]
+    },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
       }
     ]
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "main.css",
+    }),
+  ],
   resolve: {
-    extensions: ['.ts', '.js', '.css']
+    extensions: ['.ts', '.js', '.css', '.less']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

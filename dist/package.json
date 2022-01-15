@@ -1,0 +1,8 @@
+{
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "name": "data-structure-ds.js",
+  "version": "1.1.0",
+  "description": "An open source front-end library that helps developers to draw and create interactions for end-users visualizing data structures.",
+  "homepage": "https://ds-js-library-yu-xue.herokuapp.com/"
+}
