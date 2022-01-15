@@ -1,7 +1,10 @@
-# DS.js
+# ds-visualization.js
 
 ## Author
 - Yuuuuuu-xue (Yu Xue)
+
+## Description
+This is UofT *CSC309: Programming on the Web* 2021 Fall individual assignment (building a frontend library, focused on DOM manipulation)
 
 ## Landing page
 https://ds-visualization-js.herokuapp.com/
