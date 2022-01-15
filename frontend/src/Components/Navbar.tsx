@@ -1,5 +1,5 @@
 import { FC, ReactElement, useState } from 'react';
-import {  AppBar, Toolbar, IconButton, Typography, Menu, Box, Tooltip, MenuItem } from '@mui/material';
+import {  AppBar, Toolbar, IconButton, Typography, Menu, Box, Tooltip, MenuItem, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -66,14 +66,19 @@ const Navbar: FC<Props> = ({ options }): ReactElement => {
               </Menu>
             </Box>
         }   
-        <Typography variant="h6" color="inherit" component="div" sx={{flexGrow: 1}}>
-          Data Structures Library (DS.js)
-        </Typography>
-        <IconButton sx={{color: 'white'}} onClick={() => window.open('https://github.com/Yuuuuuu-xue', '_blank')}>
-          Github
-          &nbsp;&nbsp;
-          <GitHubIcon /> 
-        </IconButton>
+        <Box sx={{display: 'flex', flexDirection: 'row', flex: 1, justifyContent: 'space-between', padding: 0, margin: 0, alignItems: 'center'}}>
+          <Button onClick={() => navigate('/')} style={{color: 'white', textTransform: 'none'}}>
+            <Typography variant="h6" color="inherit" component="div">
+              Data Structure Visualization (ds-visualization.js)
+            </Typography>
+          </Button>
+          
+          <IconButton sx={{color: 'white'}} onClick={() => window.open('https://github.com/Yuuuuuu-xue/ds-visualization.js', '_blank')}>
+            Github
+            &nbsp;&nbsp;
+            <GitHubIcon /> 
+          </IconButton>
+        </Box>
       </Toolbar>
     </AppBar>
   )

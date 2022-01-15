@@ -42,7 +42,7 @@ const Home: FC<Props> = (): ReactElement => {
     <div className="home">
       <Navbar options={[]} />
       
-      <h1 className="title">DS.js</h1>
+      <h1 className="title">ds-visualization.js</h1>
       {/* <ColorOutlinedButton className="source-code-button" variant="outlined" size="large" onClick={() => window.open('https://github.com/Yuuuuuu-xue', '_blank') }>
         Source Code
         &nbsp;&nbsp;
