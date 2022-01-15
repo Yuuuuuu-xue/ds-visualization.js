@@ -36,24 +36,14 @@ const Setup: FC<Props> = (): ReactElement => {
     subtitle: 'Vanilla JavaScript', 
     codeDescription: [
       {
-        description: `Add following lines in your html <head></head> tag to include the compiled JavaScript 
-    library, stylesheets, and external modules such as jQuery and Less compiler.`,
-    codeBody: `<link rel="stylesheet/less" type="text/css" href="./path-to-the-file/main.less" />
-<link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-  crossorigin="anonymous"
-/>
-<script defer src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
-<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script defer type="text/javascript" src="./path-to-the-file/ds.js"></script>`,
-      }, 
+        description: 'Download the library source file ds.js and style file main.css from',
+        codeBody: 'https://github.com/Yuuuuuu-xue/ds-visualization.js/tree/main/src'
+      },
       {
-        description: 'Now, you can include an example.js file after those scripts. Then inside your example.js, you can start using the library:',
-        codeBody: `$(document).ready(function() {
-  const dsController = new ds.DataStructureController(800, 400);
-});
-  `
+        description: `Add following lines in your html <head></head> tag to include the compiled JavaScript library, stylesheets, and external modules such as jQuery and Less compiler.`,
+    codeBody: `<link rel="stylesheet" type="text/css" href="./main.css" />
+<script defer type="text/javascript" src="./ds.js"></script>
+<script defer type="text/javascript" src='./demo.js'></script>`,
       }
     ]
   },
