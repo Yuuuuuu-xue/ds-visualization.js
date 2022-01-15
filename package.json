@@ -2,6 +2,12 @@
   "engines": {
     "node": "14.18.1"
   },
+  "main": "dist/ds.js",
+  "types": "dist/index.d.ts",
+  "name": "data-structure-ds.js",
+  "version": "1.0.0",
+  "description": "An open source front-end library that helps developers to draw and create interactions for end-users visualizing data structures.",
+  "homepage": "https://ds-js-library-yu-xue.herokuapp.com/",
   "scripts": {
     "build": "npm run install-all && npx webpack && cd frontend && npm run build",
     "start": "node server.js",
