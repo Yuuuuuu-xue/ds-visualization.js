@@ -49,7 +49,7 @@ module.exports = {
     extensions: ['.ts', '.js', '.css', '.less']
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'src'),
     // path: path.resolve('./frontend/public/library'),
     filename: 'ds.js'
   }

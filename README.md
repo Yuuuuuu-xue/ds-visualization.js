@@ -4,99 +4,80 @@
 - Yuuuuuu-xue (Yu Xue)
 
 ## Landing page
-https://ds-js-library-yu-xue.herokuapp.com/
+https://ds-visualization-js.herokuapp.com/
 
 ## Documentation
-https://ds-js-library-yu-xue.herokuapp.com/documentation
-
-## Run the code locally
-1. Clone the repo
-2. Install all the dependencies
-   ```
-   npm i
-   ```
-3. Compile TypeScript code into JavaScript
-   ```
-   npm run build
-   ```
-4. Run the code
-   ```
-   npm run dev
-   ```
-
-## Alpha Release Production url
-https://ds-library-yu-xue.herokuapp.com/
-
-## Instruction and Alpha release
-https://ds-library-yu-xue.herokuapp.com/views/examples.html
+https://ds-visualization-js.herokuapp.com/documentation
 
 ## Getting started
+#### npm (with React)
+Install the package with npm.
+```
+npm i ds-visualization.js
+```
+
+Import the library and have fun!
+```
+import { DataStructureController } from "ds-visualization.js";
+```
+
 #### Vanilla JavaScript
-Add following lines in your html head tag to include the compiled JavaScript library, stylesheets, and external modules such as jQuery and Less compiler.
+Download the library source file [ds.js](./src/ds.js) and style file [main.css](./src/main.css)
+
+Add following lines in your html <head></head> tag to include the compiled JavaScript library, stylesheets, and external modules such as jQuery and Less compiler.
 ```
-<link rel="stylesheet/less" type="text/css" href="./path-to-the-file/main.less" />
-<link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-  crossorigin="anonymous"
-/>
-<script defer src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
-<script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script defer type="text/javascript" src="./path-to-the-file/ds.js"></script>
+<link rel="stylesheet" type="text/css" href="./main.css" />
+<script defer type="text/javascript" src="./ds.js"></script>
+<script defer type="text/javascript" src='./demo.js'></script>
 ```
 
-Now, you can include an example.js file after those scripts. Then inside your example.js, you can start using the library:
+Click [here](./src) to view the example of html and javascript files of using this library with vanills.js
+
+
+## Structure of the repo
+#### Install all the dependencies
 ```
-$(document).ready(function() {
-  const dsController = new ds.DataStructureController(800, 400);
-});
+npm run install-all
 ```
 
-#### React
-Add following lines in your React app ./public/index.hmtl <head></head> tag to include the compiled JavaScript library, stylesheets, and external modules such as jQuery and Less compiler.
+#### [./frontend](./frontend)
+This directory contains the source file for the **landing page** https://ds-visualization-js.herokuapp.com/. It was created by **React** with **TypeScript** and **SCSS** for the styles.
+
+#### [./library](./library)
+This directory contains the source file for the library. It was created by **TypeScript** and **Less** for the styles.
+
+#### [./src](./src)
+This directory contains the compiled files of the library though webpack and an example of using this library with VanillaJS.
+
+#### [./dist](./dist)
+This directory contains the files needed to publish to the npm
+
+## Run the code locally
+#### Run the landing page
 ```
-<link rel="stylesheet/less" type="text/css" href="./styles/main.less" />
-<link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-  crossorigin="anonymous"
-/>
-<script src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="./library/ds.js"></script>
+1. cd frontend
+2. npm i
+3. npm start
 ```
 
-Then add the following line inside the <body></body> tag so we can use the library in our React app.
+#### Compile the TypeScript library
+Install the TypeScript compiler: 
 ```
-<script>
-  $(document).ready(function() {
-    window.ds = ds;
-  });
-</script>
+npm install -g typescript
+
+# Then you can check if you have installed it successfully
+tsc --version
 ```
 
-If you are using React with JavaScript, then inside the App.js, we can use the library as follows:
+Compile the code
 ```
-function App() {
-  const ds = (window as any).ds;
-  const dsController = new ds.DataStructureController(800, 400);
-
-  return (
-    <div>
-    </div>
-  );
-}
+tsc
 ```
 
-If you are using React with TypeScript, then inside the App.tsx, we can use the library as follows:
+Compile it though webpack:
 ```
-function App() {
-  const ds = (window as any).ds;
-  dsController = new ds.DataStructureController(800, 400);
+npm run build-library
+```
 
-  return (
-    <div>
-    </div>
-  );
-}
-```
+
+
