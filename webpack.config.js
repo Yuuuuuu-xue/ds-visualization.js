@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  context: path.resolve('src'),
+  context: path.resolve('library'),
   entry: './index.ts',
   mode: "development",
   module: {
