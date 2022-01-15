@@ -1,4 +1,4 @@
-import { DataStructureController } from "data-structure-ds.js";
+import { DataStructureController } from "ds-visualization.js";
 
 const getCGController = (): any => {
   console.log(DataStructureController)
